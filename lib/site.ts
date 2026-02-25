@@ -14,6 +14,7 @@ export const siteConfig: SiteConfig = {
     },
   },
   profile: {
+    name: "Nicolas Valenzuela",
     status: {
       es: "en linea",
       en: "online",

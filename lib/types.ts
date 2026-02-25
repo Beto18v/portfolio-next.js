@@ -16,6 +16,7 @@ export interface SkillCategory {
 }
 
 export interface Profile {
+  name: string;
   status: LocalizedText;
   role: LocalizedText;
   tagline: LocalizedText;
