@@ -1,8 +1,7 @@
 "use client";
 
-import { Star } from "lucide-react";
+import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/site";
-import { cn } from "@/lib/utils";
 import { useLocale, useT } from "./locale-provider";
 
 export function Skills() {
@@ -39,37 +38,38 @@ export function Skills() {
                 {category.title[locale]}
               </h3>
               <ul className="space-y-3">
-                {category.skills.map((skill) => (
-                  <li
-                    key={skill.name}
-                    className="flex items-center justify-between gap-3 rounded-md border border-transparent px-2 py-1.5 transition-colors hover:border-border/70"
-                    aria-label={`${skill.name} level ${skill.level} of 5`}
-                  >
-                    <span className="text-sm text-foreground">
-                      {skill.name}
-                    </span>
-                    <span
-                      className="flex items-center gap-0.5"
-                      role="img"
-                      aria-label={`${skill.level} stars`}
+                {category.skills.map((skill) => {
+                  const proficiency = Math.min(
+                    100,
+                    Math.max(0, skill.percentage ?? skill.level * 20),
+                  );
+
+                  return (
+                    <li
+                      key={skill.name}
+                      className="space-y-2 rounded-md border border-transparent px-2 py-1.5 transition-colors hover:border-border/70"
+                      aria-label={`${skill.name} proficiency ${proficiency}%`}
                     >
-                      {Array.from({ length: 5 }).map((_, index) => {
-                        const active = index < skill.level;
-                        return (
-                          <Star
-                            key={`${skill.name}-${index}`}
-                            className={cn(
-                              "h-3.5 w-3.5 transition-all duration-300",
-                              active
-                                ? "fill-primary text-primary group-hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)]"
-                                : "text-muted-foreground/50",
-                            )}
-                          />
-                        );
-                      })}
-                    </span>
-                  </li>
-                ))}
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="text-sm text-foreground">
+                          {skill.name}
+                        </span>
+                        <span className="text-xs font-medium text-muted-foreground">
+                          {proficiency}%
+                        </span>
+                      </div>
+                      <div className="h-2 w-full overflow-hidden rounded-full bg-muted/70">
+                        <motion.div
+                          className="h-full rounded-full bg-primary"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${proficiency}%` }}
+                          viewport={{ once: true, amount: 0.5 }}
+                          transition={{ duration: 0.7, ease: "easeOut" }}
+                        />
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             </article>
           ))}

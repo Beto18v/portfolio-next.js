@@ -20,7 +20,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const demoAriaPrefix = useT(siteConfig.labels.openDemo);
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-indigo-500/20 bg-card/60 shadow-sm backdrop-blur-md transition-all hover:border-indigo-500/40 hover:shadow-[0_0_30px_hsl(250_90%_60%/.24)]">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-indigo-500/20 bg-card/60 shadow-sm backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-1 hover:border-indigo-500/40 hover:shadow-[0_14px_38px_hsl(250_90%_60%/.24)]">
       <div className="relative aspect-video overflow-hidden border-b border-indigo-500/20">
         <Image
           src={project.image}
@@ -51,7 +51,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-auto flex flex-wrap gap-3 pt-6">
           {project.links.code ? (
             <Button
               asChild

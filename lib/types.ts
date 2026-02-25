@@ -5,6 +5,7 @@ export type SkillLevel = 1 | 2 | 3 | 4 | 5;
 export interface Skill {
   name: string;
   level: SkillLevel;
+  percentage?: number;
   icon?: string;
 }
 
@@ -15,7 +16,7 @@ export interface SkillCategory {
 }
 
 export interface Profile {
-  name: string;
+  status: LocalizedText;
   role: LocalizedText;
   tagline: LocalizedText;
   location?: LocalizedText;

@@ -9,12 +9,15 @@ export const siteConfig: SiteConfig = {
       en: "Nicolas | Full Stack Developer",
     },
     description: {
-      es: "Portfolio profesional de Nicolas con enfoque en productos web modernos.",
-      en: "Professional portfolio of Nicolas focused on modern web products.",
+      es: "Portfolio profesional de Nicolas Valenzuela con enfoque en productos web modernos.",
+      en: "Professional portfolio of Nicolas Valenzuela focused on modern web products.",
     },
   },
   profile: {
-    name: "Nicolas",
+    status: {
+      es: "en linea",
+      en: "online",
+    },
     role: {
       es: "Full Stack Developer",
       en: "Full Stack Developer",
@@ -34,8 +37,8 @@ export const siteConfig: SiteConfig = {
   },
   hero: {
     title: {
-      es: "Nicolas",
-      en: "Nicolas",
+      es: "Nicolas Valenzuela",
+      en: "Nicolas Valenzuela",
     },
     subtitle: {
       es: "Arquitectura frontend moderna, performante y escalable para productos digitales.",

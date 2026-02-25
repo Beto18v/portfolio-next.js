@@ -84,7 +84,7 @@ export function Hero() {
             <div className="flex w-fit items-center gap-3 rounded-full border border-indigo-500/25 bg-background/40 px-4 py-2 backdrop-blur-sm">
               <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_hsl(160_84%_55%/.75)]" />
               <span className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                {siteConfig.profile.name}
+                {siteConfig.profile.status?.[locale] ?? ""}
               </span>
             </div>
           </div>
