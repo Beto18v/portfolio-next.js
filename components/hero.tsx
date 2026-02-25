@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Github, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocale, useT } from "./locale-provider";
-import { FuturisticBackground } from "./futuristic-background";
+import DotGridBg from "./hero/dot-grid-bg";
 
 export function Hero() {
   const { locale } = useLocale();
@@ -21,7 +21,7 @@ export function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[80vh] items-center overflow-hidden px-4 pb-20 pt-24 md:px-6 md:pt-28">
-      <FuturisticBackground />
+      <DotGridBg />
 
       <div className="absolute right-8 top-24 hidden h-28 w-28 rounded-xl border border-indigo-500/30 bg-indigo-500/10 backdrop-blur-sm md:block" />
       <div className="absolute bottom-16 left-8 hidden h-20 w-44 rounded-xl border border-emerald-400/25 bg-emerald-400/10 backdrop-blur-sm md:block" />
