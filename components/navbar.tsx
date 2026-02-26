@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { LanguageToggle } from "./language-toggle";
 import * as React from "react";
 import { useT } from "./locale-provider";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +20,7 @@ import {
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
+  const pathname = usePathname();
   const skillsNav = useT(siteConfig.sections.skills.nav);
   const projectsNav = useT(siteConfig.sections.projects.nav);
   const contactNav = useT(siteConfig.sections.contact.nav);
@@ -48,6 +50,12 @@ export function Navbar() {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 md:px-6">
         <Link
           href="/"
+          onClick={(event) => {
+            if (pathname === "/") {
+              event.preventDefault();
+              window.scrollTo({ top: 0, behavior: "auto" });
+            }
+          }}
           className="text-lg font-semibold tracking-tight text-indigo-200 drop-shadow-[0_0_10px_hsl(250_100%_72%/.45)] transition-all hover:text-indigo-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
           aria-label={siteConfig.profile.name}
         >
