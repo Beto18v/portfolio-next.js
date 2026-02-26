@@ -21,7 +21,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-indigo-500/20 bg-card/60 shadow-sm backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-1 hover:border-indigo-500/40 hover:shadow-[0_14px_38px_hsl(250_90%_60%/.24)]">
-      <div className="relative aspect-video overflow-hidden border-b border-indigo-500/20">
+      <div className="relative aspect-4/4 overflow-hidden border-b border-indigo-500/20">
         <Image
           src={project.image}
           alt={project.imageAlt[locale]}

@@ -208,8 +208,8 @@ export const siteConfig: SiteConfig = {
         en: "Adoptafacil",
       },
       description: {
-        es: "Módulo para simulación y cálculo de escenarios financieros con enfoque en mantenibilidad y precisión.",
-        en: "Financial simulation and scenario engine focused on maintainability and precision.",
+        es: "AdoptaFácil es un ecosistema digital completo diseñado para revolucionar el proceso de adopción de mascotas en Colombia.",
+        en: "AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia.",
       },
       image: "/projects/adoptafacil.jpg",
       imageAlt: {
