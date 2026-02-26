@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
     },
   },
   profile: {
-    name: "Nicolas Valenzuela",
+    name: "Nicolas",
     status: {
       es: "en linea",
       en: "online",
@@ -68,7 +68,7 @@ export const siteConfig: SiteConfig = {
     skills: {
       id: "skills",
       nav: {
-        es: "Skills",
+        es: "Habilidades",
         en: "Skills",
       },
       badge: {
@@ -76,7 +76,7 @@ export const siteConfig: SiteConfig = {
         en: "Core Stack",
       },
       title: {
-        es: "Skills y dominio técnico",
+        es: "Habilidades y dominio técnico",
         en: "Skills & technical proficiency",
       },
       subtitle: {
@@ -91,7 +91,7 @@ export const siteConfig: SiteConfig = {
         en: "Projects",
       },
       badge: {
-        es: "Portfolio",
+        es: "Portafolio",
         en: "Portfolio",
       },
       title: {
@@ -314,16 +314,16 @@ export const siteConfig: SiteConfig = {
 
     {
       title: {
-        es: "Vue Portfolio ",
+        es: "Vue Portafolio ",
         en: "Vue Portfolio",
       },
       description: {
-        es: "Portfolio personal moderno, elegante y profesional. Con 3 vistas diferentes, completamente modularizado en componentes reutilizables y con soporte para múltiples idiomas (español, inglés y mandarín).",
+        es: "Portafolio personal moderno, elegante y profesional. Con 3 vistas diferentes, completamente modularizado en componentes reutilizables y con soporte para múltiples idiomas (español, inglés y mandarín).",
         en: "Modern, sleek and professional personal portfolio. With 3 different views, completely modularized in reusable components and with support for multiple languages (Spanish, English and Mandarin).",
       },
       image: "/projects/vue-portfolio.jpg",
       imageAlt: {
-        es: "Vista previa del proyecto Vue Portfolio",
+        es: "Vista previa del proyecto Vue Portafolio",
         en: "Preview of Vue Portfolio project",
       },
       tags: [

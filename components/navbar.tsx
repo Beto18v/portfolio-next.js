@@ -7,6 +7,15 @@ import { cn } from "@/lib/utils";
 import { LanguageToggle } from "./language-toggle";
 import * as React from "react";
 import { useT } from "./locale-provider";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
@@ -45,7 +54,7 @@ export function Navbar() {
           {siteConfig.profile.name}
         </Link>
         <nav
-          className="flex items-center gap-2 text-sm font-medium sm:gap-4"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-4 text-sm font-medium md:flex"
           aria-label={siteConfig.profile.name}
         >
           {navItems.map((item) => (
@@ -60,9 +69,44 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
+        </nav>
+
+        <div className="hidden items-center gap-2 md:flex">
           <LanguageToggle />
           <ThemeToggle />
-        </nav>
+        </div>
+
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageToggle />
+          <ThemeToggle />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-9 w-9 rounded-full border-border/70 bg-background/70 backdrop-blur-md"
+                aria-label="Open navigation menu"
+              >
+                <Menu className="h-4 w-4" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="pt-12">
+              <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+              <div className="flex flex-col gap-2 px-2">
+                {navItems.map((item) => (
+                  <SheetClose asChild key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="rounded-md px-3 py-2 text-base text-muted-foreground transition-all hover:text-indigo-200 hover:bg-accent/40"
+                    >
+                      {item.label}
+                    </Link>
+                  </SheetClose>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

@@ -9,21 +9,17 @@ import { siteConfig } from "@/lib/site";
 import { useT } from "./locale-provider";
 
 export function ThemeToggle() {
-  const { setTheme, theme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+  const { setTheme } = useTheme();
   const label = useT(siteConfig.labels.toggleTheme);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <Button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      onClick={() => {
+        const isDark =
+          typeof document !== "undefined" &&
+          document.documentElement.classList.contains("dark");
+        setTheme(isDark ? "light" : "dark");
+      }}
       variant="outline"
       size="icon"
       className={cn(
@@ -32,11 +28,8 @@ export function ThemeToggle() {
       )}
       aria-label={label}
     >
-      {theme === "light" ? (
-        <Sun className="h-4 w-4" />
-      ) : (
-        <Moon className="h-4 w-4" />
-      )}
+      <Sun className="h-4 w-4 dark:hidden" />
+      <Moon className="hidden h-4 w-4 dark:block" />
       <span className="sr-only">{label}</span>
     </Button>
   );

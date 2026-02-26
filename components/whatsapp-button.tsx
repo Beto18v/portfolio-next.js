@@ -16,10 +16,10 @@ export function WhatsAppButton() {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50"
+      className="fixed right-4 z-60 bottom-[max(1rem,env(safe-area-inset-bottom))] sm:bottom-5 sm:right-5"
       aria-label={aria}
     >
-      <span className="flex items-center justify-center w-14 h-14 rounded-full bg-green-500 hover:scale-110 transition-transform duration-200 shadow-lg">
+      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 shadow-lg transition-transform duration-200 hover:scale-110 sm:h-14 sm:w-14">
         <FaWhatsapp className="h-8 w-8 text-white transition-colors duration-200" />
       </span>
     </a>
