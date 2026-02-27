@@ -230,6 +230,7 @@ export const siteConfig: SiteConfig = {
       ],
       links: {
         code: "https://github.com/Beto18v/AdoptaFacil",
+        demo: "https://adoptafacil-prod-a3f3gvdnc8hhfkfj.eastus-01.azurewebsites.net/",
       },
       featured: true,
     },
