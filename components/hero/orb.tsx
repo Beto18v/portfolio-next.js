@@ -2,11 +2,29 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 
 function Orb() {
   const mesh = useRef<THREE.Mesh>(null!);
+  const [color, setColor] = useState("#5227FF");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const getTheme = () =>
+        document.documentElement.classList.contains("dark") ? "dark" : "light";
+      const updateColor = () => {
+        setColor(getTheme() === "dark" ? "#5227FF" : "#7B68EE");
+      };
+      updateColor();
+      const observer = new MutationObserver(updateColor);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+      return () => observer.disconnect();
+    }
+  }, []);
 
   useFrame((state) => {
     const { mouse } = state;
@@ -21,8 +39,8 @@ function Orb() {
         <icosahedronGeometry args={[1.2, 2]} />
         <meshStandardMaterial
           wireframe
-          color="#5227FF"
-          emissive="#5227FF"
+          color={color}
+          emissive={color}
           emissiveIntensity={0.6}
         />
       </mesh>
