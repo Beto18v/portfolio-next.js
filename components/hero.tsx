@@ -25,9 +25,6 @@ export function Hero() {
       <DotGridBg />
       <FuturisticOrb />
 
-      <div className="absolute right-8 top-24 hidden h-28 w-28 rounded-xl border border-indigo-500/30 bg-indigo-500/10 backdrop-blur-sm md:block" />
-      <div className="absolute bottom-16 left-8 hidden h-20 w-44 rounded-xl border border-emerald-400/25 bg-emerald-400/10 backdrop-blur-sm md:block" />
-
       <div className="mx-auto flex w-full max-w-6xl flex-col justify-center">
         <div className="max-w-3xl space-y-8">
           <div className="hero-reveal space-y-4">

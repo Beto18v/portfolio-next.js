@@ -42,8 +42,8 @@ export const siteConfig: SiteConfig = {
       en: "Nicolas Valenzuela",
     },
     subtitle: {
-      es: "Arquitectura frontend moderna, performante y escalable para productos digitales.",
-      en: "Modern, performant and scalable frontend architecture for digital products.",
+      es: "Diseño y construyo soluciones digitales modernos, rápidos y escalables.",
+      en: "I design and build modern, fast and scalable digital solutions.",
     },
     badge: {
       es: "Disponible para proyectos",
