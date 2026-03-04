@@ -41,7 +41,7 @@ export function Skills() {
                 {category.skills.map((skill) => {
                   const proficiency = Math.min(
                     100,
-                    Math.max(0, skill.percentage ?? skill.level * 20),
+                    Math.max(0, skill.percentage ?? 0),
                   );
 
                   return (
