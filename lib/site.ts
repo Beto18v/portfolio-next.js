@@ -149,8 +149,7 @@ export const siteConfig: SiteConfig = {
       skills: [
         { name: "REST APIs", percentage: 85 },
         { name: "Laravel", percentage: 80 },
-        { name: "FastAPI", percentage: 80 },
-        { name: "Python", percentage: 70 },
+        { name: "FastAPI", percentage: 75 },
         { name: "SpringBoot", percentage: 65 },
         { name: ".Net", percentage: 60 },
       ],
@@ -180,6 +179,7 @@ export const siteConfig: SiteConfig = {
         { name: "Vercel", percentage: 90 },
         { name: "Azure App Service", percentage: 80 },
         { name: "Docker", percentage: 75 },
+        { name: "Supabase", percentage: 70 },
         { name: "Railway", percentage: 70 },
         { name: "Linux", percentage: 50 },
         { name: "CI/CD", percentage: 45 },
