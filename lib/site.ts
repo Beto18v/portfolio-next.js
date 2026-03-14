@@ -177,9 +177,9 @@ export const siteConfig: SiteConfig = {
       skills: [
         { name: "Git", percentage: 95 },
         { name: "Vercel", percentage: 90 },
+        { name: "Supabase", percentage: 85 },
         { name: "Azure App Service", percentage: 80 },
         { name: "Docker", percentage: 75 },
-        { name: "Supabase", percentage: 70 },
         { name: "Railway", percentage: 70 },
         { name: "Linux", percentage: 50 },
         { name: "CI/CD", percentage: 45 },
@@ -189,25 +189,40 @@ export const siteConfig: SiteConfig = {
   projects: [
     {
       title: {
-        es: "NEXVAL",
-        en: "NEXVAL",
+        es: "Dinerance",
+        en: "Dinerance",
       },
       description: {
-        es: "Sistema de landing pages multi-rubro optimizado para conversión, performance y despliegue rápido. Integración directa con WhatsApp y estructura SEO-friendly.",
-        en: "Multi-sector landing page system optimized for conversion, performance, and rapid deployment. Direct integration with WhatsApp and SEO-friendly structure.",
+        es: "SaaS de finanzas personales con dashboard web, autenticación y gestión de transacciones.",
+        en: "Personal finance SaaS with a web dashboard, authentication, and transaction management.",
       },
-      image: "/projects/nexval.jpg",
+      image: "/projects/dinerance.jpg",
       imageAlt: {
-        es: "Vista previa del proyecto NEXVAL",
-        en: "Preview of NEXVAL project",
+        es: "Vista previa de Dinerance",
+        en: "Preview of the Dinerance",
       },
-      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+      tags: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "Supabase",
+        "FastAPI",
+        "SQLAlchemy",
+        "PostgreSQL",
+        "Alembic",
+        "RLS",
+      ],
       links: {
-        code: "https://github.com/Beto18v/NEXVAL",
-        demo: "https://nexval.vercel.app/",
+        code: {
+          frontend: "https://github.com/Beto18v/dinerance-dashboard.git",
+          backend: "https://github.com/Beto18v/dinerance-api.git",
+        },
+        demo: "https://dinerance.vercel.app/",
       },
       featured: true,
     },
+
     {
       title: {
         es: "Adoptafacil",
@@ -235,11 +250,37 @@ export const siteConfig: SiteConfig = {
         "Grok AI",
       ],
       links: {
-        code: "https://github.com/Beto18v/AdoptaFacil",
+        code: {
+          frontend: "https://github.com/Beto18v/AdoptaFacil-Deploy.git",
+          backend: "https://github.com/Beto18v/Chatbot-service-Prod.git",
+        },
         demo: "https://adoptafacil-prod-a3f3gvdnc8hhfkfj.eastus-01.azurewebsites.net/",
       },
       featured: true,
     },
+
+    {
+      title: {
+        es: "NEXVAL",
+        en: "NEXVAL",
+      },
+      description: {
+        es: "Sistema de landing pages multi-rubro optimizado para conversión, performance y despliegue rápido. Integración directa con WhatsApp y estructura SEO-friendly.",
+        en: "Multi-sector landing page system optimized for conversion, performance, and rapid deployment. Direct integration with WhatsApp and SEO-friendly structure.",
+      },
+      image: "/projects/nexval.jpg",
+      imageAlt: {
+        es: "Vista previa del proyecto NEXVAL",
+        en: "Preview of NEXVAL project",
+      },
+      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+      links: {
+        code: "https://github.com/Beto18v/NEXVAL",
+        demo: "https://nexval.vercel.app/",
+      },
+      featured: true,
+    },
+
     {
       title: {
         es: "Bots",
@@ -382,6 +423,14 @@ export const siteConfig: SiteConfig = {
     code: {
       es: "Código",
       en: "Code",
+    },
+    frontend: {
+      es: "Frontend",
+      en: "Frontend",
+    },
+    backend: {
+      es: "Backend",
+      en: "Backend",
     },
     liveDemo: {
       es: "Demo",

@@ -15,9 +15,30 @@ interface ProjectCardProps {
 export function ProjectCard({ project }: ProjectCardProps) {
   const { locale } = useLocale();
   const codeLabel = useT(siteConfig.labels.code);
+  const frontendLabel = useT(siteConfig.labels.frontend);
+  const backendLabel = useT(siteConfig.labels.backend);
   const liveDemoLabel = useT(siteConfig.labels.liveDemo);
   const codeAriaPrefix = useT(siteConfig.labels.openCode);
   const demoAriaPrefix = useT(siteConfig.labels.openDemo);
+
+  const codeLinks: Array<{ href: string; labelSuffix?: string }> = [];
+  const code = project.links.code;
+  if (typeof code === "string") {
+    const href = code.trim();
+    if (href) {
+      codeLinks.push({ href });
+    }
+  } else if (code) {
+    const frontendHref = code.frontend?.trim();
+    if (frontendHref) {
+      codeLinks.push({ href: frontendHref, labelSuffix: frontendLabel });
+    }
+
+    const backendHref = code.backend?.trim();
+    if (backendHref) {
+      codeLinks.push({ href: backendHref, labelSuffix: backendLabel });
+    }
+  }
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-indigo-500/20 bg-card/60 shadow-sm backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-1 hover:border-indigo-500/40 hover:shadow-[0_14px_38px_hsl(250_90%_60%/.24)]">
@@ -51,25 +72,29 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <div className="mt-auto flex flex-wrap gap-3 pt-6">
-          {project.links.code ? (
+        <div className="mt-auto flex flex-wrap gap-3">
+          {codeLinks.map((link) => (
             <Button
+              key={link.href}
               asChild
               variant="outline"
               size="sm"
               className="rounded-full"
             >
               <Link
-                href={project.links.code}
+                href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${codeAriaPrefix} ${project.title[locale]}`}
+                aria-label={`${codeAriaPrefix} ${project.title[locale]}${
+                  link.labelSuffix ? ` (${link.labelSuffix})` : ""
+                }`}
               >
                 <Github className="h-4 w-4" />
                 {codeLabel}
+                {link.labelSuffix ? ` ${link.labelSuffix}` : ""}
               </Link>
             </Button>
-          ) : null}
+          ))}
           {project.links.demo ? (
             <Button asChild size="sm" className="neon-button rounded-full">
               <Link

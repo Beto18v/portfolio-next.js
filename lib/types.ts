@@ -49,16 +49,25 @@ export interface SectionText {
   subtitle?: LocalizedText;
 }
 
+export type ProjectCodeLink =
+  | string
+  | {
+      frontend?: string;
+      backend?: string;
+    };
+
+export interface ProjectLinks {
+  code?: ProjectCodeLink;
+  demo?: string;
+}
+
 export interface Project {
   title: LocalizedText;
   description: LocalizedText;
   image: string;
   imageAlt: LocalizedText;
   tags: string[];
-  links: {
-    code?: string;
-    demo?: string;
-  };
+  links: ProjectLinks;
   featured: boolean;
 }
 
@@ -82,6 +91,8 @@ export interface FooterConfig {
 
 export interface Labels {
   code: LocalizedText;
+  frontend: LocalizedText;
+  backend: LocalizedText;
   liveDemo: LocalizedText;
   averageByCategory: LocalizedText;
   topSkills: LocalizedText;
