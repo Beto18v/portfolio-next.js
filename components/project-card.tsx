@@ -72,7 +72,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <div className="mt-auto flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-3">
           {codeLinks.map((link) => (
             <Button
               key={link.href}
