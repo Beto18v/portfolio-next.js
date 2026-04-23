@@ -263,8 +263,38 @@ export const siteConfig: SiteConfig = {
 
     {
       title: {
-        es: "NEXVAL",
-        en: "NEXVAL",
+        es: "Pianio",
+        en: "Pianio",
+      },
+      description: {
+        es: "Aplicación web frontend-only para practicar piano utilizando archivos MIDI y XML. Permite visualizar notas en un escenario de pantalla completa, reproducir con un sintetizador mínimo, conectar un teclado MIDI y practicar con un modo de espera.",
+        en: "Frontend-only web application for practicing piano using MIDI and XML files. It allows you to visualize notes on a full-screen stage, play with a minimal synthesizer, connect a MIDI keyboard, and practice with a waiting mode.",
+      },
+      image: "/projects/pianio.jpg",
+      imageAlt: {
+        es: "Vista previa del proyecto Pianio",
+        en: "Preview of Pianio project",
+      },
+      tags: [
+        "Angular",
+        "TypeScript",
+        "SCSS",
+        "RxJS",
+        "Vitest",
+        "Playwright",
+        "Web MIDI API + Web Audio API",
+      ],
+      links: {
+        code: "https://github.com/Beto18v/Pianio",
+        demo: "https://pianio.vercel.app/",
+      },
+      featured: true,
+    },
+
+    {
+      title: {
+        es: "Nexval",
+        en: "Nexval",
       },
       description: {
         es: "Sistema de landing pages multi-rubro optimizado para conversión, performance y despliegue rápido. Integración directa con WhatsApp y estructura SEO-friendly.",
