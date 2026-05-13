@@ -131,6 +131,9 @@ export function Stats() {
                 <div className="mt-3 text-3xl font-bold md:text-4xl">
                   <AnimatedValue value={displayValue} suffix={stat.suffix} />
                 </div>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {stat.label[locale]}
+                </p>
               </motion.div>
             );
           })}
