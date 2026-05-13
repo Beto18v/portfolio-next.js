@@ -115,14 +115,68 @@ export const siteConfig: SiteConfig = {
       },
       title: {
         es: "Hablemos",
-        en: "Let’s build together",
+        en: "Let's build together",
       },
       subtitle: {
         es: "Cuéntame tu idea y armamos una solución web profesional.",
         en: "Tell me about your idea and we can build a professional web solution.",
       },
     },
+    stats: {
+      id: "stats",
+      nav: {
+        es: "Estadísticas",
+        en: "Stats",
+      },
+      badge: {
+        es: "Métricas",
+        en: "Metrics",
+      },
+      title: {
+        es: "En números",
+        en: "By the numbers",
+      },
+    },
   },
+  stats: [
+    {
+      value: 2,
+      suffix: "+",
+      since: { year: 2024, month: 6 },
+      label: {
+        es: "Años de experiencia",
+        en: "Years of experience",
+      },
+      icon: "Briefcase",
+    },
+    {
+      value: 3,
+      suffix: "+",
+      label: {
+        es: "Proyectos en producción",
+        en: "Projects in production",
+      },
+      icon: "Rocket",
+    },
+    {
+      value: 30,
+      suffix: "+",
+      label: {
+        es: "Tecnologías dominadas",
+        en: "Technologies mastered",
+      },
+      icon: "Code2",
+    },
+    {
+      value: 8,
+      suffix: "+",
+      label: {
+        es: "Proyectos completados",
+        en: "Completed projects",
+      },
+      icon: "CheckCircle2",
+    },
+  ],
   skills: [
     {
       id: "frontend",
@@ -131,14 +185,32 @@ export const siteConfig: SiteConfig = {
         en: "Frontend",
       },
       skills: [
-        { name: "Next.js", percentage: 90 },
-        { name: "React", percentage: 85 },
-        { name: "TypeScript", percentage: 85 },
-        { name: "Shadcn/UI", percentage: 80 },
-        { name: "Tailwind CSS", percentage: 80 },
-        { name: "Angular", percentage: 75 },
-        { name: "Recharts", percentage: 70 },
-        { name: "Vue", percentage: 60 },
+        {
+          name: "Next.js",
+          icon: "SiNextdotjs",
+          docsUrl: "https://nextjs.org/docs",
+          isFavorite: true,
+        },
+        { name: "React", icon: "FaReact", docsUrl: "https://react.dev" },
+        {
+          name: "TypeScript",
+          icon: "SiTypescript",
+          docsUrl: "https://www.typescriptlang.org/docs/",
+          isFavorite: true,
+        },
+        {
+          name: "Shadcn/UI",
+          icon: "SiShadcnui",
+          docsUrl: "https://ui.shadcn.com/docs",
+        },
+        {
+          name: "Tailwind CSS",
+          icon: "SiTailwindcss",
+          docsUrl: "https://tailwindcss.com/docs",
+        },
+        { name: "Angular", icon: "SiAngular", docsUrl: "https://angular.dev" },
+        { name: "Recharts", icon: "VscGraph", docsUrl: "https://recharts.org" },
+        { name: "Vue", icon: "SiVuedotjs", docsUrl: "https://vuejs.org" },
       ],
     },
     {
@@ -148,11 +220,38 @@ export const siteConfig: SiteConfig = {
         en: "Backend",
       },
       skills: [
-        { name: "REST APIs", percentage: 85 },
-        { name: "Laravel", percentage: 80 },
-        { name: "FastAPI", percentage: 75 },
-        { name: "SpringBoot", percentage: 70 },
-        { name: ".Net", percentage: 60 },
+        {
+          name: "REST APIs",
+          icon: "FaNetworkWired",
+          docsUrl: "https://restfulapi.net",
+        },
+        {
+          name: "Laravel",
+          icon: "SiLaravel",
+          docsUrl: "https://laravel.com/docs",
+        },
+        {
+          name: "FastAPI",
+          icon: "SiFastapi",
+          docsUrl: "https://fastapi.tiangolo.com/",
+          isFavorite: true,
+        },
+        {
+          name: "Python",
+          icon: "SiPython",
+          docsUrl: "https://docs.python.org/3/",
+          isFavorite: true,
+        },
+        {
+          name: "SpringBoot",
+          icon: "SiSpringboot",
+          docsUrl: "https://spring.io/projects/spring-boot#learn",
+        },
+        {
+          name: ".Net",
+          icon: "SiDotnet",
+          docsUrl: "https://learn.microsoft.com/en-us/dotnet/",
+        },
       ],
     },
     {
@@ -162,11 +261,32 @@ export const siteConfig: SiteConfig = {
         en: "Database",
       },
       skills: [
-        { name: "MySQL", percentage: 90 },
-        { name: "SQLite", percentage: 85 },
-        { name: "PostgreSQL", percentage: 80 },
-        { name: "SQL Server", percentage: 65 },
-        { name: "MongoDB", percentage: 40 },
+        {
+          name: "MySQL",
+          icon: "SiMysql",
+          docsUrl: "https://dev.mysql.com/doc/",
+        },
+        {
+          name: "SQLite",
+          icon: "SiSqlite",
+          docsUrl: "https://www.sqlite.org/docs.html",
+        },
+        {
+          name: "PostgreSQL",
+          icon: "SiPostgresql",
+          docsUrl: "https://www.postgresql.org/docs/",
+          isFavorite: true,
+        },
+        {
+          name: "SQL Server",
+          icon: "FaDatabase",
+          docsUrl: "https://learn.microsoft.com/en-us/sql/",
+        },
+        {
+          name: "MongoDB",
+          icon: "SiMongodb",
+          docsUrl: "https://www.mongodb.com/docs/",
+        },
       ],
     },
     {
@@ -176,14 +296,40 @@ export const siteConfig: SiteConfig = {
         en: "Tools",
       },
       skills: [
-        { name: "Git", percentage: 95 },
-        { name: "Vercel", percentage: 90 },
-        { name: "Supabase", percentage: 85 },
-        { name: "Azure App Service", percentage: 80 },
-        { name: "Docker", percentage: 75 },
-        { name: "Railway", percentage: 70 },
-        { name: "Linux", percentage: 50 },
-        { name: "CI/CD", percentage: 45 },
+        { name: "Git", icon: "SiGit", docsUrl: "https://git-scm.com/doc" },
+        {
+          name: "Vercel",
+          icon: "SiVercel",
+          docsUrl: "https://vercel.com/docs",
+          isFavorite: true,
+        },
+        {
+          name: "Supabase",
+          icon: "SiSupabase",
+          docsUrl: "https://supabase.com/docs",
+          isFavorite: true,
+        },
+        {
+          name: "Azure",
+          icon: "FaCloud",
+          docsUrl: "https://learn.microsoft.com/en-us/azure/app-service/",
+        },
+        {
+          name: "Docker",
+          icon: "SiDocker",
+          docsUrl: "https://docs.docker.com/",
+        },
+        {
+          name: "Railway",
+          icon: "SiRailway",
+          docsUrl: "https://docs.railway.app/",
+        },
+        { name: "Linux", icon: "SiLinux", docsUrl: "https://linux.org" },
+        {
+          name: "CI/CD",
+          icon: "FaCogs",
+          docsUrl: "https://docs.github.com/en/actions",
+        },
       ],
     },
   ],
@@ -194,8 +340,8 @@ export const siteConfig: SiteConfig = {
         en: "Dinerance",
       },
       description: {
-        es: "SaaS de finanzas personales con dashboard web, autenticación y gestión de transacciones.",
-        en: "Personal finance SaaS with a web dashboard, authentication, and transaction management.",
+        es: "SaaS de finanzas personales con dashboard interactivo, autenticación segura, gestión de transacciones y RLS. Stack moderno: Next.js + FastAPI + PostgreSQL + Supabase.",
+        en: "Personal finance SaaS with interactive dashboard, secure auth, transaction management, and RLS. Modern stack: Next.js + FastAPI + PostgreSQL + Supabase.",
       },
       image: "/projects/dinerance.jpg",
       imageAlt: {
@@ -222,43 +368,31 @@ export const siteConfig: SiteConfig = {
         demo: "https://dinerance.vercel.app/",
       },
       featured: true,
+      isStar: true,
+      isProduction: true,
     },
 
     {
       title: {
-        es: "Adoptafacil",
-        en: "Adoptafacil",
+        es: "Nunca Cierro",
+        en: "Nunca Cierro",
       },
       description: {
-        es: "AdoptaFácil es un ecosistema digital completo diseñado para revolucionar el proceso de adopción de mascotas en Colombia.",
-        en: "AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia.",
+        es: "Sistema de landing pages multi-rubro con IA conversacional. Integración directa con WhatsApp, SEO optimizado y despliegue rápido en Vercel. Next.js + shadcn/ui.",
+        en: "Multi-sector landing page system with conversational AI. Direct WhatsApp integration, SEO-optimized, and fast Vercel deployment. Next.js + shadcn/ui.",
       },
-      image: "/projects/adoptafacil.jpg",
+      image: "/projects/nuncacierro.jpg",
       imageAlt: {
-        es: "Vista previa del proyecto Adoptafacil",
-        en: "Preview of Adoptafacil project",
+        es: "Vista previa del proyecto NUNCA CIERRO",
+        en: "Preview of NUNCA CIERRO project",
       },
-      tags: [
-        "Laravel",
-        "FastAPI",
-        "React",
-        "Inertia.js",
-        "PostgreSQL",
-        "TypeScript",
-        "Tailwind",
-        "Docker",
-        "Google API",
-        "Grok AI",
-        "Wompi",
-      ],
+      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
       links: {
-        code: {
-          frontend: "https://github.com/Beto18v/AdoptaFacil-Deploy.git",
-          backend: "https://github.com/Beto18v/Chatbot-service-Prod.git",
-        },
-        demo: "https://adoptafacil-prod-a3f3gvdnc8hhfkfj.eastus-01.azurewebsites.net/",
+        code: "https://github.com/Beto18v/NUNCA-CIERRO",
+        demo: "https://nuncacierro.vercel.app/",
       },
       featured: true,
+      isProduction: true,
     },
 
     {
@@ -289,26 +423,41 @@ export const siteConfig: SiteConfig = {
         demo: "https://pianio.vercel.app/",
       },
       featured: true,
+      isProduction: true,
     },
 
     {
       title: {
-        es: "Nexval",
-        en: "Nexval",
+        es: "Adoptafacil",
+        en: "Adoptafacil",
       },
       description: {
-        es: "Sistema de landing pages multi-rubro optimizado para conversión, performance y despliegue rápido. Integración directa con WhatsApp y estructura SEO-friendly.",
-        en: "Multi-sector landing page system optimized for conversion, performance, and rapid deployment. Direct integration with WhatsApp and SEO-friendly structure.",
+        es: "Ecosistema digital multi-servicio para adopción de mascotas en Colombia. Arquitectura con Laravel + FastAPI + React, pagos Wompi, chatbot con IA (Grok) y autenticación.",
+        en: "Multi-service digital ecosystem for pet adoption in Colombia. Architecture with Laravel + FastAPI + React, Wompi payments, AI chatbot (Grok), and auth.",
       },
-      image: "/projects/nexval.jpg",
+      image: "/projects/adoptafacil.jpg",
       imageAlt: {
-        es: "Vista previa del proyecto NEXVAL",
-        en: "Preview of NEXVAL project",
+        es: "Vista previa del proyecto Adoptafacil",
+        en: "Preview of Adoptafacil project",
       },
-      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+      tags: [
+        "Laravel",
+        "FastAPI",
+        "React",
+        "Inertia.js",
+        "PostgreSQL",
+        "TypeScript",
+        "Tailwind",
+        "Docker",
+        "Google API",
+        "Grok AI",
+        "Wompi",
+      ],
       links: {
-        code: "https://github.com/Beto18v/NEXVAL",
-        demo: "https://nexval.vercel.app/",
+        code: {
+          frontend: "https://github.com/Beto18v/AdoptaFacil-Deploy.git",
+          backend: "https://github.com/Beto18v/Chatbot-service-Prod.git",
+        },
       },
       featured: true,
     },
@@ -319,8 +468,8 @@ export const siteConfig: SiteConfig = {
         en: "Bots",
       },
       description: {
-        es: "Bot para WhatsApp que automatiza respuestas usando inteligencia artificial.",
-        en: "WhatsApp bot that automates responses using artificial intelligence.",
+        es: "Bot WhatsApp con IA (Groq) para automatización de respuestas inteligentes. Integración Twilio, procesamiento de lenguaje natural y respuestas en tiempo real.",
+        en: "WhatsApp bot with AI (Groq) for intelligent response automation. Twilio integration, NLP, and real-time replies.",
       },
       image: "/projects/bots.jpg",
       imageAlt: {
@@ -339,8 +488,8 @@ export const siteConfig: SiteConfig = {
         en: "Canva App",
       },
       description: {
-        es: "Este proyecto automatiza la gestión, edición de imágenes y textos personalizados para proyectos en canva.",
-        en: "This project automates the management, editing of images and customized texts for projects in canva.",
+        es: "Automatización de diseño gráfico para Canva: gestión y edición de imágenes personalizadas. Integra Google Drive, Google Sheets, Cloudinary y Canva API.",
+        en: "Graphic design automation for Canva: custom image management and editing. Integrates Google Drive, Google Sheets, Cloudinary, and Canva API.",
       },
       image: "/projects/canva-app.jpg",
       imageAlt: {
@@ -369,8 +518,8 @@ export const siteConfig: SiteConfig = {
         en: "Video Programmer",
       },
       description: {
-        es: "Sistema SaaS completo para el control de canales, programación y subida automatizada de videos a YouTube.",
-        en: "Complete SaaS system for channel control, scheduling and automated video upload to YouTube.",
+        es: "SaaS para automatización de canales de YouTube: programación inteligente, subida automatizada y gestión multicanal vía YouTube API v3. Laravel + React + shadcn/ui.",
+        en: "SaaS for YouTube channel automation: smart scheduling, automated uploads, and multi-channel management via YouTube API v3. Laravel + React + shadcn/ui.",
       },
       image: "/projects/video-programmer.jpg",
       imageAlt: {
@@ -515,6 +664,58 @@ export const siteConfig: SiteConfig = {
     whatsappLabel: {
       es: "WhatsApp",
       en: "WhatsApp",
+    },
+    whatsappInline: {
+      es: "WhatsApp",
+      en: "WhatsApp",
+    },
+    statsExperience: {
+      es: "Experiencia",
+      en: "Experience",
+    },
+    statsProjects: {
+      es: "Proyectos",
+      en: "Projects",
+    },
+    statsTechnologies: {
+      es: "Tecnologías",
+      en: "Technologies",
+    },
+    statsClients: {
+      es: "Clientes",
+      en: "Clients",
+    },
+    viewDetails: {
+      es: "Ver detalles",
+      en: "View details",
+    },
+    features: {
+      es: "Características",
+      en: "Features",
+    },
+    technologies: {
+      es: "Tecnologías",
+      en: "Technologies",
+    },
+    coreStackTitle: {
+      es: "Stack Principal",
+      en: "Core Stack",
+    },
+    coreStackDesc: {
+      es: "Tecnologías que uso en el día a día para construir productos en producción.",
+      en: "Technologies I use daily to build production-grade products.",
+    },
+    inProduction: {
+      es: "En producción",
+      en: "In production",
+    },
+    prevProject: {
+      es: "Anterior",
+      en: "Previous",
+    },
+    nextProject: {
+      es: "Siguiente",
+      en: "Next",
     },
   },
 };

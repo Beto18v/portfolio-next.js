@@ -9,6 +9,7 @@ import * as React from "react";
 import { useT } from "./locale-provider";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -24,6 +25,8 @@ export function Navbar() {
   const skillsNav = useT(siteConfig.sections.skills.nav);
   const projectsNav = useT(siteConfig.sections.projects.nav);
   const contactNav = useT(siteConfig.sections.contact.nav);
+  const { scrollYProgress } = useScroll();
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -116,6 +119,12 @@ export function Navbar() {
           </Sheet>
         </div>
       </div>
+
+      {/* Scroll progress bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 h-0.5 bg-linear-to-r from-indigo-500 via-violet-500 to-emerald-500"
+        style={{ width: progressWidth }}
+      />
     </header>
   );
 }

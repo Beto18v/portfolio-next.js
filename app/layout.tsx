@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
@@ -9,7 +9,12 @@ import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { LocaleProvider } from "@/components/locale-provider";
 
+
 const inter = Inter({ subsets: ["latin"] });
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+});
 
 export const metadata: Metadata = {
   title: siteConfig.seo.title[siteConfig.defaultLocale],
@@ -26,6 +31,7 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
+          dmSans.variable,
           "min-h-screen bg-background antialiased",
         )}
       >

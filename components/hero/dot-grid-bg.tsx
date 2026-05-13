@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 import DotGrid from "@/components/ui/dot-grid";
+import { useScroll, useTransform, useReducedMotion, motion } from "framer-motion";
 
 export default function DotGridBg() {
   const [baseColor, setBaseColor] = useState("#210d47");
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollY } = useScroll();
+  const yOffset = useTransform(scrollY, (value) =>
+    shouldReduceMotion ? 0 : value * 0.5,
+  );
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -24,7 +30,10 @@ export default function DotGridBg() {
   }, []);
 
   return (
-    <div className="absolute inset-0 -z-10 pointer-events-none">
+    <motion.div
+      className="absolute inset-0 -z-10 pointer-events-none"
+      style={{ y: yOffset }}
+    >
       <DotGrid
         dotSize={5}
         gap={15}
@@ -36,6 +45,6 @@ export default function DotGridBg() {
         resistance={750}
         returnDuration={1.5}
       />
-    </div>
+    </motion.div>
   );
 }
