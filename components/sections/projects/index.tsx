@@ -161,53 +161,120 @@ export function Projects() {
             </div>
           </div>
 
-          {/* ─── CardSwap Stack (Right) ─── */}
+          {/* ─── Card Swap area (desktop + mobile) ─── */}
           <div
-            className="relative z-0 h-130 w-full overflow-visible pb-6 lg:col-span-7 lg:self-center lg:justify-self-start"
+            className="relative z-0 lg:col-span-7 lg:self-center lg:justify-self-start"
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
-            onMouseEnter={() => setIsStackHovered(true)}
-            onMouseLeave={() => setIsStackHovered(false)}
           >
-            <CardSwap
-              width={390}
-              height={330}
-              cardDistance={64}
-              verticalDistance={38}
-              delay={5000}
-              pauseOnHover
-              skewAmount={0}
-              easing="linear"
-              anchor="left"
-              stackDirection="right"
-              controlledDuration={0.38}
-              controlledEase="power3.inOut"
-              hovered={isStackHovered}
-              activeIndex={activeIndex}
-              onCardClick={(idx) => setActiveIndex(idx)}
-              onActiveIndexChange={(idx) =>
-                setActiveIndex((curr) => (curr === idx ? curr : idx))
-              }
+            {/* ─── CardSwap Stack (Desktop only) ─── */}
+            <div
+              className="hidden h-130 w-full overflow-visible pb-6 md:block"
+              onMouseEnter={() => setIsStackHovered(true)}
+              onMouseLeave={() => setIsStackHovered(false)}
             >
-              {projectsToRender.map((project, index) => {
-                const isFront = index === activeIndex;
+              <CardSwap
+                width={390}
+                height={330}
+                cardDistance={64}
+                verticalDistance={38}
+                delay={5000}
+                pauseOnHover
+                skewAmount={0}
+                easing="linear"
+                anchor="left"
+                stackDirection="right"
+                controlledDuration={0.38}
+                controlledEase="power3.inOut"
+                hovered={isStackHovered}
+                activeIndex={activeIndex}
+                onCardClick={(idx) => setActiveIndex(idx)}
+                onActiveIndexChange={(idx) =>
+                  setActiveIndex((curr) => (curr === idx ? curr : idx))
+                }
+              >
+                {projectsToRender.map((project, index) => {
+                  const isFront = index === activeIndex;
 
-                return (
-                  <Card key={project.title.en}>
-                    <div
-                      className={
-                        `relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 border-t border-t-white/20 bg-slate-950/80 backdrop-blur-[28px] ` +
-                        `${isFront ? "shadow-[0_28px_80px_rgba(16,185,129,0.10)]" : "shadow-[0_18px_50px_rgba(0,0,0,0.32)]"}`
-                      }
-                    >
+                  return (
+                    <Card key={project.title.en}>
+                      <div
+                        className={
+                          `relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 border-t border-t-white/20 bg-slate-950/80 backdrop-blur-[28px] ` +
+                          `${isFront ? "shadow-[0_28px_80px_rgba(16,185,129,0.10)]" : "shadow-[0_18px_50px_rgba(0,0,0,0.32)]"}`
+                        }
+                      >
+                        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/15" />
+                        {/* File-tab header with project name */}
+                        <div className="flex items-center gap-2.5 border-b border-white/10 bg-black/35 px-4 py-2.5 backdrop-blur-sm">
+                          <div className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_6px_hsl(160_84%_55%/0.5)]" />
+                          <span className="truncate text-sm font-semibold text-foreground">
+                            {project.title[locale]}
+                          </span>
+                          {project.isProduction ? (
+                            <span className="ml-auto inline-flex items-center rounded-full border border-emerald-400/25 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
+                              {inProductionLabel}
+                            </span>
+                          ) : null}
+                        </div>
+                        {/* Card body */}
+                        <div className="relative flex-1">
+                          <Image
+                            src={project.image}
+                            alt={
+                              project.imageAlt?.[locale] ??
+                              project.title[locale]
+                            }
+                            fill
+                            sizes="(max-width: 1024px) 320px, 400px"
+                            className="object-cover"
+                            priority={false}
+                          />
+                          <div className="absolute inset-0 bg-linear-to-t from-slate-950/92 via-slate-950/50 to-transparent" />
+                          <div className="absolute inset-x-0 bottom-0 bg-slate-950/45 px-4 py-4 backdrop-blur-sm">
+                            <p className="line-clamp-3 text-center text-xs leading-relaxed text-zinc-300">
+                              {project.description[locale]}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  );
+                })}
+              </CardSwap>
+            </div>
+
+            {/* ─── Mobile single card view ─── */}
+            <div className="block w-full md:hidden">
+              <AnimatePresence mode="wait" initial={false}>
+                {activeProject ? (
+                  <motion.div
+                    key={activeProject.title.en}
+                    initial={
+                      shouldReduceMotion
+                        ? { opacity: 1 }
+                        : { opacity: 0, x: 40 }
+                    }
+                    animate={
+                      shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }
+                    }
+                    exit={
+                      shouldReduceMotion
+                        ? { opacity: 1 }
+                        : { opacity: 0, x: -40 }
+                    }
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="mx-auto w-full max-w-sm"
+                  >
+                    <div className="relative flex h-90 flex-col overflow-hidden rounded-2xl border border-white/10 border-t border-t-white/20 bg-slate-950/80 shadow-[0_28px_80px_rgba(16,185,129,0.10)] backdrop-blur-[28px]">
                       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/15" />
                       {/* File-tab header with project name */}
                       <div className="flex items-center gap-2.5 border-b border-white/10 bg-black/35 px-4 py-2.5 backdrop-blur-sm">
                         <div className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_6px_hsl(160_84%_55%/0.5)]" />
                         <span className="truncate text-sm font-semibold text-foreground">
-                          {project.title[locale]}
+                          {activeProject.title[locale]}
                         </span>
-                        {project.isProduction ? (
+                        {activeProject.isProduction ? (
                           <span className="ml-auto inline-flex items-center rounded-full border border-emerald-400/25 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
                             {inProductionLabel}
                           </span>
@@ -216,27 +283,28 @@ export function Projects() {
                       {/* Card body */}
                       <div className="relative flex-1">
                         <Image
-                          src={project.image}
+                          src={activeProject.image}
                           alt={
-                            project.imageAlt?.[locale] ?? project.title[locale]
+                            activeProject.imageAlt?.[locale] ??
+                            activeProject.title[locale]
                           }
                           fill
-                          sizes="(max-width: 1024px) 320px, 400px"
+                          sizes="(max-width: 768px) 90vw, 400px"
                           className="object-cover"
-                          priority={false}
+                          priority={activeIndex === 0}
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-slate-950/92 via-slate-950/50 to-transparent" />
                         <div className="absolute inset-x-0 bottom-0 bg-slate-950/45 px-4 py-4 backdrop-blur-sm">
                           <p className="line-clamp-3 text-center text-xs leading-relaxed text-zinc-300">
-                            {project.description[locale]}
+                            {activeProject.description[locale]}
                           </p>
                         </div>
                       </div>
                     </div>
-                  </Card>
-                );
-              })}
-            </CardSwap>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>
