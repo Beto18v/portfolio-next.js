@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { WhatsAppButton } from "@/components/whatsapp-button";
+import { ThemeProvider } from "@/components/shared/theme-provider";
+import { Navbar } from "@/components/shared/navbar";
+import { Footer } from "@/components/shared/footer";
+import { WhatsAppButton } from "@/components/shared/whatsapp-button";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
-import { LocaleProvider } from "@/components/locale-provider";
-
+import { LocaleProvider } from "@/components/shared/locale-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 const dmSans = DM_Sans({

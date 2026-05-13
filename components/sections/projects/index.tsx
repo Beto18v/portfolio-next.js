@@ -3,8 +3,8 @@
 import { useState, useRef } from "react";
 import type { TouchEventHandler } from "react";
 import { siteConfig } from "@/lib/site";
-import { useLocale, useT } from "./locale-provider";
-import CardSwap, { Card } from "./card-swap";
+import { useLocale, useT } from "@/components/shared/locale-provider";
+import CardSwap, { Card } from "./components/card-swap";
 import { ChevronLeft, ChevronRight, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

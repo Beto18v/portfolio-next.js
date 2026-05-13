@@ -5,11 +5,11 @@ import { siteConfig } from "@/lib/site";
 import Link from "next/link";
 import { Github, ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useLocale, useT } from "./locale-provider";
+import { useLocale, useT } from "@/components/shared/locale-provider";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
-import DotGridBg from "@/components/hero/dot-grid-bg";
-import FuturisticOrb from "@/components/hero/orb";
+import DotGridBg from "./components/dot-grid-bg";
+import FuturisticOrb from "./components/orb";
 
 export function Hero() {
   const { locale } = useLocale();

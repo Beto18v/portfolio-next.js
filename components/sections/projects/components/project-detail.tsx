@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site";
-import { useLocale, useT } from "./locale-provider";
+import { useLocale, useT } from "@/components/shared/locale-provider";
 import {
   SheetHeader,
   SheetTitle,

@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site";
 import Link from "next/link";
 import { Mail, Github, Linkedin, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useLocale, useT } from "./locale-provider";
+import { useLocale, useT } from "@/components/shared/locale-provider";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 

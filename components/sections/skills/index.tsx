@@ -1,7 +1,7 @@
 "use client";
 
 import { siteConfig } from "@/lib/site";
-import { useLocale, useT } from "./locale-provider";
+import { useLocale, useT } from "@/components/shared/locale-provider";
 import { SkillIcon } from "@/lib/skill-icons";
 import type { SkillCategory, Skill } from "@/lib/types";
 

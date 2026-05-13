@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Briefcase, Rocket, Code2, CheckCircle2 } from "lucide-react";
 import { siteConfig } from "@/lib/site";
-import { useLocale } from "./locale-provider";
+import { useLocale } from "@/components/shared/locale-provider";
 import { staggerContainer, fadeUp, springHover } from "@/lib/motion";
 
 function StatIcon({ name, className }: { name: string; className?: string }) {

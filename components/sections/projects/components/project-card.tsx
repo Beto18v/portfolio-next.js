@@ -5,7 +5,7 @@ import { Github, ExternalLink, Eye } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useLocale, useT } from "./locale-provider";
+import { useLocale, useT } from "@/components/shared/locale-provider";
 import { siteConfig } from "@/lib/site";
 import { useReducedMotion } from "framer-motion";
 
@@ -55,8 +55,7 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
       onMouseEnter={(e) => {
         if (shouldReduceMotion) return;
         e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.boxShadow =
-          "0 14px 38px hsl(250 90% 60% / 0.24)";
+        e.currentTarget.style.boxShadow = "0 14px 38px hsl(250 90% 60% / 0.24)";
         e.currentTarget.style.borderColor = "hsl(250 90% 60% / 0.4)";
       }}
       onMouseLeave={(e) => {

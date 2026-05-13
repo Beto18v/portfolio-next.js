@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Hero } from "@/components/hero";
-import { Skills } from "@/components/skills";
-import { Stats } from "@/components/stats";
-import { Projects } from "@/components/projects";
-import { Contact } from "@/components/contact";
+import { Hero } from "@/components/sections/hero";
+import { Skills } from "@/components/sections/skills";
+import { Stats } from "@/components/sections/stats";
+import { Projects } from "@/components/sections/projects";
+import { Contact } from "@/components/sections/contact";
 
 const sections = [
   { id: "hero", Component: Hero, delay: 0 },
