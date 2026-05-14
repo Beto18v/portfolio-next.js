@@ -2,7 +2,7 @@
 
 import { siteConfig } from "@/lib/site";
 import { useLocale, useT } from "@/components/shared/locale-provider";
-import { SkillIcon } from "@/lib/skill-icons";
+import { SkillIcon } from "@/components/sections/skills/components/skill-icons";
 import type { SkillCategory, Skill } from "@/lib/types";
 
 function SkillCard({ skill }: { skill: Skill }) {
@@ -16,7 +16,7 @@ function SkillCard({ skill }: { skill: Skill }) {
     >
       <SkillIcon
         name={skill.icon ?? ""}
-        className="h-7 w-7 text-muted-foreground transition-all duration-200 group-hover:text-foreground group-hover:scale-110"
+        className="h-7 w-7 text-muted-foreground transition-all duration-200 group-hover:scale-110"
       />
       <span className="text-[10px] font-medium leading-tight text-muted-foreground transition-colors duration-200 group-hover:text-foreground">
         {skill.name}
