@@ -397,6 +397,29 @@ export const siteConfig: SiteConfig = {
 
     {
       title: {
+        es: "Nexval",
+        en: "Nexval",
+      },
+      description: {
+        es: "Sistema de landing pages multi-rubro con IA conversacional. Integración directa con WhatsApp, SEO optimizado y despliegue rápido en Vercel. Next.js + shadcn/ui.",
+        en: "Multi-sector landing page system with conversational AI. Direct WhatsApp integration, SEO-optimized, and fast Vercel deployment. Next.js + shadcn/ui.",
+      },
+      image: "/projects/nexval.jpg",
+      imageAlt: {
+        es: "Vista previa del proyecto NEXVAL",
+        en: "Preview of NEXVAL project",
+      },
+      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+      links: {
+        code: "https://github.com/Beto18v/NEXVAL",
+        demo: "https://nexval.vercel.app/",
+      },
+      featured: true,
+      isProduction: true,
+    },
+
+    {
+      title: {
         es: "Pianio",
         en: "Pianio",
       },
