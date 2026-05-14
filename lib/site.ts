@@ -5,12 +5,12 @@ export const siteConfig: SiteConfig = {
   defaultLocale: "es",
   seo: {
     title: {
-      es: "Nicolas | Full Stack Developer",
-      en: "Nicolas | Full Stack Developer",
+      es: "Nicolas | Desarrollador de IA y Automatización",
+      en: "Nicolas | AI Developer & Automation Builder",
     },
     description: {
-      es: "Portfolio profesional de Nicolas Valenzuela con enfoque en productos web modernos.",
-      en: "Professional portfolio of Nicolas Valenzuela focused on modern web products.",
+      es: "Portfolio profesional de Nicolas Valenzuela con enfoque en desarrollo de software, IA aplicada y automatización de procesos.",
+      en: "Professional portfolio of Nicolas Valenzuela focused on software development, applied AI, and process automation.",
     },
   },
   profile: {
@@ -20,12 +20,12 @@ export const siteConfig: SiteConfig = {
       en: "online",
     },
     role: {
-      es: "Full Stack Developer",
-      en: "Full Stack Developer",
+      es: "Desarrollador de IA y Automatización",
+      en: "AI Developer & Automation Builder",
     },
     tagline: {
-      es: "Construyo experiencias web rápidas, escalables y orientadas a resultados.",
-      en: "I build fast, scalable web experiences focused on real outcomes.",
+      es: "Construyo software, integro modelos como Ollama y automatizo procesos para crear soluciones prácticas.",
+      en: "I build software, integrate models like Ollama, and automate processes to create practical solutions.",
     },
     location: {
       es: "Colombia",
@@ -42,8 +42,8 @@ export const siteConfig: SiteConfig = {
       en: "Nicolas Valenzuela",
     },
     subtitle: {
-      es: "Diseño y construyo soluciones digitales modernos, rápidos y escalables.",
-      en: "I design and build modern, fast and scalable digital solutions.",
+      es: "Construyo software, integro IA y automatizo procesos con soluciones prácticas.",
+      en: "I build software, integrate AI, and automate processes with practical solutions.",
     },
     badge: {
       es: "Disponible para proyectos",
@@ -150,7 +150,7 @@ export const siteConfig: SiteConfig = {
       icon: "Briefcase",
     },
     {
-      value: 3,
+      value: 4,
       suffix: "+",
       label: {
         es: "Proyectos en producción",
@@ -340,8 +340,8 @@ export const siteConfig: SiteConfig = {
         en: "Dinerance",
       },
       description: {
-        es: "SaaS de finanzas personales con dashboard interactivo, autenticación segura, gestión de transacciones y RLS. Stack moderno: Next.js + FastAPI + PostgreSQL + Supabase.",
-        en: "Personal finance SaaS with interactive dashboard, secure auth, transaction management, and RLS. Modern stack: Next.js + FastAPI + PostgreSQL + Supabase.",
+        es: "Plataforma SaaS para gestión de finanzas personales. Ofrece un dashboard interactivo, autenticación robusta y Row-Level Security (RLS) para máxima privacidad.",
+        en: "Personal finance management SaaS platform. Features an interactive dashboard, robust authentication, and Row-Level Security (RLS) for maximum privacy.",
       },
       image: "/projects/dinerance.jpg",
       imageAlt: {
@@ -378,8 +378,8 @@ export const siteConfig: SiteConfig = {
         en: "Nunca Cierro",
       },
       description: {
-        es: "Sistema de landing pages multi-rubro con IA conversacional. Integración directa con WhatsApp, SEO optimizado y despliegue rápido en Vercel. Next.js + shadcn/ui.",
-        en: "Multi-sector landing page system with conversational AI. Direct WhatsApp integration, SEO-optimized, and fast Vercel deployment. Next.js + shadcn/ui.",
+        es: "Implementación de bots inteligentes que responden automáticamente los mensajes de los clientes en WhatsApp 24/7: preguntas frecuentes, horarios, precios, agendamiento de citas, domicilios y más.",
+        en: "Intelligent bot implementation that automatically responds to customer messages on WhatsApp 24/7: frequently asked questions, schedules, prices, appointment booking, deliveries, and more.",
       },
       image: "/projects/nuncacierro.jpg",
       imageAlt: {
@@ -401,8 +401,8 @@ export const siteConfig: SiteConfig = {
         en: "Nexval",
       },
       description: {
-        es: "Sistema de landing pages multi-rubro con IA conversacional. Integración directa con WhatsApp, SEO optimizado y despliegue rápido en Vercel. Next.js + shadcn/ui.",
-        en: "Multi-sector landing page system with conversational AI. Direct WhatsApp integration, SEO-optimized, and fast Vercel deployment. Next.js + shadcn/ui.",
+        es: "Creación de páginas web, landing pages de alta conversión, sistemas personalizados y plataformas SaaS escalables diseñadas para automatizar procesos, atraer clientes y hacer crecer marca. Desarrollo rápido, diseño profesional y tecnología enfocada en resultados reales.",
+        en: "Web page creation, high-conversion landing pages, custom systems, and scalable SaaS platforms designed to automate processes, attract customers, and grow brands. Fast development, professional design, and technology focused on real results.",
       },
       image: "/projects/nexval.jpg",
       imageAlt: {
@@ -424,8 +424,8 @@ export const siteConfig: SiteConfig = {
         en: "Pianio",
       },
       description: {
-        es: "Aplicación web frontend-only para practicar piano utilizando archivos MIDI y XML. Permite visualizar notas en un escenario de pantalla completa, reproducir con un sintetizador mínimo, conectar un teclado MIDI y practicar con un modo de espera.",
-        en: "Frontend-only web application for practicing piano using MIDI and XML files. It allows you to visualize notes on a full-screen stage, play with a minimal synthesizer, connect a MIDI keyboard, and practice with a waiting mode.",
+        es: "Aplicación web para la práctica interactiva de piano. Soporta conexión de teclados MIDI, visualización de partituras (MIDI/XML) y un modo de aprendizaje auto-guiado.",
+        en: "Web application for interactive piano practice. Supports MIDI keyboard connection, sheet music visualization (MIDI/XML), and a self-guided learning mode.",
       },
       image: "/projects/pianio.jpg",
       imageAlt: {
@@ -455,8 +455,8 @@ export const siteConfig: SiteConfig = {
         en: "Adoptafacil",
       },
       description: {
-        es: "Ecosistema digital multi-servicio para adopción de mascotas en Colombia. Arquitectura con Laravel + FastAPI + React, pagos Wompi, chatbot con IA (Grok) y autenticación.",
-        en: "Multi-service digital ecosystem for pet adoption in Colombia. Architecture with Laravel + FastAPI + React, Wompi payments, AI chatbot (Grok), and auth.",
+        es: "Ecosistema digital para la adopción de mascotas. Incluye un chatbot para asistir a los usuarios, pasarela de pagos con Wompi y una arquitectura multi-servicio.",
+        en: "Digital ecosystem for pet adoption. Includes an AI chatbot (Grok) to assist users, Wompi payment gateway, and a multi-service architecture with Laravel and FastAPI.",
       },
       image: "/projects/adoptafacil.jpg",
       imageAlt: {
@@ -484,35 +484,14 @@ export const siteConfig: SiteConfig = {
       },
       featured: true,
     },
-
-    {
-      title: {
-        es: "Bots",
-        en: "Bots",
-      },
-      description: {
-        es: "Bot WhatsApp con IA (Groq) para automatización de respuestas inteligentes. Integración Twilio, procesamiento de lenguaje natural y respuestas en tiempo real.",
-        en: "WhatsApp bot with AI (Groq) for intelligent response automation. Twilio integration, NLP, and real-time replies.",
-      },
-      image: "/projects/bots.jpg",
-      imageAlt: {
-        es: "Vista previa del proyecto Bots",
-        en: "Preview of Bots project",
-      },
-      tags: ["FastAPI", "Python", "Groq", "Twilio"],
-      links: {
-        code: "https://github.com/Beto18v/Bots",
-      },
-      featured: true,
-    },
     {
       title: {
         es: "Canva App",
         en: "Canva App",
       },
       description: {
-        es: "Automatización de diseño gráfico para Canva: gestión y edición de imágenes personalizadas. Integra Google Drive, Google Sheets, Cloudinary y Canva API.",
-        en: "Graphic design automation for Canva: custom image management and editing. Integrates Google Drive, Google Sheets, Cloudinary, and Canva API.",
+        es: "Herramienta de automatización para Canva que integra Google Drive y Sheets. Permite la edición masiva y gestión de diseños gráficos mediante la API de Canva.",
+        en: "Automation tool for Canva that integrates Google Drive and Sheets. Allows bulk editing and graphic design management through the Canva API.",
       },
       image: "/projects/canva-app.jpg",
       imageAlt: {
@@ -541,8 +520,8 @@ export const siteConfig: SiteConfig = {
         en: "Video Programmer",
       },
       description: {
-        es: "SaaS para automatización de canales de YouTube: programación inteligente, subida automatizada y gestión multicanal vía YouTube API v3. Laravel + React + shadcn/ui.",
-        en: "SaaS for YouTube channel automation: smart scheduling, automated uploads, and multi-channel management via YouTube API v3. Laravel + React + shadcn/ui.",
+        es: "Plataforma SaaS para la automatización completa de canales de YouTube. Gestiona la programación y subida de videos de forma inteligente utilizando la API de YouTube v3.",
+        en: "SaaS platform for complete YouTube channel automation. Intelligently manages video scheduling and uploads using the YouTube API v3.",
       },
       image: "/projects/video-programmer.jpg",
       imageAlt: {
@@ -570,8 +549,8 @@ export const siteConfig: SiteConfig = {
         en: "Vue Portfolio",
       },
       description: {
-        es: "Portafolio personal moderno, elegante y profesional. Con 3 vistas diferentes, completamente modularizado en componentes reutilizables y con soporte para múltiples idiomas (español, inglés y mandarín).",
-        en: "Modern, sleek and professional personal portfolio. With 3 different views, completely modularized in reusable components and with support for multiple languages (Spanish, English and Mandarin).",
+        es: "Portafolio profesional multi-idioma con un diseño modular y personalizable.",
+        en: "Multi-language professional portfolio with a modular and customizable design.",
       },
       image: "/projects/vue-portfolio.jpg",
       imageAlt: {
