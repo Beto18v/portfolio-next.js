@@ -86,7 +86,6 @@ export interface Project {
 
 export interface Contact {
   email: string;
-  text: LocalizedText;
   whatsapp: {
     countryCode: string;
     number: string;

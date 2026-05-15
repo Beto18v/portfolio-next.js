@@ -114,12 +114,12 @@ export const siteConfig: SiteConfig = {
         en: "Contact",
       },
       title: {
-        es: "Hablemos",
-        en: "Let's build together",
+        es: "Hablemos de tu próxima automatización",
+        en: "Let's build your next automation",
       },
       subtitle: {
-        es: "Cuéntame tu idea y armamos una solución web profesional.",
-        en: "Tell me about your idea and we can build a professional web solution.",
+        es: "Cuéntame qué proceso quieres automatizar, qué modelo quieres conectar o qué idea quieres poner a trabajar sola.",
+        en: "Tell me what process you want to automate, which model you want to connect, or what idea you want to put to work on its own.",
       },
     },
     stats: {
@@ -580,10 +580,6 @@ export const siteConfig: SiteConfig = {
         es: "Vi tu portafolio y me interesa trabajar contigo",
         en: "I saw your portfolio and I am interested in working with you",
       },
-    },
-    text: {
-      es: "Disponible para proyectos freelance y oportunidades full-time remotas.",
-      en: "Available for freelance projects and remote full-time opportunities.",
     },
   },
   footer: {

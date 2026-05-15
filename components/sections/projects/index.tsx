@@ -200,13 +200,13 @@ export function Projects() {
                     <Card key={project.title.en}>
                       <div
                         className={
-                          `relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 border-t border-t-white/20 bg-slate-950/80 backdrop-blur-[28px] ` +
-                          `${isFront ? "shadow-[0_28px_80px_rgba(16,185,129,0.10)]" : "shadow-[0_18px_50px_rgba(0,0,0,0.32)]"}`
+                          `relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/90 backdrop-blur-[28px] ` +
+                          `${isFront ? "shadow-[0_28px_80px_rgba(16,185,129,0.10)]" : "shadow-[0_18px_50px_rgba(0,0,0,0.18)]"}`
                         }
                       >
-                        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/15" />
+                        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-border/60" />
                         {/* File-tab header with project name */}
-                        <div className="flex items-center gap-2.5 border-b border-white/10 bg-black/35 px-4 py-2.5 backdrop-blur-sm">
+                        <div className="flex items-center gap-2.5 border-b border-border/60 bg-background/70 px-4 py-2.5 backdrop-blur-sm">
                           <div className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_6px_hsl(160_84%_55%/0.5)]" />
                           <span className="truncate text-sm font-semibold text-foreground">
                             {project.title[locale]}
@@ -230,9 +230,9 @@ export function Projects() {
                             className="object-cover"
                             priority={false}
                           />
-                          <div className="absolute inset-0 bg-linear-to-t from-slate-950/92 via-slate-950/50 to-transparent" />
-                          <div className="absolute inset-x-0 bottom-0 bg-slate-950/45 px-4 py-4 backdrop-blur-sm">
-                            <p className="line-clamp-3 text-center text-xs leading-relaxed text-zinc-300">
+                          <div className="absolute inset-0 bg-linear-to-t from-background/95 via-background/55 to-transparent" />
+                          <div className="absolute inset-x-0 bottom-0 bg-background/55 px-4 py-4 backdrop-blur-sm">
+                            <p className="line-clamp-3 text-center text-xs leading-relaxed text-muted-foreground">
                               {project.description[locale]}
                             </p>
                           </div>
@@ -266,10 +266,10 @@ export function Projects() {
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="mx-auto w-full max-w-sm"
                   >
-                    <div className="relative flex h-90 flex-col overflow-hidden rounded-2xl border border-white/10 border-t border-t-white/20 bg-slate-950/80 shadow-[0_28px_80px_rgba(16,185,129,0.10)] backdrop-blur-[28px]">
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/15" />
+                    <div className="relative flex h-90 flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/90 shadow-[0_28px_80px_rgba(16,185,129,0.10)] backdrop-blur-[28px]">
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-border/60" />
                       {/* File-tab header with project name */}
-                      <div className="flex items-center gap-2.5 border-b border-white/10 bg-black/35 px-4 py-2.5 backdrop-blur-sm">
+                      <div className="flex items-center gap-2.5 border-b border-border/60 bg-background/70 px-4 py-2.5 backdrop-blur-sm">
                         <div className="h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_6px_hsl(160_84%_55%/0.5)]" />
                         <span className="truncate text-sm font-semibold text-foreground">
                           {activeProject.title[locale]}
@@ -293,9 +293,9 @@ export function Projects() {
                           className="object-cover"
                           priority={activeIndex === 0}
                         />
-                        <div className="absolute inset-0 bg-linear-to-t from-slate-950/92 via-slate-950/50 to-transparent" />
-                        <div className="absolute inset-x-0 bottom-0 bg-slate-950/45 px-4 py-4 backdrop-blur-sm">
-                          <p className="line-clamp-3 text-center text-xs leading-relaxed text-zinc-300">
+                        <div className="absolute inset-0 bg-linear-to-t from-background/95 via-background/55 to-transparent" />
+                        <div className="absolute inset-x-0 bottom-0 bg-background/55 px-4 py-4 backdrop-blur-sm">
+                          <p className="line-clamp-3 text-center text-xs leading-relaxed text-muted-foreground">
                             {activeProject.description[locale]}
                           </p>
                         </div>
