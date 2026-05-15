@@ -386,9 +386,22 @@ export const siteConfig: SiteConfig = {
         es: "Vista previa del proyecto NUNCA CIERRO",
         en: "Preview of NUNCA CIERRO project",
       },
-      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
+      tags: [
+        "WhatsApp API",
+        "Meta for Developers",
+        "Qroq",
+        "Ollama",
+        "Next.js",
+        "FastAPI",
+        "PostgreSQL",
+        "Vercel",
+        "Railway",
+      ],
       links: {
-        code: "https://github.com/Beto18v/NUNCA-CIERRO",
+        code: {
+          frontend: "https://github.com/nunca-cierro/nc-dashboard.git",
+          backend: "https://github.com/nunca-cierro/nc-api.git",
+        },
         demo: "https://nuncacierro.vercel.app/",
       },
       featured: true,
@@ -456,7 +469,7 @@ export const siteConfig: SiteConfig = {
       },
       description: {
         es: "Ecosistema digital para la adopción de mascotas. Incluye un chatbot para asistir a los usuarios, pasarela de pagos con Wompi y una arquitectura multi-servicio.",
-        en: "Digital ecosystem for pet adoption. Includes an AI chatbot (Grok) to assist users, Wompi payment gateway, and a multi-service architecture with Laravel and FastAPI.",
+        en: "Digital ecosystem for pet adoption. Includes an chatbot to assist users, Wompi payment gateway, and a multi-service architecture.",
       },
       image: "/projects/adoptafacil.jpg",
       imageAlt: {
@@ -473,7 +486,7 @@ export const siteConfig: SiteConfig = {
         "Tailwind",
         "Docker",
         "Google API",
-        "Grok AI",
+        "Groq",
         "Wompi",
       ],
       links: {
@@ -484,6 +497,7 @@ export const siteConfig: SiteConfig = {
       },
       featured: true,
     },
+
     {
       title: {
         es: "Canva App",
@@ -514,6 +528,7 @@ export const siteConfig: SiteConfig = {
       },
       featured: true,
     },
+
     {
       title: {
         es: "Video Programador",
