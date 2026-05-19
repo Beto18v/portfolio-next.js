@@ -33,7 +33,7 @@ export const siteConfig: SiteConfig = {
     },
     links: {
       github: "https://github.com/beto18v",
-      linkedin: "https://www.linkedin.com/in/nicolas-valenzuela-b89700361/",
+      linkedin: "https://www.linkedin.com/in/beto18v/",
     },
   },
   hero: {
@@ -378,7 +378,7 @@ export const siteConfig: SiteConfig = {
         en: "Nunca Cierro",
       },
       description: {
-        es: "Implementación de bots inteligentes que responden automáticamente los mensajes de los clientes en WhatsApp 24/7: preguntas frecuentes, horarios, precios, agendamiento de citas, domicilios y más.",
+        es: "Implementación de bots inteligentes que responden automáticamente los mensajes de los clientes en WhatsApp y Telegram 24/7: preguntas frecuentes, horarios, precios, agendamiento de citas, domicilios y más.",
         en: "Intelligent bot implementation that automatically responds to customer messages on WhatsApp 24/7: frequently asked questions, schedules, prices, appointment booking, deliveries, and more.",
       },
       image: "/projects/nuncacierro.jpg",
@@ -398,10 +398,7 @@ export const siteConfig: SiteConfig = {
         "Railway",
       ],
       links: {
-        code: {
-          frontend: "https://github.com/nunca-cierro/nc-dashboard.git",
-          backend: "https://github.com/nunca-cierro/nc-api.git",
-        },
+        code: "https://github.com/nunca-cierro/app.git",
         demo: "https://nuncacierro.vercel.app/",
       },
       featured: true,
