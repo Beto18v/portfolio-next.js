@@ -388,6 +388,7 @@ export const siteConfig: SiteConfig = {
       },
       tags: [
         "WhatsApp API",
+        "Telegram Bot API",
         "Meta for Developers",
         "Qroq",
         "Ollama",
