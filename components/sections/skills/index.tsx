@@ -1,27 +1,89 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { siteConfig } from "@/lib/site";
 import { useLocale, useT } from "@/components/shared/locale-provider";
 import { SkillIcon } from "@/components/sections/skills/components/skill-icons";
 import type { SkillCategory, Skill } from "@/lib/types";
 
-function SkillCard({ skill }: { skill: Skill }) {
-  return (
-    <a
-      href={skill.docsUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex flex-col items-center gap-1.5 rounded-xl border border-indigo-500/20 bg-card/40 p-3 transition-all duration-200 hover:border-indigo-400/40 hover:bg-card/80 hover:shadow-[0_0_16px_hsl(250_90%_60%/0.15)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-      aria-label={`${skill.name} documentation`}
-    >
-      <SkillIcon
-        name={skill.icon ?? ""}
-        className="h-7 w-7 text-muted-foreground transition-all duration-200 group-hover:scale-110"
-      />
+const cardVariants = {
+  hidden: { opacity: 0, y: 16, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: i * 0.05,
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  }),
+};
+
+function SkillCard({ skill, index = 0 }: { skill: Skill; index?: number }) {
+  const shouldReduceMotion = useReducedMotion();
+  const sharedClasses =
+    "group flex flex-col items-center gap-1.5 rounded-xl border border-indigo-500/20 bg-card/40 p-3 transition-all duration-200 hover:border-indigo-400/40 hover:bg-card/80 hover:shadow-[0_0_16px_hsl(250_90%_60%/0.15)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
+
+  const content = (
+    <>
+      {skill.icon ? (
+        <SkillIcon
+          name={skill.icon}
+          className="h-7 w-7 text-muted-foreground transition-all duration-200 group-hover:scale-110"
+        />
+      ) : (
+        <div className="h-7 w-7 flex items-center justify-center">
+          <span className="text-xs font-bold text-muted-foreground/40">◆</span>
+        </div>
+      )}
       <span className="text-[10px] font-medium leading-tight text-muted-foreground transition-colors duration-200 group-hover:text-foreground">
         {skill.name}
       </span>
-    </a>
+    </>
+  );
+
+  if (shouldReduceMotion) {
+    if (skill.docsUrl) {
+      return (
+        <a href={skill.docsUrl} target="_blank" rel="noopener noreferrer" className={sharedClasses} aria-label={`${skill.name} documentation`}>
+          {content}
+        </a>
+      );
+    }
+    return <div className={sharedClasses}>{content}</div>;
+  }
+
+  if (skill.docsUrl) {
+    return (
+      <motion.a
+        href={skill.docsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={sharedClasses}
+        aria-label={`${skill.name} documentation`}
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        custom={index}
+      >
+        {content}
+      </motion.a>
+    );
+  }
+
+  return (
+    <motion.div
+      className={sharedClasses}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      custom={index}
+    >
+      {content}
+    </motion.div>
   );
 }
 
@@ -30,13 +92,10 @@ export function Skills() {
   const sectionBadge = useT(siteConfig.sections.skills.badge);
   const sectionTitle = useT(siteConfig.sections.skills.title);
   const sectionSubtitle = siteConfig.sections.skills.subtitle?.[locale] ?? "";
-  const coreStackTitle = useT(siteConfig.labels.coreStackTitle);
-  const coreStackDesc = useT(siteConfig.labels.coreStackDesc);
-
   const categories = siteConfig.skills;
-  const favoriteSkills = categories.flatMap((cat) =>
-    cat.skills.filter((s) => s.isFavorite),
-  );
+  const coreExpertiseTitle = useT(siteConfig.coreExpertise.title);
+  const coreExpertiseDesc = useT(siteConfig.coreExpertise.description);
+  const coreExpertiseSkills = siteConfig.coreExpertise.skills;
 
   return (
     <section
@@ -69,8 +128,8 @@ export function Skills() {
                       {category.title[locale]}
                     </h3>
                     <div className="grid grid-cols-4 gap-2 sm:grid-cols-4 md:grid-cols-4">
-                      {category.skills.map((skill) => (
-                        <SkillCard key={skill.name} skill={skill} />
+                      {category.skills.map((skill, i) => (
+                        <SkillCard key={skill.name} skill={skill} index={i} />
                       ))}
                     </div>
                   </div>
@@ -79,33 +138,23 @@ export function Skills() {
             </div>
           </div>
 
-          {/* ─── Core Stack Sidebar (Right) ─── */}
+          {/* ─── AI Engineering Sidebar (Right) ─── */}
           <div className="w-full shrink-0 lg:w-64">
-            <div className="sticky top-24 rounded-2xl border border-emerald-500/25 bg-linear-to-br from-emerald-500/5 to-emerald-500/2 p-5 shadow-[0_0_24px_hsl(160_84%_55%/0.08)]">
-              <div className="mb-1 inline-block rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-emerald-400">
-                ⭐ {coreStackTitle}
+            <div className="sticky top-24 rounded-2xl border border-indigo-500/25 bg-linear-to-br from-indigo-500/5 to-indigo-500/2 p-5 shadow-[0_0_24px_hsl(250_90%_60%/0.08)]">
+              <div className="mb-1 inline-block rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-indigo-400">
+                {coreExpertiseTitle}
               </div>
               <p className="mb-4 mt-2 text-xs leading-relaxed text-muted-foreground">
-                {coreStackDesc}
+                {coreExpertiseDesc}
               </p>
               <div className="flex flex-wrap gap-2">
-                {favoriteSkills.map((skill) => (
-                  <a
-                    key={skill.name}
-                    href={skill.docsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/20 bg-emerald-500/4 px-2.5 py-1.5 transition-all duration-200 hover:border-emerald-400/40 hover:bg-emerald-500/10 hover:shadow-[0_0_12px_hsl(160_84%_55%/0.15)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400"
-                    aria-label={`${skill.name} documentation`}
+                {coreExpertiseSkills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-indigo-500/20 bg-indigo-500/4 px-2.5 py-1.5 text-xs font-medium text-indigo-300/90"
                   >
-                    <SkillIcon
-                      name={skill.icon ?? ""}
-                      className="h-4 w-4 text-emerald-400 transition-all duration-200 group-hover:scale-110"
-                    />
-                    <span className="text-xs font-medium text-emerald-300/90 transition-colors duration-200 group-hover:text-emerald-200">
-                      {skill.name}
-                    </span>
-                  </a>
+                    {skill}
+                  </span>
                 ))}
               </div>
             </div>

@@ -22,6 +22,10 @@ function StatIcon({ name, className }: { name: string; className?: string }) {
   }
 }
 
+function easeOutCubic(t: number): number {
+  return 1 - Math.pow(1 - t, 3);
+}
+
 function AnimatedValue({
   value,
   suffix = "",
@@ -29,30 +33,39 @@ function AnimatedValue({
   value: number;
   suffix?: string;
 }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(value);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (shouldReduceMotion) {
+      setCount(value);
+      return;
+    }
+
     if (!inView) return;
 
     const duration = 1500;
-    const steps = 40;
-    const increment = value / steps;
-    let current = 0;
+    const start = performance.now();
+    let rafId: number;
 
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.round(current));
+    function tick(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutCubic(progress);
+
+      setCount(Math.round(eased * value));
+
+      if (progress < 1) {
+        rafId = requestAnimationFrame(tick);
       }
-    }, duration / steps);
+    }
 
-    return () => clearInterval(timer);
-  }, [inView, value]);
+    rafId = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(rafId);
+  }, [inView, value, shouldReduceMotion]);
 
   return (
     <span ref={ref}>

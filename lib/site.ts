@@ -5,12 +5,12 @@ export const siteConfig: SiteConfig = {
   defaultLocale: "es",
   seo: {
     title: {
-      es: "Nicolas | Desarrollador de IA y Automatización",
-      en: "Nicolas | AI Developer & Automation Builder",
+      es: "Nicolas Valenzuela | AI Engineer & Full Stack Developer",
+      en: "Nicolas Valenzuela | AI Engineer & Full Stack Developer",
     },
     description: {
-      es: "Portfolio profesional de Nicolas Valenzuela con enfoque en desarrollo de software, IA aplicada y automatización de procesos.",
-      en: "Professional portfolio of Nicolas Valenzuela focused on software development, applied AI, and process automation.",
+      es: "Portfolio profesional enfocado en AI Engineering, agentes inteligentes, aplicaciones con LLMs, automatización y desarrollo full stack moderno.",
+      en: "Professional portfolio focused on AI Engineering, intelligent agents, LLM-powered applications, automation and modern full stack development.",
     },
   },
   profile: {
@@ -20,12 +20,12 @@ export const siteConfig: SiteConfig = {
       en: "online",
     },
     role: {
-      es: "Desarrollador de IA y Automatización",
-      en: "AI Developer & Automation Builder",
+      es: "AI Engineer & Full Stack Developer",
+      en: "AI Engineer & Full Stack Developer",
     },
     tagline: {
-      es: "Construyo software, integro modelos como Ollama y automatizo procesos para crear soluciones prácticas.",
-      en: "I build software, integrate models like Ollama, and automate processes to create practical solutions.",
+      es: "Diseño y desarrollo agentes de IA, aplicaciones potenciadas por LLMs y plataformas web modernas que automatizan procesos y resuelven problemas reales de negocio.",
+      en: "I design and build AI agents, LLM-powered applications and modern web platforms that automate workflows and solve real business problems.",
     },
     location: {
       es: "Colombia",
@@ -42,12 +42,12 @@ export const siteConfig: SiteConfig = {
       en: "Nicolas Valenzuela",
     },
     subtitle: {
-      es: "Construyo software, integro IA y automatizo procesos con soluciones prácticas.",
-      en: "I build software, integrate AI, and automate processes with practical solutions.",
+      es: "Construyo agentes inteligentes, aplicaciones con IA y sistemas de automatización escalables utilizando tecnologías modernas y arquitecturas listas para producción.",
+      en: "I build intelligent agents, AI-powered applications and scalable automation systems using modern technologies and production-ready architectures.",
     },
     badge: {
-      es: "Disponible para proyectos",
-      en: "Available for projects",
+      es: "Disponible para proyectos de IA y Automatización",
+      en: "Available for AI & Automation Projects",
     },
     primaryCTA: {
       label: {
@@ -68,20 +68,20 @@ export const siteConfig: SiteConfig = {
     skills: {
       id: "skills",
       nav: {
-        es: "Habilidades",
-        en: "Skills",
+        es: "Especialización",
+        en: "Expertise",
       },
       badge: {
-        es: "Core Stack",
-        en: "Core Stack",
+        es: "Especialización",
+        en: "Expertise",
       },
       title: {
-        es: "Habilidades y dominio técnico",
-        en: "Skills & technical proficiency",
+        es: "Core Expertise",
+        en: "Core Expertise",
       },
       subtitle: {
-        es: "Tecnologías clave para construir productos robustos y mantenibles.",
-        en: "Key technologies to build robust and maintainable products.",
+        es: "Especializado en inteligencia artificial aplicada, agentes inteligentes, automatización y desarrollo full stack moderno.",
+        en: "Specialized in applied AI, intelligent agents, automation and modern full stack development.",
       },
     },
     projects: {
@@ -114,12 +114,12 @@ export const siteConfig: SiteConfig = {
         en: "Contact",
       },
       title: {
-        es: "Hablemos de tu próxima automatización",
-        en: "Let's build your next automation",
+        es: "Construyamos tu próxima solución con IA",
+        en: "Let's build your next AI solution",
       },
       subtitle: {
-        es: "Cuéntame qué proceso quieres automatizar, qué modelo quieres conectar o qué idea quieres poner a trabajar sola.",
-        en: "Tell me what process you want to automate, which model you want to connect, or what idea you want to put to work on its own.",
+        es: "Si tienes una idea para automatizar procesos, integrar modelos de IA o desarrollar una plataforma moderna, conversemos.",
+        en: "If you're looking to automate workflows, integrate AI models or build a modern platform, let's talk.",
       },
     },
     stats: {
@@ -137,6 +137,28 @@ export const siteConfig: SiteConfig = {
         en: "By the numbers",
       },
     },
+  },
+  coreExpertise: {
+    title: {
+      es: "AI Engineering",
+      en: "AI Engineering",
+    },
+    description: {
+      es: "Desarrollo soluciones inteligentes para empresas utilizando LLMs, automatización, APIs y arquitecturas modernas.",
+      en: "Building intelligent business solutions using LLMs, automation, APIs and modern architectures.",
+    },
+    skills: [
+      "AI Agents",
+      "LLM Integration",
+      "Prompt Engineering",
+      "RAG",
+      "MCP",
+      "Tool Calling",
+      "Function Calling",
+      "Workflow Automation",
+      "Business Automation",
+      "API Design",
+    ],
   },
   stats: [
     {
@@ -196,21 +218,37 @@ export const siteConfig: SiteConfig = {
           name: "TypeScript",
           icon: "SiTypescript",
           docsUrl: "https://www.typescriptlang.org/docs/",
-          isFavorite: true,
         },
         {
-          name: "Shadcn/UI",
-          icon: "SiShadcnui",
-          docsUrl: "https://ui.shadcn.com/docs",
+          name: "JavaScript",
+          icon: "SiJavascript",
+          docsUrl: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
         },
         {
           name: "Tailwind CSS",
           icon: "SiTailwindcss",
           docsUrl: "https://tailwindcss.com/docs",
         },
-        { name: "Angular", icon: "SiAngular", docsUrl: "https://angular.dev" },
-        { name: "Recharts", icon: "VscGraph", docsUrl: "https://recharts.org" },
-        { name: "Vue", icon: "SiVuedotjs", docsUrl: "https://vuejs.org" },
+        {
+          name: "HTML5",
+          icon: "SiHtml5",
+          docsUrl: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+        },
+        {
+          name: "CSS3",
+          icon: "SiCss3",
+          docsUrl: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+        },
+        {
+          name: "shadcn/ui",
+          icon: "SiShadcnui",
+          docsUrl: "https://ui.shadcn.com/docs",
+        },
+        {
+          name: "Framer Motion",
+          icon: "SiFramer",
+          docsUrl: "https://motion.dev",
+        },
       ],
     },
     {
@@ -221,46 +259,83 @@ export const siteConfig: SiteConfig = {
       },
       skills: [
         {
-          name: "REST APIs",
-          icon: "FaNetworkWired",
-          docsUrl: "https://restfulapi.net",
-        },
-        {
-          name: "Laravel",
-          icon: "SiLaravel",
-          docsUrl: "https://laravel.com/docs",
-        },
-        {
-          name: "FastAPI",
-          icon: "SiFastapi",
-          docsUrl: "https://fastapi.tiangolo.com/",
-          isFavorite: true,
-        },
-        {
           name: "Python",
           icon: "SiPython",
           docsUrl: "https://docs.python.org/3/",
           isFavorite: true,
         },
         {
-          name: "SpringBoot",
-          icon: "SiSpringboot",
-          docsUrl: "https://spring.io/projects/spring-boot#learn",
+          name: "FastAPI",
+          icon: "SiFastapi",
+          docsUrl: "https://fastapi.tiangolo.com/",
         },
         {
-          name: ".Net",
-          icon: "SiDotnet",
-          docsUrl: "https://learn.microsoft.com/en-us/dotnet/",
+          name: "Node.js",
+          icon: "SiNodedotjs",
+          docsUrl: "https://nodejs.org/docs",
         },
+        {
+          name: "REST APIs",
+          icon: "FaNetworkWired",
+          docsUrl: "https://restfulapi.net",
+        },
+        { name: "WebSockets", icon: "FaGlobe", docsUrl: "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" },
       ],
     },
     {
-      id: "database",
+      id: "ai-llm",
       title: {
-        es: "Base de datos",
-        en: "Database",
+        es: "AI & LLM",
+        en: "AI & LLM",
       },
       skills: [
+        {
+          name: "OpenAI API",
+          icon: "SiOpenai",
+          docsUrl: "https://platform.openai.com/docs",
+        },
+        {
+          name: "Anthropic API",
+          icon: "SiAnthropic",
+          docsUrl: "https://docs.anthropic.com",
+        },
+        {
+          name: "Google Gemini API",
+          icon: "SiGooglegemini",
+          docsUrl: "https://ai.google.dev/docs",
+        },
+        { name: "Ollama", icon: "SiOllama", docsUrl: "https://ollama.ai" },
+        {
+          name: "LangChain",
+          icon: "SiLangchain",
+          docsUrl: "https://python.langchain.com/docs",
+        },
+        { name: "LangGraph", icon: "FaCodeBranch", docsUrl: "https://langchain-ai.github.io/langgraph/" },
+        { name: "Groq", icon: "FaBolt", docsUrl: "https://console.groq.com/docs" },
+        { name: "AI Agents", icon: "FaBrain", docsUrl: "https://platform.openai.com/docs/guides/agents" },
+        { name: "Prompt Engineering", icon: "FaCode", docsUrl: "https://platform.openai.com/docs/guides/prompt-engineering" },
+        { name: "RAG", icon: "FaDatabase", docsUrl: "https://python.langchain.com/docs/concepts/rag/" },
+        { name: "MCP", icon: "FaExchangeAlt", docsUrl: "https://modelcontextprotocol.io/" },
+        { name: "Function Calling", icon: "FaCogs", docsUrl: "https://platform.openai.com/docs/guides/function-calling" },
+        { name: "Tool Calling", icon: "FaCodeBranch", docsUrl: "https://docs.anthropic.com/en/docs/build-with-claude/tool-use" },
+        { name: "Structured Outputs", icon: "FaLayerGroup", docsUrl: "https://platform.openai.com/docs/guides/structured-outputs" },
+        { name: "Embeddings", icon: "FaBolt", docsUrl: "https://platform.openai.com/docs/guides/embeddings" },
+        { name: "Vector Search", icon: "FaSearchengin", docsUrl: "https://www.pinecone.io/learn/vector-search/" },
+      ],
+    },
+    {
+      id: "databases",
+      title: {
+        es: "Bases de datos",
+        en: "Databases",
+      },
+      skills: [
+        {
+          name: "PostgreSQL",
+          icon: "SiPostgresql",
+          docsUrl: "https://www.postgresql.org/docs/",
+          isFavorite: true,
+        },
         {
           name: "MySQL",
           icon: "SiMysql",
@@ -271,77 +346,108 @@ export const siteConfig: SiteConfig = {
           icon: "SiSqlite",
           docsUrl: "https://www.sqlite.org/docs.html",
         },
-        {
-          name: "PostgreSQL",
-          icon: "SiPostgresql",
-          docsUrl: "https://www.postgresql.org/docs/",
-          isFavorite: true,
-        },
-        {
-          name: "SQL Server",
-          icon: "FaDatabase",
-          docsUrl: "https://learn.microsoft.com/en-us/sql/",
-        },
-        {
-          name: "MongoDB",
-          icon: "SiMongodb",
-          docsUrl: "https://www.mongodb.com/docs/",
-        },
+        { name: "Redis", icon: "SiRedis", docsUrl: "https://redis.io/docs" },
+        { name: "Qdrant", icon: "FaDatabase", docsUrl: "https://qdrant.tech/documentation/" },
       ],
     },
     {
-      id: "tools",
+      id: "devops-cloud",
       title: {
-        es: "Herramientas",
-        en: "Tools",
+        es: "DevOps & Cloud",
+        en: "DevOps & Cloud",
       },
       skills: [
-        { name: "Git", icon: "SiGit", docsUrl: "https://git-scm.com/doc" },
-        {
-          name: "Vercel",
-          icon: "SiVercel",
-          docsUrl: "https://vercel.com/docs",
-          isFavorite: true,
-        },
-        {
-          name: "Supabase",
-          icon: "SiSupabase",
-          docsUrl: "https://supabase.com/docs",
-          isFavorite: true,
-        },
-        {
-          name: "Azure",
-          icon: "FaCloud",
-          docsUrl: "https://learn.microsoft.com/en-us/azure/app-service/",
-        },
         {
           name: "Docker",
           icon: "SiDocker",
           docsUrl: "https://docs.docker.com/",
         },
+        { name: "Git", icon: "SiGit", docsUrl: "https://git-scm.com/doc" },
         {
-          name: "Railway",
-          icon: "SiRailway",
-          docsUrl: "https://docs.railway.app/",
+          name: "GitHub",
+          icon: "SiGithub",
+          docsUrl: "https://docs.github.com",
         },
         { name: "Linux", icon: "SiLinux", docsUrl: "https://linux.org" },
         {
-          name: "CI/CD",
-          icon: "FaCogs",
-          docsUrl: "https://docs.github.com/en/actions",
+          name: "Vercel",
+          icon: "SiVercel",
+          docsUrl: "https://vercel.com/docs",
         },
+        {
+          name: "Cloudflare",
+          icon: "SiCloudflare",
+          docsUrl: "https://developers.cloudflare.com",
+        },
+        {
+          name: "Nginx",
+          icon: "SiNginx",
+          docsUrl: "https://nginx.org/en/docs/",
+        },
+        { name: "Hetzner", icon: "SiHetzner", docsUrl: "https://docs.hetzner.com" },
+      ],
+    },
+    {
+      id: "automation-data",
+      title: {
+        es: "Automatización & Datos",
+        en: "Automation & Data",
+      },
+      skills: [
+        { name: "n8n", icon: "SiN8N", docsUrl: "https://docs.n8n.io" },
+        { name: "Playwright", icon: "FaGlobe", docsUrl: "https://playwright.dev/docs" },
+        {
+          name: "Selenium",
+          icon: "SiSelenium",
+          docsUrl: "https://www.selenium.dev/documentation",
+        },
+        { name: "Web Scraping", icon: "FaDatabase", docsUrl: "https://scrapy.org/" },
       ],
     },
   ],
   projects: [
     {
       title: {
+        es: "Nunca Cierro",
+        en: "Nunca Cierro",
+      },
+      description: {
+        es: "Sistema multi-agente con IA que automatiza la atención al cliente 24/7 en WhatsApp y Telegram. Resuelve consultas, agenda citas y procesa domicilios usando LLMs, con escalabilidad horizontal para múltiples negocios.",
+        en: "Multi-agent AI system that automates customer support 24/7 on WhatsApp and Telegram. Handles queries, books appointments and processes deliveries using LLMs, with horizontal scalability across multiple businesses.",
+      },
+      image: "/projects/nuncacierro.jpg",
+      imageAlt: {
+        es: "Vista previa del proyecto NUNCA CIERRO",
+        en: "Preview of NUNCA CIERRO project",
+      },
+      tags: [
+        "WhatsApp API",
+        "Telegram API",
+        "Meta for Developers",
+        "Qroq",
+        "Ollama",
+        "Next.js",
+        "FastAPI",
+        "PostgreSQL",
+        "Vercel",
+        "Railway",
+      ],
+      links: {
+        code: "https://github.com/nunca-cierro/app.git",
+        demo: "https://nuncacierro.com/",
+      },
+      featured: true,
+      isProduction: true,
+    },
+
+    {
+      title: {
         es: "Dinerance",
         en: "Dinerance",
       },
       description: {
-        es: "Plataforma SaaS para gestión de finanzas personales. Ofrece un dashboard interactivo, autenticación robusta y Row-Level Security (RLS) para máxima privacidad.",
-        en: "Personal finance management SaaS platform. Features an interactive dashboard, robust authentication, and Row-Level Security (RLS) for maximum privacy.",
+        es: "SaaS de gestión financiera personal con arquitectura multi-servicio, autenticación robusta y Row-Level Security. Diseñado para escalar, con separación clara de responsabilidades entre frontend y API.",
+        en: "Personal finance SaaS with multi-service architecture, robust authentication and Row-Level Security. Built to scale with clear separation of concerns between frontend and API.",
       },
       image: "/projects/dinerance.jpg",
       imageAlt: {
@@ -374,46 +480,12 @@ export const siteConfig: SiteConfig = {
 
     {
       title: {
-        es: "Nunca Cierro",
-        en: "Nunca Cierro",
-      },
-      description: {
-        es: "Implementación de bots inteligentes que responden automáticamente los mensajes de los clientes en WhatsApp y Telegram 24/7: preguntas frecuentes, horarios, precios, agendamiento de citas, domicilios y más.",
-        en: "Intelligent bot implementation that automatically responds to customer messages on WhatsApp 24/7: frequently asked questions, schedules, prices, appointment booking, deliveries, and more.",
-      },
-      image: "/projects/nuncacierro.jpg",
-      imageAlt: {
-        es: "Vista previa del proyecto NUNCA CIERRO",
-        en: "Preview of NUNCA CIERRO project",
-      },
-      tags: [
-        "WhatsApp API",
-        "Telegram Bot API",
-        "Meta for Developers",
-        "Qroq",
-        "Ollama",
-        "Next.js",
-        "FastAPI",
-        "PostgreSQL",
-        "Vercel",
-        "Railway",
-      ],
-      links: {
-        code: "https://github.com/nunca-cierro/app.git",
-        demo: "https://nuncacierro.vercel.app/",
-      },
-      featured: true,
-      isProduction: true,
-    },
-
-    {
-      title: {
         es: "Nexval",
         en: "Nexval",
       },
       description: {
-        es: "Creación de páginas web, landing pages de alta conversión, sistemas personalizados y plataformas SaaS escalables diseñadas para automatizar procesos, atraer clientes y hacer crecer marca. Desarrollo rápido, diseño profesional y tecnología enfocada en resultados reales.",
-        en: "Web page creation, high-conversion landing pages, custom systems, and scalable SaaS platforms designed to automate processes, attract customers, and grow brands. Fast development, professional design, and technology focused on real results.",
+        es: "Ecosistema de desarrollo full stack que transforma procesos de negocio en plataformas SaaS escalables. Automatización de flujos de trabajo, landing pages de alto rendimiento y sistemas personalizados con arquitectura modular.",
+        en: "Full stack development ecosystem that transforms business processes into scalable SaaS platforms. Workflow automation, high-performance landing pages and custom systems with modular architecture.",
       },
       image: "/projects/nexval.jpg",
       imageAlt: {
@@ -435,8 +507,8 @@ export const siteConfig: SiteConfig = {
         en: "Pianio",
       },
       description: {
-        es: "Aplicación web para la práctica interactiva de piano. Soporta conexión de teclados MIDI, visualización de partituras (MIDI/XML) y un modo de aprendizaje auto-guiado.",
-        en: "Web application for interactive piano practice. Supports MIDI keyboard connection, sheet music visualization (MIDI/XML), and a self-guided learning mode.",
+        es: "Aplicación web interactiva con arquitectura modular, testing end-to-end y soporte MIDI en tiempo real. Diseñada con clean architecture para mantener escalabilidad y facilidad de mantenimiento.",
+        en: "Interactive web application with modular architecture, end-to-end testing and real-time MIDI support. Built with clean architecture for scalability and maintainability.",
       },
       image: "/projects/pianio.jpg",
       imageAlt: {
@@ -466,8 +538,8 @@ export const siteConfig: SiteConfig = {
         en: "Adoptafacil",
       },
       description: {
-        es: "Ecosistema digital para la adopción de mascotas. Incluye un chatbot para asistir a los usuarios, pasarela de pagos con Wompi y una arquitectura multi-servicio.",
-        en: "Digital ecosystem for pet adoption. Includes an chatbot to assist users, Wompi payment gateway, and a multi-service architecture.",
+        es: "Plataforma que integra un chatbot con IA para asistir en adopciones, pasarela de pagos y arquitectura multi-servicio desplegada con Docker. Automatiza el proceso completo desde la consulta hasta la adopción.",
+        en: "Platform integrating an AI chatbot for adoption assistance, payment gateway and multi-service architecture deployed with Docker. Automates the entire process from inquiry to adoption.",
       },
       image: "/projects/adoptafacil.jpg",
       imageAlt: {
@@ -502,8 +574,8 @@ export const siteConfig: SiteConfig = {
         en: "Canva App",
       },
       description: {
-        es: "Herramienta de automatización para Canva que integra Google Drive y Sheets. Permite la edición masiva y gestión de diseños gráficos mediante la API de Canva.",
-        en: "Automation tool for Canva that integrates Google Drive and Sheets. Allows bulk editing and graphic design management through the Canva API.",
+        es: "Herramienta de automatización que conecta Canva con Google Drive y Sheets para edición masiva de diseños. Optimiza flujos de trabajo de equipos de marketing reduciendo horas de trabajo manual.",
+        en: "Automation tool connecting Canva with Google Drive and Sheets for bulk design editing. Optimizes marketing team workflows, reducing hours of manual work.",
       },
       image: "/projects/canva-app.jpg",
       imageAlt: {
@@ -533,8 +605,8 @@ export const siteConfig: SiteConfig = {
         en: "Video Programmer",
       },
       description: {
-        es: "Plataforma SaaS para la automatización completa de canales de YouTube. Gestiona la programación y subida de videos de forma inteligente utilizando la API de YouTube v3.",
-        en: "SaaS platform for complete YouTube channel automation. Intelligently manages video scheduling and uploads using the YouTube API v3.",
+        es: "SaaS que automatiza completamente la gestión de canales de YouTube: programación inteligente, subida automatizada y organización de contenido. Arquitectura escalable que soporta múltiples canales simultáneamente.",
+        en: "SaaS that fully automates YouTube channel management: intelligent scheduling, automated uploads and content organization. Scalable architecture supporting multiple channels simultaneously.",
       },
       image: "/projects/video-programmer.jpg",
       imageAlt: {
@@ -562,8 +634,8 @@ export const siteConfig: SiteConfig = {
         en: "Vue Portfolio",
       },
       description: {
-        es: "Portafolio profesional multi-idioma con un diseño modular y personalizable.",
-        en: "Multi-language professional portfolio with a modular and customizable design.",
+        es: "Portafolio profesional multi-idioma con arquitectura modular, i18n integrado y diseño reusable. Construido con clean architecture para facilitar el mantenimiento y la escalabilidad.",
+        en: "Multi-language professional portfolio with modular architecture, built-in i18n and reusable design. Built with clean architecture for easy maintenance and scalability.",
       },
       image: "/projects/vue-portfolio.jpg",
       imageAlt: {

@@ -5,8 +5,14 @@ export type SkillLevel = 1 | 2 | 3 | 4 | 5;
 export interface Skill {
   name: string;
   icon?: string;
-  docsUrl: string;
+  docsUrl?: string;
   isFavorite?: boolean;
+}
+
+export interface CoreExpertise {
+  title: LocalizedText;
+  description: LocalizedText;
+  skills: string[];
 }
 
 export interface SkillCategory {
@@ -148,6 +154,7 @@ export interface SiteConfig {
     contact: SectionText;
     stats: SectionText;
   };
+  coreExpertise: CoreExpertise;
   stats: StatsMetric[];
   projects: Project[];
   skills: SkillCategory[];
