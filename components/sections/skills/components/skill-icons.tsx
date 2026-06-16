@@ -32,6 +32,7 @@ import {
   SiSelenium,
   SiCloudflare,
   SiNginx,
+  SiGoogle,
 } from "react-icons/si";
 import {
   FaReact,
@@ -46,6 +47,7 @@ import {
   FaLayerGroup,
   FaExchangeAlt,
   FaSearchengin,
+  FaHeartbeat,
 } from "react-icons/fa";
 
 const iconMap: Record<
@@ -83,6 +85,7 @@ const iconMap: Record<
   SiSelenium,
   SiCloudflare,
   SiNginx,
+  SiGoogle,
   FaReact,
   FaNetworkWired,
   FaBrain,
@@ -95,6 +98,7 @@ const iconMap: Record<
   FaLayerGroup,
   FaExchangeAlt,
   FaSearchengin,
+  FaHeartbeat,
 };
 
 const colorMap: Record<string, string> = {
@@ -129,6 +133,7 @@ const colorMap: Record<string, string> = {
   SiCloudflare: "#F38020",
   SiNginx: "#009639",
   SiHetzner: "#D50C2D",
+  SiGoogle: "#4285F4",
   FaReact: "#61DAFB",
   FaNetworkWired: "#6B7280",
   FaBrain: "#A855F7",
@@ -141,6 +146,7 @@ const colorMap: Record<string, string> = {
   FaLayerGroup: "#6B7280",
   FaExchangeAlt: "#6B7280",
   FaSearchengin: "#6B7280",
+  FaHeartbeat: "#DC2626",
 };
 
 export interface SkillIconProps {

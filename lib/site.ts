@@ -321,6 +321,7 @@ export const siteConfig: SiteConfig = {
         { name: "Structured Outputs", icon: "FaLayerGroup", docsUrl: "https://platform.openai.com/docs/guides/structured-outputs" },
         { name: "Embeddings", icon: "FaBolt", docsUrl: "https://platform.openai.com/docs/guides/embeddings" },
         { name: "Vector Search", icon: "FaSearchengin", docsUrl: "https://www.pinecone.io/learn/vector-search/" },
+        { name: "OpenCode", icon: "FaBrain", docsUrl: "https://github.com/stackblitz/opencode" },
       ],
     },
     {
@@ -385,6 +386,7 @@ export const siteConfig: SiteConfig = {
           docsUrl: "https://nginx.org/en/docs/",
         },
         { name: "Hetzner", icon: "SiHetzner", docsUrl: "https://docs.hetzner.com" },
+        { name: "Google Search Console", icon: "SiGoogle", docsUrl: "https://search.google.com/search-console" },
       ],
     },
     {
@@ -402,6 +404,7 @@ export const siteConfig: SiteConfig = {
           docsUrl: "https://www.selenium.dev/documentation",
         },
         { name: "Web Scraping", icon: "FaDatabase", docsUrl: "https://scrapy.org/" },
+        { name: "UptimeRobot", icon: "FaHeartbeat", docsUrl: "https://uptimerobot.com" },
       ],
     },
   ],
