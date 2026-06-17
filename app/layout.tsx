@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
+import { LenisProvider } from "@/components/shared/lenis-provider";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
 import { WhatsAppButton } from "@/components/shared/whatsapp-button";
@@ -41,12 +42,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <LocaleProvider>
-            <div className="relative flex min-h-screen flex-col">
-              <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
-              <WhatsAppButton />
-            </div>
+            <LenisProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Footer />
+                <WhatsAppButton />
+              </div>
+            </LenisProvider>
           </LocaleProvider>
         </ThemeProvider>
       </body>
