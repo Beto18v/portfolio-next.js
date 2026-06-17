@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Briefcase, Rocket, Code2, CheckCircle2 } from "lucide-react";
 import { siteConfig } from "@/lib/site";
+import SectionDivider from "@/components/shared/section-divider";
 import { useLocale } from "@/components/shared/locale-provider";
 import { staggerContainer, fadeUp, springHover } from "@/lib/motion";
 
@@ -91,6 +92,7 @@ export function Stats() {
 
   return (
     <section className="scroll-mt-20 px-4 py-20 md:px-6">
+      <SectionDivider variant="glow" label={sectionBadge.toLowerCase()} />
       <div className="mx-auto w-full max-w-6xl space-y-10">
         <motion.div
           className="space-y-3"

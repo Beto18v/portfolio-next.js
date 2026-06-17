@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import type { TouchEventHandler } from "react";
 import { siteConfig } from "@/lib/site";
 import { useLocale, useT } from "@/components/shared/locale-provider";
+import SectionDivider from "@/components/shared/section-divider";
 import CardSwap, { Card } from "./components/card-swap";
 import { ChevronLeft, ChevronRight, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
@@ -100,6 +101,7 @@ export function Projects() {
       id={siteConfig.sections.projects.id}
       className="scroll-mt-20 px-4 py-20 md:px-6"
     >
+      <SectionDivider variant="terminal" label={badge.toLowerCase()} />
       <div className="mx-auto w-full max-w-6xl">
         <div className="mb-10 space-y-3">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">

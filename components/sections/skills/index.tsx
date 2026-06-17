@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { siteConfig } from "@/lib/site";
 import { useLocale, useT } from "@/components/shared/locale-provider";
 import { SkillIcon } from "@/components/sections/skills/components/skill-icons";
+import SectionDivider from "@/components/shared/section-divider";
 import type { SkillCategory, Skill } from "@/lib/types";
 
 const cardVariants = {
@@ -102,6 +103,7 @@ export function Skills() {
       id={siteConfig.sections.skills.id}
       className="scroll-mt-20 px-4 py-20 md:px-6"
     >
+      <SectionDivider variant="terminal" label={sectionBadge.toLowerCase()} />
       <div className="mx-auto w-full max-w-6xl">
         <div className="mb-10 space-y-3">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">

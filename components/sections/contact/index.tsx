@@ -3,12 +3,14 @@
 import { siteConfig } from "@/lib/site";
 import { Mail, Github, Linkedin, MessageCircle } from "lucide-react";
 import { useLocale, useT } from "@/components/shared/locale-provider";
+import SectionDivider from "@/components/shared/section-divider";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 
 export function Contact() {
   const { locale } = useLocale();
   const shouldReduceMotion = useReducedMotion();
+  const sectionBadge = siteConfig.sections.contact.badge[locale];
   const title = useT(siteConfig.sections.contact.title);
   const subtitle = siteConfig.sections.contact.subtitle?.[locale] ?? "";
   const emailAria = useT(siteConfig.labels.contactEmail);
@@ -21,6 +23,7 @@ export function Contact() {
       id={siteConfig.sections.contact.id}
       className="scroll-mt-20 px-4 py-20 md:px-6 relative overflow-hidden"
     >
+      <SectionDivider variant="glow" label={sectionBadge.toLowerCase()} />
       <motion.div
         className="mx-auto w-full max-w-4xl overflow-hidden rounded-3xl border border-border/60 bg-card/70 p-8 text-center backdrop-blur-md md:p-10 relative shadow-[0_24px_80px_rgba(0,0,0,0.08)]"
         variants={!shouldReduceMotion ? fadeUp : undefined}
