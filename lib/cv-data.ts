@@ -91,7 +91,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
           "Ciclo técnico completado al 100%. Especialización en arquitectura de software, bases de datos y metodologías ágiles.",
       },
       {
-        title: "Especialización en Conceptos de Ciberseguridad",
+        title: "Curso en Conceptos de Ciberseguridad",
         institution: "",
         period: "Certificación Activa (2026)",
       },
@@ -231,7 +231,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
           "Technical cycle 100% completed. Specialized in software architecture, databases, and agile methodologies.",
       },
       {
-        title: "Cybersecurity Concepts Specialization",
+        title: "Cybersecurity Concepts Course",
         institution: "",
         period: "Active Certification (2026)",
       },
