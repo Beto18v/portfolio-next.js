@@ -46,37 +46,38 @@ type Bilingual<T> = Record<Locale, T>;
 const cvDataByLocale: Bilingual<CvTexts> = {
   es: {
     professionalSummary:
-      "AI & Full Stack Developer. 2+ años diseñando y desplegando sistemas multi-agente, arquitecturas RAG de baja latencia y plataformas SaaS en producción. Combino visión arquitectónica con implementación directa. Stack: LangGraph, n8n, Next.js 16, TypeScript, FastAPI, Qdrant, PostgreSQL. Obsesionado con métricas de impacto y automatización end-to-end.",
+      "AI & Software Developer. Construyo sistemas RAG con LangChain y LangGraph, integrando modelos de Groq, OpenAI y HuggingFace en producción. Full stack con Next.js, Angular, FastAPI y Spring Boot. Despliego en Docker, Railway y Vercel. Del prompt engineering al deploy: soluciones end-to-end con foco en resultado.",
 
     experience: [
       {
-        title: "AI Engineer & Full Stack Developer",
+        title: "Desarrollador de IA & Software",
+        company: "ITSSolutions",
+        environment: "Bogotá, Colombia",
+        bullets: [
+          "Implementé un nodo analizador de CVs con RAG usando LangChain y LangGraph, integrando embeddings de HuggingFace y modelos de Groq y OpenAI para procesamiento semántico de documentos.",
+          "Desarrollé y mantuve APIs RESTful con FastAPI y Spring Boot, conectando servicios de IA con frontends en Angular mediante autenticación JWT.",
+          "Diseñé flujos de prompt engineering para modelos LLM, optimizando la precisión de extracción y clasificación de datos en pipelines automatizados.",
+          "Gestioné bases de datos MySQL para los servicios de la plataforma, modelando esquemas y optimizando consultas.",
+        ],
+      },
+      {
+        title: "Ingeniero de IA & Desarrollador Full Stack",
         company: "Nunca Cierro",
-        environment: "Entorno de Producción",
+        environment: "Proyecto Propio · En Producción",
         bullets: [
-          "Automaticé el 40% del flujo de conversión de leads diseñando un ecosistema multi-agente con LangGraph y n8n, integrando WhatsApp y Telegram para NLP en tiempo real.",
-          "Reduje la latencia del sistema RAG a <200ms implementando búsqueda semántica con Qdrant, embeddings optimizados y data chunking contextual.",
-          "Incrementé 15% la retención de usuarios migrando el frontend a Next.js 16 (App Router) con TypeScript estricto, Lenis y Framer Motion.",
-          "Mantuve 99.9% de uptime en producción multi-servicio con Docker, Hetzner Cloud y Railway, con monitoreo preventivo automatizado.",
+          "Automaticé la atención al cliente 24/7 integrando WhatsApp y Telegram APIs con modelos de Groq y Ollama para procesamiento de lenguaje natural en tiempo real.",
+          "Desarrollé el frontend con Next.js y la API con FastAPI, desplegando la arquitectura multi-servicio en Railway y Vercel con PostgreSQL.",
+          "Contenericé la infraestructura con Docker para escalar horizontalmente entre múltiples negocios, manteniendo 99.9% de uptime.",
         ],
       },
       {
-        title: "Core Software Developer & SaaS Architect",
+        title: "Desarrollador Core & Arquitecto SaaS",
         company: "Dinerance",
-        environment: "Entorno de Producción",
+        environment: "Proyecto Propio · En Producción",
         bullets: [
-          "Escalé la infraestructura para miles de operaciones concurrentes diseñando esquemas PostgreSQL con Supabase y Row-Level Security multi-tenant.",
-          "Reduje 30% el tiempo de entrega de features construyendo microservicios asíncronos con FastAPI (Python) y Node.js bajo OAuth 2.0 y JWT.",
-          "Optimicé 25% el consumo de recursos del servidor con scripts de extracción en Playwright usando rotación y evasión de bloqueos.",
-        ],
-      },
-      {
-        title: "Desarrollador Full Stack",
-        company: "Freelance",
-        environment: "",
-        bullets: [
-          "Desarrollé interfaces responsivas con React, Vue y Tailwind CSS, reduciendo 20% los tiempos de carga y asegurando compatibilidad cross-device.",
-          "Implementé backends con Laravel (PHP) y Spring Boot (Java), modelando bases de datos MySQL con CI/CD en Git/GitHub.",
+          "Diseñé esquemas PostgreSQL con Supabase aplicando Row-Level Security para aislamiento multi-tenant, soportando operaciones concurrentes.",
+          "Construí la API con FastAPI y SQLAlchemy, aplicando migraciones controladas con Alembic y autenticación JWT.",
+          "Desarrollé el dashboard financiero con Next.js, TypeScript, Tailwind CSS y shadcn/ui.",
         ],
       },
     ],
@@ -113,29 +114,27 @@ const cvDataByLocale: Bilingual<CvTexts> = {
 
     skillGroups: [
       {
-        title: "AI & Automatización",
+        title: "AI & LLMs",
         skills: [
+          "LangChain",
           "LangGraph",
-          "n8n",
           "RAG",
-          "Model Context Protocol (MCP)",
-          "Qdrant Vector DB",
+          "Groq",
           "Ollama",
           "OpenAI API",
-          "Anthropic API",
+          "HuggingFace",
           "Prompt Engineering",
         ],
       },
       {
         title: "Frontend",
         skills: [
-          "Next.js 16 (App Router)",
-          "React.js",
+          "Next.js (App Router)",
+          "React",
+          "Angular",
           "TypeScript",
           "Tailwind CSS",
           "shadcn/ui",
-          "Lenis Smooth Scroll",
-          "Framer Motion",
         ],
       },
       {
@@ -146,27 +145,30 @@ const cvDataByLocale: Bilingual<CvTexts> = {
           "Spring Boot (Java)",
           "Laravel (PHP)",
           "RESTful APIs",
-          "WebSockets",
+          "JWT",
         ],
       },
       {
-        title: "Bases de Datos & Cloud",
+        title: "Bases de Datos",
         skills: [
           "PostgreSQL",
-          "Supabase",
-          "Row-Level Security (RLS)",
+          "Supabase (RLS)",
           "MySQL",
+          "SQLAlchemy",
+          "Alembic",
           "SQLite",
-          "Docker",
-          "Hetzner Cloud",
-          "Railway",
-          "Vercel",
-          "Nginx",
         ],
       },
       {
-        title: "Seguridad",
-        skills: ["OAuth 2.0", "JWT", "Ciberseguridad", "Linux SysAdmin"],
+        title: "DevOps & Cloud",
+        skills: [
+          "Docker",
+          "Railway",
+          "Vercel",
+          "Git / GitHub",
+          "Linux",
+          "Nginx",
+        ],
       },
     ],
 
@@ -184,37 +186,38 @@ const cvDataByLocale: Bilingual<CvTexts> = {
 
   en: {
     professionalSummary:
-      "AI & Full Stack Developer. 2+ years designing and deploying multi-agent systems, low-latency RAG architectures, and SaaS platforms to production. I combine architectural vision with hands-on implementation. Stack: LangGraph, n8n, Next.js 16, TypeScript, FastAPI, Qdrant, PostgreSQL. Metrics-driven. End-to-end ownership.",
+      "AI & Software Developer. I build RAG systems with LangChain and LangGraph, integrating Groq, OpenAI, and HuggingFace models in production. Full stack with Next.js, Angular, FastAPI, and Spring Boot. I deploy on Docker, Railway, and Vercel. From prompt engineering to deployment: end-to-end solutions with a results-driven focus.",
 
     experience: [
       {
+        title: "AI & Software Developer",
+        company: "ITSSolutions",
+        environment: "Bogotá, Colombia",
+        bullets: [
+          "Implemented a CV analyzer node with RAG using LangChain and LangGraph, integrating HuggingFace embeddings and Groq and OpenAI models for semantic document processing.",
+          "Built and maintained RESTful APIs with FastAPI and Spring Boot, connecting AI services to Angular frontends with JWT authentication.",
+          "Designed prompt engineering flows for LLM models, optimizing data extraction and classification accuracy in automated pipelines.",
+          "Managed MySQL databases for platform services, modeling schemas and optimizing queries.",
+        ],
+      },
+      {
         title: "AI Engineer & Full Stack Developer",
         company: "Nunca Cierro",
-        environment: "Production Environment",
+        environment: "Personal Project · Production",
         bullets: [
-          "Automated 40% of lead conversion flow by designing a multi-agent ecosystem with LangGraph and n8n, integrating WhatsApp and Telegram for real-time NLP.",
-          "Reduced RAG system latency to <200ms by implementing semantic search with Qdrant, optimized embeddings, and contextual data chunking.",
-          "Increased user retention by 15% by migrating the frontend to Next.js 16 (App Router) with strict TypeScript, Lenis, and Framer Motion.",
-          "Maintained 99.9% uptime across multi-service production with Docker, Hetzner Cloud, and Railway, with automated proactive monitoring.",
+          "Automated 24/7 customer support by integrating WhatsApp and Telegram APIs with Groq and Ollama models for real-time natural language processing.",
+          "Built the frontend with Next.js and the API with FastAPI, deploying the multi-service architecture on Railway and Vercel with PostgreSQL.",
+          "Containerized the infrastructure with Docker to scale horizontally across multiple businesses, maintaining 99.9% uptime.",
         ],
       },
       {
-        title: "Core Software Developer & SaaS Architect",
+        title: "Core Developer & SaaS Architect",
         company: "Dinerance",
-        environment: "Production Environment",
+        environment: "Personal Project · Production",
         bullets: [
-          "Scaled infrastructure to handle thousands of concurrent operations by designing PostgreSQL schemas with Supabase and multi-tenant Row-Level Security.",
-          "Reduced feature delivery time by 30% by building async microservices with FastAPI (Python) and Node.js under OAuth 2.0 and JWT.",
-          "Cut server resource consumption by 25% with Playwright extraction scripts using rotation and anti-blocking evasion techniques.",
-        ],
-      },
-      {
-        title: "Full Stack Developer",
-        company: "Freelance",
-        environment: "",
-        bullets: [
-          "Built responsive interfaces with React, Vue, and Tailwind CSS, reducing load times by 20% and ensuring full cross-device compatibility.",
-          "Implemented backends with Laravel (PHP) and Spring Boot (Java), modeling MySQL databases with Git/GitHub CI/CD.",
+          "Designed PostgreSQL schemas with Supabase applying Row-Level Security for multi-tenant isolation, supporting concurrent operations.",
+          "Built the API with FastAPI and SQLAlchemy, applying controlled migrations with Alembic and JWT authentication.",
+          "Developed the financial dashboard with Next.js, TypeScript, Tailwind CSS, and shadcn/ui.",
         ],
       },
     ],
@@ -251,29 +254,27 @@ const cvDataByLocale: Bilingual<CvTexts> = {
 
     skillGroups: [
       {
-        title: "AI & Automation",
+        title: "AI & LLMs",
         skills: [
+          "LangChain",
           "LangGraph",
-          "n8n",
           "RAG",
-          "Model Context Protocol (MCP)",
-          "Qdrant Vector DB",
+          "Groq",
           "Ollama",
           "OpenAI API",
-          "Anthropic API",
+          "HuggingFace",
           "Prompt Engineering",
         ],
       },
       {
         title: "Frontend",
         skills: [
-          "Next.js 16 (App Router)",
-          "React.js",
+          "Next.js (App Router)",
+          "React",
+          "Angular",
           "TypeScript",
           "Tailwind CSS",
           "shadcn/ui",
-          "Lenis Smooth Scroll",
-          "Framer Motion",
         ],
       },
       {
@@ -284,27 +285,30 @@ const cvDataByLocale: Bilingual<CvTexts> = {
           "Spring Boot (Java)",
           "Laravel (PHP)",
           "RESTful APIs",
-          "WebSockets",
+          "JWT",
         ],
       },
       {
-        title: "Databases & Cloud",
+        title: "Databases",
         skills: [
           "PostgreSQL",
-          "Supabase",
-          "Row-Level Security (RLS)",
+          "Supabase (RLS)",
           "MySQL",
+          "SQLAlchemy",
+          "Alembic",
           "SQLite",
-          "Docker",
-          "Hetzner Cloud",
-          "Railway",
-          "Vercel",
-          "Nginx",
         ],
       },
       {
-        title: "Security",
-        skills: ["OAuth 2.0", "JWT", "Cybersecurity", "Linux SysAdmin"],
+        title: "DevOps & Cloud",
+        skills: [
+          "Docker",
+          "Railway",
+          "Vercel",
+          "Git / GitHub",
+          "Linux",
+          "Nginx",
+        ],
       },
     ],
 
