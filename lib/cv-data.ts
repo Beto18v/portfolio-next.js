@@ -52,7 +52,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Desarrollador de IA & Software",
         company: "ITSSolutions",
-        environment: "Bogotá, Colombia",
+        environment: "Bogotá, Colombia · Desde Abr 2026",
         bullets: [
           "Implementé un nodo analizador de CVs con RAG usando LangChain y LangGraph, integrando embeddings de HuggingFace y modelos de Groq y OpenAI para procesamiento semántico de documentos.",
           "Desarrollé y mantuve APIs RESTful con FastAPI y Spring Boot, conectando servicios de IA con frontends en Angular mediante autenticación JWT.",
@@ -192,7 +192,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "AI & Software Developer",
         company: "ITSSolutions",
-        environment: "Bogotá, Colombia",
+        environment: "Bogotá, Colombia · Since Apr 2026",
         bullets: [
           "Implemented a CV analyzer node with RAG using LangChain and LangGraph, integrating HuggingFace embeddings and Groq and OpenAI models for semantic document processing.",
           "Built and maintained RESTful APIs with FastAPI and Spring Boot, connecting AI services to Angular frontends with JWT authentication.",
