@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/lib/site";
 import Link from "next/link";
-import { Github, ArrowRight, MapPin } from "lucide-react";
+import { Github, ArrowRight, MapPin, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocale, useT } from "@/components/shared/locale-provider";
 import { motion, useReducedMotion } from "framer-motion";
@@ -148,6 +148,26 @@ export function Hero() {
                 >
                   <Github className="h-4 w-4" />
                   {secondaryLabel}
+                </Link>
+              </Button>
+            </motion.span>
+            <motion.span
+              style={{ display: "inline-flex" }}
+              whileHover={springScale}
+              whileTap={springTapScale}
+            >
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="h-11 rounded-full border-indigo-500/30 bg-background/70 px-7 hover:border-indigo-400/60"
+              >
+                <Link
+                  href="/cv"
+                  aria-label={locale === "es" ? "Ver currículum (CV)" : "View resume (CV)"}
+                >
+                  <FileText className="h-4 w-4" />
+                  CV
                 </Link>
               </Button>
             </motion.span>
