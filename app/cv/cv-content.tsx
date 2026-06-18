@@ -19,10 +19,10 @@ export function CvContent() {
   return (
     <>
       {/* ── CV Document ── */}
-      <article className="cv-document mx-auto max-w-205 bg-white px-10 py-10 text-[15px] leading-relaxed text-slate-800 sm:px-14 sm:py-12">
+      <article className="cv-document mx-auto max-w-205 bg-white px-10 pt-8 pb-10 text-[15px] leading-relaxed text-slate-800 sm:px-14 sm:pt-10 sm:pb-12">
         {/* ── Header ── */}
-        <header className="mb-7">
-          <h1 className="text-[2.1rem] font-bold tracking-[-0.025em] text-slate-900">
+        <header className="mb-7 pb-5 border-b border-slate-100">
+          <h1 className="text-[2.35rem] font-extrabold tracking-[-0.03em] text-slate-900">
             {data.profile.name}
           </h1>
           <p className="mt-0.5 text-[1.05rem] font-medium text-slate-500">
@@ -73,7 +73,7 @@ export function CvContent() {
         </header>
 
         {/* ── Professional Summary ── */}
-        <section className="mb-6">
+        <section className="mb-7">
           <h2 className="section-heading">{labels.sectionSummary}</h2>
           <p className="text-[0.92rem] leading-relaxed text-slate-700">
             {data.professionalSummary}
@@ -81,7 +81,7 @@ export function CvContent() {
         </section>
 
         {/* ── Experience ── */}
-        <section className="mb-5">
+        <section className="mb-6 border-t border-slate-100 pt-5">
           <h2 className="section-heading">{labels.sectionExperience}</h2>
 
           {data.experience.map((exp, i) => (
@@ -107,7 +107,7 @@ export function CvContent() {
         </section>
 
         {/* ── Education ── */}
-        <section className="mb-5">
+        <section className="mb-6 border-t border-slate-100 pt-5">
           <h2 className="section-heading">{labels.sectionEducation}</h2>
 
           {data.education.map((edu, i) => (
@@ -137,7 +137,7 @@ export function CvContent() {
         </section>
 
         {/* ── Certifications ── */}
-        <section className="mb-5">
+        <section className="mb-6 border-t border-slate-100 pt-5">
           <h2 className="section-heading">{labels.sectionCertifications}</h2>
 
           <div className="space-y-1.5">
@@ -158,12 +158,12 @@ export function CvContent() {
         </section>
 
         {/* ── Technical Skills ── */}
-        <section>
+        <section className="mb-6 border-t border-slate-100 pt-5">
           <h2 className="section-heading">{labels.sectionSkills}</h2>
 
           <div className="space-y-3">
             {data.skillGroups.map((group, i) => (
-              <div key={i} className="cv-entry">
+            <div key={i} className="cv-entry !border-b-0 !pb-0">
                 <h4 className="text-[0.82rem] font-bold uppercase tracking-[0.05em] text-slate-900">
                   {group.title}
                 </h4>
@@ -173,6 +173,16 @@ export function CvContent() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* ── Soft Skills ── */}
+        <section className="border-t border-slate-100 pt-5">
+          <h2 className="section-heading">{labels.sectionSoftSkills}</h2>
+          <ul className="cv-bullets">
+            {data.softSkills.map((skill, i) => (
+              <li key={i}>{skill}</li>
+            ))}
+          </ul>
         </section>
       </article>
 
@@ -190,7 +200,7 @@ export function CvContent() {
       </div>
 
       {/* Download PDF — right on desktop, below back-to-top on mobile */}
-      <div className="cv-no-print fixed top-40 right-6 z-50 sm:top-20">
+      <div className="cv-no-print fixed top-[140px] right-6 z-50 sm:top-20">
         <Button
           size="lg"
           onClick={handlePrint}
@@ -205,23 +215,28 @@ export function CvContent() {
       <style>{`
         /* Section heading style */
         .section-heading {
-          font-size: 0.9rem;
+          font-size: 0.88rem;
           font-weight: 700;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
           color: #0f172a;
-          border-bottom: 1.5px solid #e2e8f0;
-          padding-bottom: 5px;
-          margin-bottom: 12px;
-          margin-top: 4px;
+          border-left: 3px solid #0f172a;
+          padding-left: 10px;
+          margin-bottom: 14px;
+          margin-top: 0;
+          line-height: 1.3;
         }
 
         /* Entry spacing */
         .cv-entry {
           margin-bottom: 14px;
+          padding-bottom: 14px;
+          border-bottom: 1px solid #f1f5f9;
         }
         .cv-entry:last-child {
           margin-bottom: 0;
+          padding-bottom: 0;
+          border-bottom: none;
         }
 
         /* Bullet list */

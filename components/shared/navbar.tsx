@@ -35,6 +35,8 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isCvPage = pathname === "/cv";
+
   const navItems = [
     { href: `#${siteConfig.sections.skills.id}`, label: skillsNav },
     { href: `#${siteConfig.sections.projects.id}`, label: projectsNav },
@@ -64,23 +66,25 @@ export function Navbar() {
         >
           {siteConfig.profile.name}
         </Link>
-        <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-4 text-sm font-medium md:flex"
-          aria-label={siteConfig.profile.name}
-        >
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "rounded-md px-2 py-1 text-muted-foreground transition-all",
-                "hover:text-indigo-200 hover:drop-shadow-[0_0_10px_hsl(250_84%_64%/.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        {!isCvPage && (
+          <nav
+            className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-4 text-sm font-medium md:flex"
+            aria-label={siteConfig.profile.name}
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "rounded-md px-2 py-1 text-muted-foreground transition-all",
+                  "hover:text-indigo-200 hover:drop-shadow-[0_0_10px_hsl(250_84%_64%/.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        )}
 
         <div className="hidden items-center gap-2 md:flex">
           <LanguageToggle />
@@ -90,33 +94,35 @@ export function Navbar() {
         <div className="flex items-center gap-2 md:hidden">
           <LanguageToggle />
           <ThemeToggle />
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-9 w-9 rounded-full border-border/70 bg-background/70 backdrop-blur-md"
-                aria-label="Open navigation menu"
-              >
-                <Menu className="h-4 w-4" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="pt-12">
-              <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-              <div className="flex flex-col gap-2 px-2">
-                {navItems.map((item) => (
-                  <SheetClose asChild key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="rounded-md px-3 py-2 text-base text-muted-foreground transition-all hover:text-indigo-200 hover:bg-accent/40"
-                    >
-                      {item.label}
-                    </Link>
-                  </SheetClose>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+          {!isCvPage && (
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-9 w-9 rounded-full border-border/70 bg-background/70 backdrop-blur-md"
+                  aria-label="Open navigation menu"
+                >
+                  <Menu className="h-4 w-4" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="pt-12">
+                <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+                <div className="flex flex-col gap-2 px-2">
+                  {navItems.map((item) => (
+                    <SheetClose asChild key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="rounded-md px-3 py-2 text-base text-muted-foreground transition-all hover:text-indigo-200 hover:bg-accent/40"
+                      >
+                        {item.label}
+                      </Link>
+                    </SheetClose>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+          )}
         </div>
       </div>
 
