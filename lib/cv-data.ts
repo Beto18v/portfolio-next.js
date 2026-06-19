@@ -68,8 +68,8 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         environment: "Proyecto Propio · En Producción",
         bullets: [
           "Automaticé la atención al cliente 24/7 integrando WhatsApp y Telegram APIs con modelos de Groq y Ollama para procesamiento de lenguaje natural en tiempo real.",
-          "Desarrollé el frontend con Next.js y la API con FastAPI, desplegando la arquitectura multi-servicio en Hetzner y Vercel con PostgreSQL.",
-          "Contenericé la infraestructura con Docker para escalar horizontalmente entre múltiples negocios, manteniendo 99.9% de uptime.",
+          "Desarrollé el frontend con Next.js y la API con FastAPI, desplegando la arquitectura multi-servicio en Hetzner con Docker y Cloudflare, usando PostgreSQL.",
+          "Contenericé la infraestructura con Docker para escalar horizontalmente entre múltiples negocios, manteniendo 99.9% de disponibilidad.",
         ],
       },
       {
@@ -217,7 +217,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         environment: "Personal Project · Production",
         bullets: [
           "Automated 24/7 customer support by integrating WhatsApp and Telegram APIs with Groq and Ollama models for real-time natural language processing.",
-          "Built the frontend with Next.js and the API with FastAPI, deploying the multi-service architecture on Hetzner and Vercel with PostgreSQL.",
+          "Built the frontend with Next.js and the API with FastAPI, deploying the multi-service architecture on Hetzner with Docker and Cloudflare, using PostgreSQL.",
           "Containerized the infrastructure with Docker to scale horizontally across multiple businesses, maintaining 99.9% uptime.",
         ],
       },
