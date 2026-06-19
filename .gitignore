@@ -43,5 +43,5 @@ next-env.d.ts
 # .atl
 .atl
 
-# personal docs (tracked locally, not in repo)
-/docs/job-search-strategy.md
+# docs
+/docs
