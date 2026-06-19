@@ -18,7 +18,6 @@ const MAX_SPEED = 0.4;
 const CONNECTION_DIST = 120;
 const REPULSION_RADIUS = 150;
 const REPULSION_STRENGTH = 1.2;
-const SCROLL_DISPERSION = 0.3;
 const RETURN_FORCE = 0.005;
 
 export default function DotGridBg() {

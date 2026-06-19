@@ -41,8 +41,8 @@ function AnimatedValue({
 
   useEffect(() => {
     if (shouldReduceMotion) {
-      setCount(value);
-      return;
+      const id = requestAnimationFrame(() => setCount(value));
+      return () => cancelAnimationFrame(id);
     }
 
     if (!inView) return;
