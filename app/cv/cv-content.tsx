@@ -111,7 +111,7 @@ export function CvContent() {
           <h2 className="section-heading">{labels.sectionEducation}</h2>
 
           {data.education.map((edu, i) => (
-            <div key={i} className="cv-entry">
+            <div key={i} className="cv-entry !border-b-0 !pb-0">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                 <div>
                   <h3 className="text-[0.95rem] font-semibold text-slate-900">
