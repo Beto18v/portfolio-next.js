@@ -111,7 +111,7 @@ export function CvContent() {
           <h2 className="section-heading">{labels.sectionEducation}</h2>
 
           {data.education.map((edu, i) => (
-            <div key={i} className="cv-entry !border-b-0 !pb-0">
+            <div key={i} className="cv-entry border-b-0! pb-0!">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                 <div>
                   <h3 className="text-[0.95rem] font-semibold text-slate-900">
@@ -163,7 +163,7 @@ export function CvContent() {
 
           <div className="space-y-3">
             {data.skillGroups.map((group, i) => (
-            <div key={i} className="cv-entry !border-b-0 !pb-0">
+              <div key={i} className="cv-entry border-b-0! pb-0!">
                 <h4 className="text-[0.82rem] font-bold uppercase tracking-[0.05em] text-slate-900">
                   {group.title}
                 </h4>
@@ -200,7 +200,7 @@ export function CvContent() {
       </div>
 
       {/* Download PDF — right on desktop, below back-to-top on mobile */}
-      <div className="cv-no-print fixed top-[140px] right-6 z-50 sm:top-20">
+      <div className="cv-no-print fixed top-35 right-6 z-50 sm:top-20">
         <Button
           size="lg"
           onClick={handlePrint}
