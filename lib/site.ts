@@ -2,7 +2,7 @@ import { SiteConfig } from "./types";
 
 export const siteConfig: SiteConfig = {
   locales: ["es", "en"],
-  defaultLocale: "es",
+  defaultLocale: "en",
   seo: {
     title: {
       es: "Nicolas Valenzuela | AI Engineer & Full Stack Developer",
@@ -20,12 +20,12 @@ export const siteConfig: SiteConfig = {
       en: "online",
     },
     role: {
-      es: "AI Engineer & Full Stack Developer",
-      en: "AI Engineer & Full Stack Developer",
+      es: "Software Engineer | IA & Automatización",
+      en: "Software Engineer | AI & Automation",
     },
     tagline: {
-      es: "Diseño y desarrollo agentes de IA, aplicaciones potenciadas por LLMs y plataformas web modernas que automatizan procesos y resuelven problemas reales de negocio.",
-      en: "I design and build AI agents, LLM-powered applications and modern web platforms that automate workflows and solve real business problems.",
+      es: "Construyo sistemas de automatización con IA que procesan miles de interacciones reales. Experiencia en producción con agentes multi-canal, SaaS y arquitecturas escalables.",
+      en: "I build AI automation systems that process thousands of real interactions. Production experience with multi-agent platforms, SaaS and scalable architectures.",
     },
     location: {
       es: "Colombia",
@@ -42,12 +42,12 @@ export const siteConfig: SiteConfig = {
       en: "Nicolas Valenzuela",
     },
     subtitle: {
-      es: "Construyo agentes inteligentes, aplicaciones con IA y sistemas de automatización escalables utilizando tecnologías modernas y arquitecturas listas para producción.",
-      en: "I build intelligent agents, AI-powered applications and scalable automation systems using modern technologies and production-ready architectures.",
+      es: "Construyo sistemas de automatización con IA que procesan miles de interacciones reales. Experiencia en producción con agentes multi-canal, SaaS y arquitecturas escalables.",
+      en: "I build AI automation systems that process thousands of real interactions. Production experience with multi-agent platforms, SaaS and scalable architectures.",
     },
     badge: {
-      es: "Disponible para proyectos de IA y Automatización",
-      en: "Available for AI & Automation Projects",
+      es: "Disponible para oportunidades full-time",
+      en: "Available for full-time opportunities",
     },
     primaryCTA: {
       label: {
@@ -305,8 +305,8 @@ export const siteConfig: SiteConfig = {
         en: "Nunca Cierro",
       },
       description: {
-        es: "Sistema multi-agente con IA que automatiza la atención al cliente 24/7 en WhatsApp y Telegram. Resuelve consultas, agenda citas y procesa domicilios usando LLMs, con escalabilidad horizontal para múltiples negocios.",
-        en: "Multi-agent AI system that automates customer support 24/7 on WhatsApp and Telegram. Handles queries, books appointments and processes deliveries using LLMs, with horizontal scalability across multiple businesses.",
+        es: "Tus clientes te escriben a las 3am y alguien les responde. Nunca Cierro es un sistema de agentes que atiende WhatsApp y Telegram de forma autónoma — agenda citas, responde consultas y procesa pedidos sin que tengas que estar pegado al teléfono. Funciona 24/7 para múltiples negocios al mismo tiempo.",
+        en: "Your customers text at 3am and someone actually replies. Nunca Cierro is a multi-agent system that handles WhatsApp and Telegram autonomously — books appointments, answers questions and processes orders without you glued to your phone. Runs 24/7 across multiple businesses simultaneously.",
       },
       image: "/projects/nuncacierro.jpg",
       imageAlt: {
@@ -314,16 +314,15 @@ export const siteConfig: SiteConfig = {
         en: "Preview of NUNCA CIERRO project",
       },
       tags: [
-        "WhatsApp API",
+        "WhatsApp Cloud API",
         "Telegram API",
-        "Meta for Developers",
-        "Qroq",
-        "Ollama",
+        "Groq",
         "Next.js",
         "FastAPI",
-        "PostgreSQL",
-        "Vercel",
-        "Railway",
+        "Docker",
+        "Hetzner",
+        "Cloudefar e",
+        "PostgreSQL"        
       ],
       links: {
         code: "https://github.com/nunca-cierro/app.git",
@@ -339,8 +338,8 @@ export const siteConfig: SiteConfig = {
         en: "Dinerance",
       },
       description: {
-        es: "SaaS de gestión financiera personal con arquitectura multi-servicio, autenticación robusta y Row-Level Security. Diseñado para escalar, con separación clara de responsabilidades entre frontend y API.",
-        en: "Personal finance SaaS with multi-service architecture, robust authentication and Row-Level Security. Built to scale with clear separation of concerns between frontend and API.",
+        es: "Tu dinero, tus datos, sin vueltas. Dinerance es un SaaS de finanzas personales donde cada usuario solo ve lo suyo — cero posibilidad de que tus datos se mezclen con los de otro. Diseñado para crecer sin romperse, con autenticación robusta y preparado para conectar con bancos.",
+        en: "Your money, your data, no leaks. Dinerance is a personal finance SaaS where each user only sees their own stuff — zero chance of data mixing between accounts. Built to scale without breaking, with robust auth and ready for bank integration.",
       },
       image: "/projects/dinerance.jpg",
       imageAlt: {
@@ -373,35 +372,12 @@ export const siteConfig: SiteConfig = {
 
     {
       title: {
-        es: "Nexval",
-        en: "Nexval",
-      },
-      description: {
-        es: "Ecosistema de desarrollo full stack que transforma procesos de negocio en plataformas SaaS escalables. Automatización de flujos de trabajo, landing pages de alto rendimiento y sistemas personalizados con arquitectura modular.",
-        en: "Full stack development ecosystem that transforms business processes into scalable SaaS platforms. Workflow automation, high-performance landing pages and custom systems with modular architecture.",
-      },
-      image: "/projects/nexval.jpg",
-      imageAlt: {
-        es: "Vista previa del proyecto NEXVAL",
-        en: "Preview of NEXVAL project",
-      },
-      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
-      links: {
-        code: "https://github.com/Beto18v/NEXVAL",
-        demo: "https://nexval.vercel.app/",
-      },
-      featured: true,
-      isProduction: true,
-    },
-
-    {
-      title: {
         es: "Pianio",
         en: "Pianio",
       },
       description: {
-        es: "Aplicación web interactiva con arquitectura modular, testing end-to-end y soporte MIDI en tiempo real. Diseñada con clean architecture para mantener escalabilidad y facilidad de mantenimiento.",
-        en: "Interactive web application with modular architecture, end-to-end testing and real-time MIDI support. Built with clean architecture for scalability and maintainability.",
+        es: "Un piano en tu navegador que responde a teclados MIDI reales, no solo al mouse. Pianio usa Web MIDI y Web Audio APIs para cero latencia perceptible — tocas una tecla física y la nota aparece al instante. Con testing E2E completo para asegurar que todo funcione impecable.",
+        en: "A piano in your browser that responds to real MIDI keyboards, not just mouse clicks. Pianio uses Web MIDI and Web Audio APIs for zero perceptible latency — press a physical key and the note fires instantly. Full E2E testing to keep everything rock solid.",
       },
       image: "/projects/pianio.jpg",
       imageAlt: {
@@ -424,6 +400,30 @@ export const siteConfig: SiteConfig = {
       featured: true,
       isProduction: true,
     },
+    
+    {
+      title: {
+        es: "Nexval",
+        en: "Nexval",
+      },
+      description: {
+        es: "De idea a SaaS funcionando, sin meses de desarrollo. Nexval convierte procesos de negocio en plataformas desplegables — landing pages rápidas, sistemas custom y todo reutilizable entre proyectos. Un solo código base para múltiples productos.",
+        en: "From idea to working SaaS, no months of dev time. Nexval turns business processes into deployable platforms — fast landing pages, custom systems and everything reusable across projects. One codebase for multiple products.",
+      },
+      image: "/projects/nexval.jpg",
+      imageAlt: {
+        es: "Vista previa del proyecto NEXVAL",
+        en: "Preview of NEXVAL project",
+      },
+      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui", "SEO"],
+      links: {
+        code: "https://github.com/Beto18v/NEXVAL",
+        demo: "https://nexval.vercel.app/",
+      },
+      featured: true,
+      isProduction: true,
+    },
+
 
     {
       title: {
@@ -431,8 +431,8 @@ export const siteConfig: SiteConfig = {
         en: "Adoptafacil",
       },
       description: {
-        es: "Plataforma que integra un chatbot con IA para asistir en adopciones, pasarela de pagos y arquitectura multi-servicio desplegada con Docker. Automatiza el proceso completo desde la consulta hasta la adopción.",
-        en: "Platform integrating an AI chatbot for adoption assistance, payment gateway and multi-service architecture deployed with Docker. Automates the entire process from inquiry to adoption.",
+        es: "Adoptar una mascota no debería ser un trámite eterno. Adoptafacil te guía desde la primera consulta con un chatbot de IA hasta el pago final — todo automatizado. Encuentra refugios cerca tuyo, resuelve dudas y completa la adopción sin papeleos innecesarios. (Proyecto academico)",
+        en: "Adopting a pet shouldn't be a bureaucratic nightmare. Adoptafacil guides you from first chat with an AI bot to final payment — all automated. Finds nearby shelters, answers questions and completes the adoption without unnecessary paperwork.(Academic project)",
       },
       image: "/projects/adoptafacil.jpg",
       imageAlt: {
@@ -467,8 +467,8 @@ export const siteConfig: SiteConfig = {
         en: "Canva App",
       },
       description: {
-        es: "Herramienta de automatización que conecta Canva con Google Drive y Sheets para edición masiva de diseños. Optimiza flujos de trabajo de equipos de marketing reduciendo horas de trabajo manual.",
-        en: "Automation tool connecting Canva with Google Drive and Sheets for bulk design editing. Optimizes marketing team workflows, reducing hours of manual work.",
+        es: "Editaste un diseño en Canva y necesitás aplicar el mismo cambio a 50 más. Esta herramienta conecta Canva con Google Drive y Sheets para procesar diseños en lote — lo que tomaba horas ahora toma minutos. Ideal para equipos de marketing que manejan volumen.",
+        en: "You edited one design in Canva and need the same change across 50 more. This tool connects Canva with Google Drive and Sheets to batch process designs — what took hours now takes minutes. Built for marketing teams handling volume.",
       },
       image: "/projects/canva-app.jpg",
       imageAlt: {
@@ -498,8 +498,8 @@ export const siteConfig: SiteConfig = {
         en: "Video Programmer",
       },
       description: {
-        es: "SaaS que automatiza completamente la gestión de canales de YouTube: programación inteligente, subida automatizada y organización de contenido. Arquitectura escalable que soporta múltiples canales simultáneamente.",
-        en: "SaaS that fully automates YouTube channel management: intelligent scheduling, automated uploads and content organization. Scalable architecture supporting multiple channels simultaneously.",
+        es: "Subir, programar y organizar videos en múltiples canales de YouTube desde un solo lugar. Video Programador automatiza todo el pipeline — sube contenido, lo programa en el momento óptimo y mantiene todo organizado. Escala con la cantidad de canales que manejes.",
+        en: "Upload, schedule and organize videos across multiple YouTube channels from one place. Video Programmer automates the entire pipeline — uploads content, schedules it at the right time and keeps everything organized. Scales with however many channels you run.",
       },
       image: "/projects/video-programmer.jpg",
       imageAlt: {
@@ -527,8 +527,8 @@ export const siteConfig: SiteConfig = {
         en: "Vue Portfolio",
       },
       description: {
-        es: "Portafolio profesional multi-idioma con arquitectura modular, i18n integrado y diseño reusable. Construido con clean architecture para facilitar el mantenimiento y la escalabilidad.",
-        en: "Multi-language professional portfolio with modular architecture, built-in i18n and reusable design. Built with clean architecture for easy maintenance and scalability.",
+        es: "Mi primer portafolio profesional — multi-idioma, con renderizado del lado del servidor y UX tipo SPA. Construido con Vue.js y Laravel, fue el proyecto donde aprendí a arquitecturar aplicaciones complejas que escalan. Lo uso como referencia.",
+        en: "My first professional portfolio — multi-language, server-side rendered with SPA-like UX. Built with Vue.js and Laravel, this is where I learned to architect complex applications that scale. I use it as a reference.",
       },
       image: "/projects/vue-portfolio.jpg",
       imageAlt: {
