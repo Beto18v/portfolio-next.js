@@ -7,7 +7,11 @@ import { Download, ExternalLink, MapPin, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
-export function CvContent() {
+export function CvContent({
+  certifications,
+}: {
+  certifications: { title: string; file: string }[];
+}) {
   const { locale } = useLocale();
   const data = getCvData(locale as Locale);
   const labels = data.labels;
@@ -141,7 +145,7 @@ export function CvContent() {
           <h2 className="section-heading">{labels.sectionCertifications}</h2>
 
           <div className="space-y-1.5">
-            {data.certifications.map((cert, i) => (
+            {certifications.map((cert, i) => (
               <div key={i} className="flex items-center gap-2 text-[0.88rem]">
                 <ExternalLink className="h-3 w-3 shrink-0 text-slate-400" />
                 <a

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/lib/site";
 import Link from "next/link";
-import { Github, ArrowRight, MapPin, FileText } from "lucide-react";
+import { Github, MapPin, FileText, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocale, useT } from "@/components/shared/locale-provider";
 import { motion, useReducedMotion } from "framer-motion";
@@ -19,9 +19,7 @@ export function Hero() {
   const subtitle = useT(siteConfig.hero.subtitle);
   const badge = useT(siteConfig.hero.badge);
   const location = siteConfig.profile.location?.[locale] ?? null;
-  const primaryLabel = useT(siteConfig.hero.primaryCTA.label);
   const secondaryLabel = useT(siteConfig.hero.secondaryCTA.label);
-  const projectsAria = useT(siteConfig.labels.viewProjects);
   const githubAria = useT(siteConfig.labels.openGithub);
 
   const [now, setNow] = useState<number | null>(null);
@@ -118,25 +116,6 @@ export function Hero() {
               <Button
                 asChild
                 size="lg"
-                className="neon-button h-11 rounded-full px-7 font-semibold"
-              >
-                <Link
-                  href={siteConfig.hero.primaryCTA.href}
-                  aria-label={projectsAria}
-                >
-                  {primaryLabel}
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-            </motion.span>
-            <motion.span
-              style={{ display: "inline-flex" }}
-              whileHover={springScale}
-              whileTap={springTapScale}
-            >
-              <Button
-                asChild
-                size="lg"
                 variant="outline"
                 className="h-11 rounded-full border-indigo-500/30 bg-background/70 px-7 hover:border-indigo-400/60"
               >
@@ -168,6 +147,26 @@ export function Hero() {
                 >
                   <FileText className="h-4 w-4" />
                   CV
+                </Link>
+              </Button>
+            </motion.span>
+            <motion.span
+              style={{ display: "inline-flex" }}
+              whileHover={springScale}
+              whileTap={springTapScale}
+            >
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="h-11 rounded-full border-indigo-500/30 bg-background/70 px-7 hover:border-indigo-400/60"
+              >
+                <Link
+                  href="/certifications"
+                  aria-label={locale === "es" ? "Ver certificaciones" : "View certifications"}
+                >
+                  <Award className="h-4 w-4" />
+                  {locale === "es" ? "Certificaciones" : "Certifications"}
                 </Link>
               </Button>
             </motion.span>

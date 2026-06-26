@@ -35,7 +35,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const isCvPage = pathname === "/cv";
+  const isSpecialPage = pathname === "/cv" || pathname === "/certifications";
 
   const navItems = [
     { href: `#${siteConfig.sections.skills.id}`, label: skillsNav },
@@ -66,7 +66,7 @@ export function Navbar() {
         >
           {siteConfig.profile.name}
         </Link>
-        {!isCvPage && (
+        {!isSpecialPage && (
           <nav
             className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-4 text-sm font-medium md:flex"
             aria-label={siteConfig.profile.name}
@@ -94,7 +94,7 @@ export function Navbar() {
         <div className="flex items-center gap-2 md:hidden">
           <LanguageToggle />
           <ThemeToggle />
-          {!isCvPage && (
+          {!isSpecialPage && (
             <Sheet>
               <SheetTrigger asChild>
                 <Button

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CvContent } from "./cv-content";
+import { getCertifications } from "@/lib/get-certifications";
 
 export const metadata: Metadata = {
   title: "CV — Nicolás A. Valenzuela | AI & Full Stack Developer",
@@ -9,9 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function CvPage() {
+  const certifications = getCertifications();
   return (
     <>
-      <CvContent />
+      <CvContent certifications={certifications} />
     </>
   );
 }
