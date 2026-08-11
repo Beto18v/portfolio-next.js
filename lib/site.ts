@@ -828,8 +828,8 @@ export const siteConfig: SiteConfig = {
       en: "Clients",
     },
     viewDetails: {
-      es: "Ver detalles",
-      en: "View details",
+      es: "Visitar",
+      en: "Visit",
     },
     features: {
       es: "Características",

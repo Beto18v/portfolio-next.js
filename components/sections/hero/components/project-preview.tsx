@@ -10,6 +10,7 @@ import type { Project } from "@/lib/types";
 function FeaturedProject({ project }: { project: Project }) {
   const { locale } = useLocale();
   const inProduction = useT(siteConfig.labels.inProduction);
+  const viewDetails = useT(siteConfig.labels.viewDetails);
   const href = project.links.demo ?? `#${siteConfig.sections.projects.id}`;
   const external = !!project.links.demo;
 
@@ -41,8 +42,14 @@ function FeaturedProject({ project }: { project: Project }) {
               </p>
             ) : null}
           </div>
-          <span className="inline-flex shrink-0 items-center rounded-full border border-emerald-400/25 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
+          <span className="inline-flex shrink-0 items-center rounded-full border border-green/25 bg-green/10 px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-green">
             {inProduction}
+          </span>
+        </div>
+        <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-background/45 opacity-0 backdrop-blur-[1px] transition-opacity duration-300 group-hover:opacity-100">
+          <span className="inline-flex translate-y-2 scale-95 items-center gap-2 rounded-full border border-primary/30 bg-background/90 px-4 py-2 text-sm font-semibold text-foreground shadow-[0_8px_28px_rgba(23,21,15,0.22)] transition-transform duration-300 group-hover:translate-y-0 group-hover:scale-100">
+            {viewDetails}
+            <ArrowUpRight className="h-4 w-4" />
           </span>
         </div>
       </div>

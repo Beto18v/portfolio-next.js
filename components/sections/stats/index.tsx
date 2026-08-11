@@ -1,25 +1,13 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
+import gsap from "gsap";
+import { useReducedMotion } from "framer-motion";
 import { Briefcase, Rocket, Code2, CheckCircle2 } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import SectionDivider from "@/components/shared/section-divider";
 import { useLocale } from "@/components/shared/locale-provider";
-import { fadeUp, springHover } from "@/lib/motion";
-
-const statCardVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (index: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: index * 0.12,
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  }),
-};
+import { ActivityTicker } from "@/components/shared/activity-ticker";
 
 function StatIcon({ name, className }: { name: string; className?: string }) {
   switch (name) {
@@ -49,7 +37,6 @@ function AnimatedValue({
 }) {
   const [count, setCount] = useState(value);
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.5 });
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -57,8 +44,6 @@ function AnimatedValue({
       const id = requestAnimationFrame(() => setCount(value));
       return () => cancelAnimationFrame(id);
     }
-
-    if (!inView) return;
 
     const duration = 1500;
     const start = performance.now();
@@ -79,7 +64,7 @@ function AnimatedValue({
     rafId = requestAnimationFrame(tick);
 
     return () => cancelAnimationFrame(rafId);
-  }, [inView, value, shouldReduceMotion]);
+  }, [value, shouldReduceMotion]);
 
   return (
     <span ref={ref}>
@@ -91,9 +76,10 @@ function AnimatedValue({
 
 export function Stats() {
   const { locale } = useLocale();
-  const shouldReduceMotion = useReducedMotion();
   const sectionBadge = siteConfig.sections.stats.badge[locale];
   const sectionTitle = siteConfig.sections.stats.title[locale];
+  const sectionRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const [now, setNow] = useState<number | null>(null);
 
@@ -101,27 +87,85 @@ export function Stats() {
     Promise.resolve().then(() => setNow(Date.now()));
   }, []);
 
+  // ── "Vida + hover": cada card respira sutilmente (flotación yoyo) y al
+  //    pasar el mouse se inclina en 3D hacia el cursor y se eleva. ──
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (shouldReduceMotion) return;
+
+    const cards = Array.from(section.querySelectorAll<HTMLElement>(".stat-card"));
+    if (cards.length === 0) return;
+
+    const breathers = cards.map((card, i) =>
+      gsap.to(card, {
+        y: "+=3",
+        duration: 2.6 + (i % 4) * 0.3,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: i * 0.4,
+      }),
+    );
+
+    const hoverCleanups = cards.map((card) => {
+      const tilt = gsap.quickTo(card, "rotationX", { duration: 0.35, ease: "power2.out" });
+      const rotate = gsap.quickTo(card, "rotationY", { duration: 0.35, ease: "power2.out" });
+      const lift = gsap.quickTo(card, "y", { duration: 0.35, ease: "power2.out" });
+
+      const onEnter = () => {
+        gsap.to(card, { z: 30, scale: 1.04, duration: 0.3, ease: "power2.out" });
+      };
+      const onMove = (e: MouseEvent) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        rotate(px * 12);
+        tilt(-py * 8);
+        lift(-4);
+      };
+      const onLeave = () => {
+        rotate(0);
+        tilt(0);
+        lift(0);
+        gsap.to(card, { z: 0, scale: 1, duration: 0.3, ease: "power2.out" });
+      };
+
+      card.style.transformStyle = "preserve-3d";
+      card.addEventListener("mouseenter", onEnter);
+      card.addEventListener("mousemove", onMove);
+      card.addEventListener("mouseleave", onLeave);
+      return () => {
+        card.removeEventListener("mouseenter", onEnter);
+        card.removeEventListener("mousemove", onMove);
+        card.removeEventListener("mouseleave", onLeave);
+      };
+    });
+
+    return () => {
+      breathers.forEach((b) => b.kill());
+      hoverCleanups.forEach((c) => c());
+    };
+  }, [shouldReduceMotion]);
+
   return (
-    <section className="scroll-mt-20 px-4 py-20 md:px-6">
+    <section
+      ref={sectionRef}
+      className="scroll-mt-20 px-4 pb-10 pt-24 md:px-6"
+    >
       <SectionDivider variant="glow" label={sectionBadge.toLowerCase()} />
-      <div className="mx-auto w-full max-w-6xl space-y-10">
-        <motion.div
-          className="space-y-3"
-          variants={!shouldReduceMotion ? fadeUp : undefined}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
+      <div className="mx-auto mt-8 w-full max-w-6xl space-y-10">
+        <div className="space-y-3">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
             {sectionBadge}
           </p>
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
             {sectionTitle}
           </h2>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          {siteConfig.stats.map((stat, index) => {
+        <div className="stat-grid grid grid-cols-2 gap-4 md:grid-cols-4">
+          {siteConfig.stats.map((stat) => {
             const displayValue =
               stat.since && now
                 ? Math.round(
@@ -134,19 +178,9 @@ export function Stats() {
                   )
                 : stat.value;
             return (
-              <motion.div
+              <div
                 key={stat.icon}
-                variants={!shouldReduceMotion ? statCardVariants : undefined}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                custom={index}
-                className="rounded-2xl border border-accent-teal/20 bg-card/60 backdrop-blur-md p-6 text-center transition-all duration-300"
-                whileHover={
-                  !shouldReduceMotion
-                    ? { y: -6, scale: 1.02, ...springHover }
-                    : undefined
-                }
+                className="stat-card rounded-2xl border border-accent-teal/20 bg-card/60 p-6 text-center backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-accent-teal/40 hover:shadow-[0_0_16px_color-mix(in_oklch,var(--accent-teal)_15%,transparent)]"
               >
                 <StatIcon
                   name={stat.icon}
@@ -158,10 +192,13 @@ export function Stats() {
                 <p className="mt-1 text-sm text-muted-foreground">
                   {stat.label[locale]}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
+
+        {/* Ticker de actividad en vivo, debajo de las cards de métricas */}
+        <ActivityTicker />
       </div>
     </section>
   );

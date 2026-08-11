@@ -65,8 +65,22 @@ export function Hero() {
       className="relative isolate flex h-[calc(100svh-64px)] items-center overflow-hidden px-4 pt-16 md:px-6 md:pt-20"
     >
       <DotGridBg />
+      {/* Fondo: cuadrícula ámbar grande. */}
       <div
-        className="futuristic-noise absolute inset-0 z-[1] opacity-60 pointer-events-none"
+        className="hero-grid absolute inset-0 z-0 pointer-events-none"
+        aria-hidden="true"
+      />
+      {/* Desvanecido superior: gradiente del color de fondo que funde la
+          cuadrícula con el navbar (simétrico al inferior). */}
+      <div
+        className="hero-fade-top pointer-events-none absolute inset-x-0 top-0 z-[1] h-32 bg-linear-to-b from-background via-background/70 to-transparent"
+        aria-hidden="true"
+      />
+      {/* Desvanecido inferior: gradiente del color de fondo sobre la
+          cuadrícula para que se funda con la siguiente sección (no depende
+          de mask-image, siempre se ve). */}
+      <div
+        className="hero-fade pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-40 bg-linear-to-t from-background via-background/70 to-transparent"
         aria-hidden="true"
       />
 
@@ -85,7 +99,7 @@ export function Hero() {
                 {badge}
               </span>
               <span className="flex items-center gap-2.5 rounded-full border border-border/70 bg-background/40 px-4 py-1.5 backdrop-blur-sm">
-                <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_10px_hsl(160_84%_55%/.75)]" />
+                <span className="animate-dotPulse h-2 w-2 shrink-0 rounded-full bg-green shadow-[0_0_10px_color-mix(in_oklch,var(--green)_75%,transparent)]" />
                 <span className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                   {status}
                 </span>
@@ -220,7 +234,7 @@ export function Hero() {
                   className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground"
                 >
                   {i === 0 && (
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" aria-hidden="true" />
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-green" aria-hidden="true" />
                   )}
                   {item[locale]}
                   {i < proof.length - 1 && (

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Hero } from "@/components/sections/hero";
 import { Skills } from "@/components/sections/skills";
 import { Stats } from "@/components/sections/stats";
@@ -8,35 +7,26 @@ import { Projects } from "@/components/sections/projects";
 import { Contact } from "@/components/sections/contact";
 
 const sections = [
-  { id: "hero", Component: Hero, delay: 0 },
-  { id: "skills", Component: Skills, delay: 0.1 },
-  { id: "stats", Component: Stats, delay: 0.2 },
-  { id: "projects", Component: Projects, delay: 0.15 },
-  { id: "contact", Component: Contact, delay: 0.25 },
+  { id: "skills", Component: Skills },
+  { id: "stats", Component: Stats },
+  { id: "projects", Component: Projects },
+  { id: "contact", Component: Contact },
 ] as const;
 
 export default function Home() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-clip">
-      {sections.map(({ id, Component, delay }) => (
-        <motion.div
-          key={id}
-          // Opacity-only reveal: no `y` transform here so section offsets
-          // stay stable (a translateY on the wrapper would make the next
-          // section appear ~20px lower and break exact scroll-to-section).
-          initial={{ opacity: 0 }}
-          whileInView={{
-            opacity: 1,
-            transition: {
-              delay,
-              duration: 0.6,
-              ease: [0.22, 1, 0.36, 1],
-            },
-          }}
-          viewport={{ once: true, amount: 0.1, margin: "-50px" }}
-        >
+      {/*
+        NOTA: cada sección ya anima su propio contenido con `whileInView`
+        (fadeUp/stagger). Un wrapper animado aquí duplicaría la animación:
+        la sección entera quedaría invisible hasta entrar al viewport Y las
+        cards harían su propio fade — el doble efecto que parecía "desaparecer".
+      */}
+      <Hero />
+      {sections.map(({ id, Component }) => (
+        <div key={id}>
           <Component />
-        </motion.div>
+        </div>
       ))}
     </div>
   );

@@ -71,12 +71,12 @@ export default function SectionDivider({ variant, label }: SectionDividerProps) 
   );
 
   if (shouldReduceMotion) {
-    return <div className="py-2">{content}</div>;
+    return <div className="py-5">{content}</div>;
   }
 
   return (
     <motion.div
-      className="py-2"
+      className="py-5"
       initial={{ opacity: 0, scaleX: 0.8 }}
       whileInView={{ opacity: 1, scaleX: 1 }}
       viewport={{ once: true, amount: 0.3 }}

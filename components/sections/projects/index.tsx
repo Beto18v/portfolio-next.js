@@ -61,10 +61,10 @@ function OtherProjectCard({
       className={
         // `will-change-transform` + shadow/filter deltas minimizan el repintado
         // durante la rotación 3D (backdrop-blur grande se recalcula por frame).
-        `flex h-full flex-col overflow-hidden rounded-2xl border bg-card/95 text-left will-change-transform [backface-visibility:hidden] transition-colors duration-300 ` +
+        `group flex h-full flex-col overflow-hidden rounded-2xl border bg-card/95 text-left will-change-transform [backface-visibility:hidden] transition-colors duration-300 ` +
         (isFront
           ? "border-accent-teal/30 shadow-[0_28px_80px_color-mix(in_oklch,var(--primary)_16%,transparent)]"
-          : "border-border/60 shadow-[0_18px_50px_rgba(0,0,0,0.18)]")
+          : "border-border/60 shadow-[0_18px_50px_rgba(23,21,15,0.18)]")
       }
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-border/60" />
@@ -74,7 +74,7 @@ function OtherProjectCard({
           alt={project.imageAlt?.[locale] ?? project.title[locale]}
           fill
           sizes="(max-width: 768px) 90vw, 380px"
-          className="object-cover"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
         <div className="absolute inset-0 bg-linear-to-t from-background/85 via-transparent to-transparent" />
       </div>
@@ -183,7 +183,7 @@ function OtherProjects({ projects }: { projects: Project[] }) {
   if (projects.length === 0) return null;
 
   return (
-    <div className="mt-20">
+    <div className="mt-16">
       {/* ─── Desplegable: título de la sección ─── */}
       <button
         type="button"
@@ -348,10 +348,10 @@ export function Projects() {
   return (
     <section
       id={siteConfig.sections.projects.id}
-      className="scroll-mt-20 px-4 py-20 md:px-6"
+      className="scroll-mt-20 px-4 pb-10 pt-24 md:px-6"
     >
       <SectionDivider variant="terminal" label={badge.toLowerCase()} />
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="mx-auto mt-8 w-full max-w-6xl">
         <motion.div
           className="mb-10 space-y-3"
           variants={!shouldReduceMotion ? fadeUp : undefined}
@@ -362,7 +362,7 @@ export function Projects() {
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
             {badge}
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-gradient md:text-4xl">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-gradient md:text-4xl">
             {title}
           </h2>
           {subtitle ? (
@@ -464,7 +464,7 @@ export function Projects() {
                       <div
                         className={
                           `relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/90 backdrop-blur-[28px] ` +
-                          `${isFront ? "shadow-[0_28px_80px_color-mix(in_oklch,var(--primary)_16%,transparent)]" : "shadow-[0_18px_50px_rgba(0,0,0,0.18)]"}`
+                          `${isFront ? "shadow-[0_28px_80px_color-mix(in_oklch,var(--primary)_16%,transparent)]" : "shadow-[0_18px_50px_rgba(23,21,15,0.18)]"}`
                         }
                       >
                         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-border/60" />
@@ -475,7 +475,7 @@ export function Projects() {
                             {project.title[locale]}
                           </span>
                           {project.isProduction ? (
-                            <span className="ml-auto inline-flex items-center rounded-full border border-emerald-400/25 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
+                            <span className="ml-auto inline-flex items-center rounded-full border border-green/25 bg-green/10 px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-green">
                               {inProductionLabel}
                             </span>
                           ) : null}
@@ -538,7 +538,7 @@ export function Projects() {
                           {activeProject.title[locale]}
                         </span>
                         {activeProject.isProduction ? (
-                          <span className="ml-auto inline-flex items-center rounded-full border border-emerald-400/25 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
+                          <span className="ml-auto inline-flex items-center rounded-full border border-green/25 bg-green/10 px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-green">
                             {inProductionLabel}
                           </span>
                         ) : null}

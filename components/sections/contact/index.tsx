@@ -23,11 +23,11 @@ export function Contact() {
   return (
     <section
       id={siteConfig.sections.contact.id}
-      className="scroll-mt-20 px-4 py-20 md:px-6 relative overflow-hidden"
+      className="scroll-mt-20 px-4 pb-12 pt-24 md:px-6 relative overflow-hidden"
     >
       <SectionDivider variant="glow" label={sectionBadge.toLowerCase()} />
       <motion.div
-        className="mx-auto w-full max-w-4xl overflow-hidden rounded-3xl border border-border/60 bg-card/70 p-8 text-center backdrop-blur-md md:p-10 relative shadow-[0_24px_80px_rgba(0,0,0,0.08)]"
+        className="mx-auto mt-8 w-full max-w-4xl overflow-hidden rounded-3xl border border-border/60 bg-card/70 p-8 text-center backdrop-blur-md md:p-10 relative shadow-[0_24px_80px_rgba(23,21,15,0.08)]"
         variants={!shouldReduceMotion ? fadeUp : undefined}
         initial="hidden"
         whileInView="visible"
@@ -35,7 +35,7 @@ export function Contact() {
       >
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--accent-teal)_10%,transparent),transparent_45%),radial-gradient(circle_at_bottom_right,color-mix(in_oklch,var(--accent)_8%,transparent),transparent_35%)]" />
 
-        <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-gradient">
+        <h2 className="font-display mb-4 text-3xl font-bold tracking-tight md:text-4xl text-gradient">
           {title}
         </h2>
 
@@ -84,7 +84,7 @@ export function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={githubAria}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-foreground/10 hover:shadow-[0_0_16px_rgba(0,0,0,0.12)] dark:text-[#f5f5f5]"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background/60 text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-foreground/10 hover:shadow-[0_0_16px_rgba(23,21,15,0.14)]"
           >
             <Github className="h-5 w-5" />
           </a>
