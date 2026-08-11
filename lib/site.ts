@@ -208,13 +208,42 @@ export const siteConfig: SiteConfig = {
       },
       skills: [
         { name: "React", icon: "FaReact", docsUrl: "https://react.dev" },
-        { name: "Next.js", icon: "SiNextdotjs", docsUrl: "https://nextjs.org/docs", isFavorite: true },
-        { name: "TypeScript", icon: "SiTypescript", docsUrl: "https://www.typescriptlang.org/docs/" },
-        { name: "Tailwind CSS", icon: "SiTailwindcss", docsUrl: "https://tailwindcss.com/docs" },
-        { name: "shadcn/ui", icon: "SiShadcnui", docsUrl: "https://ui.shadcn.com/docs" },
-        { name: "Framer Motion", icon: "SiFramer", docsUrl: "https://motion.dev" },
-        { name: "JavaScript", icon: "SiJavascript", docsUrl: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-        { name: "CSS3", icon: "SiCss3", docsUrl: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+        {
+          name: "Next.js",
+          icon: "SiNextdotjs",
+          docsUrl: "https://nextjs.org/docs",
+          isFavorite: true,
+        },
+        {
+          name: "TypeScript",
+          icon: "SiTypescript",
+          docsUrl: "https://www.typescriptlang.org/docs/",
+        },
+        {
+          name: "Tailwind CSS",
+          icon: "SiTailwindcss",
+          docsUrl: "https://tailwindcss.com/docs",
+        },
+        {
+          name: "shadcn/ui",
+          icon: "SiShadcnui",
+          docsUrl: "https://ui.shadcn.com/docs",
+        },
+        {
+          name: "Framer Motion",
+          icon: "SiFramer",
+          docsUrl: "https://motion.dev",
+        },
+        {
+          name: "JavaScript",
+          icon: "SiJavascript",
+          docsUrl: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        },
+        {
+          name: "CSS3",
+          icon: "SiCss3",
+          docsUrl: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+        },
       ],
     },
     {
@@ -224,14 +253,48 @@ export const siteConfig: SiteConfig = {
         en: "Backend",
       },
       skills: [
-        { name: "FastAPI", icon: "SiFastapi", docsUrl: "https://fastapi.tiangolo.com/" },
-        { name: "Python", icon: "SiPython", docsUrl: "https://docs.python.org/3/", isFavorite: true },
-        { name: "Node.js", icon: "SiNodedotjs", docsUrl: "https://nodejs.org/docs" },
-        { name: "Java", icon: "FaCode", docsUrl: "https://docs.oracle.com/en/java/" },
-        { name: "Spring Boot", icon: "SiSpringboot", docsUrl: "https://spring.io/projects/spring-boot#learn" },
-        { name: "Laravel", icon: "SiLaravel", docsUrl: "https://laravel.com/docs" },
-        { name: "REST APIs", icon: "FaNetworkWired", docsUrl: "https://restfulapi.net" },
-        { name: "WebSockets", icon: "FaGlobe", docsUrl: "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" },
+        {
+          name: "FastAPI",
+          icon: "SiFastapi",
+          docsUrl: "https://fastapi.tiangolo.com/",
+        },
+        {
+          name: "Python",
+          icon: "SiPython",
+          docsUrl: "https://docs.python.org/3/",
+          isFavorite: true,
+        },
+        {
+          name: "Node.js",
+          icon: "SiNodedotjs",
+          docsUrl: "https://nodejs.org/docs",
+        },
+        {
+          name: "Java",
+          icon: "FaCode",
+          docsUrl: "https://docs.oracle.com/en/java/",
+        },
+        {
+          name: "Spring Boot",
+          icon: "SiSpringboot",
+          docsUrl: "https://spring.io/projects/spring-boot#learn",
+        },
+        {
+          name: "Laravel",
+          icon: "SiLaravel",
+          docsUrl: "https://laravel.com/docs",
+        },
+        {
+          name: "REST APIs",
+          icon: "FaNetworkWired",
+          docsUrl: "https://restfulapi.net",
+        },
+        {
+          name: "WebSockets",
+          icon: "FaGlobe",
+          docsUrl:
+            "https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
+        },
       ],
     },
     {
@@ -241,14 +304,46 @@ export const siteConfig: SiteConfig = {
         en: "AI & LLM",
       },
       skills: [
-        { name: "AI Agents", icon: "FaBrain", docsUrl: "https://platform.openai.com/docs/guides/agents" },
-        { name: "LangGraph", icon: "FaCodeBranch", docsUrl: "https://langchain-ai.github.io/langgraph/" },
-        { name: "RAG", icon: "FaDatabase", docsUrl: "https://python.langchain.com/docs/concepts/rag/" },
-        { name: "LangChain", icon: "SiLangchain", docsUrl: "https://python.langchain.com/docs" },
-        { name: "OpenAI API", icon: "SiOpenai", docsUrl: "https://platform.openai.com/docs" },
-        { name: "Anthropic API", icon: "SiAnthropic", docsUrl: "https://docs.anthropic.com" },
-        { name: "Tool Use", icon: "FaCogs", docsUrl: "https://platform.openai.com/docs/guides/function-calling" },
-        { name: "MCP", icon: "FaExchangeAlt", docsUrl: "https://modelcontextprotocol.io/" },
+        {
+          name: "AI Agents",
+          icon: "FaBrain",
+          docsUrl: "https://platform.openai.com/docs/guides/agents",
+        },
+        {
+          name: "LangGraph",
+          icon: "FaCodeBranch",
+          docsUrl: "https://langchain-ai.github.io/langgraph/",
+        },
+        {
+          name: "RAG",
+          icon: "FaDatabase",
+          docsUrl: "https://python.langchain.com/docs/concepts/rag/",
+        },
+        {
+          name: "LangChain",
+          icon: "SiLangchain",
+          docsUrl: "https://python.langchain.com/docs",
+        },
+        {
+          name: "OpenAI API",
+          icon: "SiOpenai",
+          docsUrl: "https://platform.openai.com/docs",
+        },
+        {
+          name: "Anthropic API",
+          icon: "SiAnthropic",
+          docsUrl: "https://docs.anthropic.com",
+        },
+        {
+          name: "Tool Use",
+          icon: "FaCogs",
+          docsUrl: "https://platform.openai.com/docs/guides/function-calling",
+        },
+        {
+          name: "MCP",
+          icon: "FaExchangeAlt",
+          docsUrl: "https://modelcontextprotocol.io/",
+        },
       ],
     },
     {
@@ -258,12 +353,33 @@ export const siteConfig: SiteConfig = {
         en: "Databases",
       },
       skills: [
-        { name: "PostgreSQL", icon: "SiPostgresql", docsUrl: "https://www.postgresql.org/docs/", isFavorite: true },
-        { name: "Supabase", icon: "SiSupabase", docsUrl: "https://supabase.com/docs" },
+        {
+          name: "PostgreSQL",
+          icon: "SiPostgresql",
+          docsUrl: "https://www.postgresql.org/docs/",
+          isFavorite: true,
+        },
+        {
+          name: "Supabase",
+          icon: "SiSupabase",
+          docsUrl: "https://supabase.com/docs",
+        },
         { name: "Redis", icon: "SiRedis", docsUrl: "https://redis.io/docs" },
-        { name: "Qdrant", icon: "FaDatabase", docsUrl: "https://qdrant.tech/documentation/" },
-        { name: "MySQL", icon: "SiMysql", docsUrl: "https://dev.mysql.com/doc/" },
-        { name: "SQLite", icon: "SiSqlite", docsUrl: "https://www.sqlite.org/docs.html" },
+        {
+          name: "Qdrant",
+          icon: "FaDatabase",
+          docsUrl: "https://qdrant.tech/documentation/",
+        },
+        {
+          name: "MySQL",
+          icon: "SiMysql",
+          docsUrl: "https://dev.mysql.com/doc/",
+        },
+        {
+          name: "SQLite",
+          icon: "SiSqlite",
+          docsUrl: "https://www.sqlite.org/docs.html",
+        },
       ],
     },
     {
@@ -273,14 +389,38 @@ export const siteConfig: SiteConfig = {
         en: "DevOps & Cloud",
       },
       skills: [
-        { name: "Docker", icon: "SiDocker", docsUrl: "https://docs.docker.com/" },
+        {
+          name: "Docker",
+          icon: "SiDocker",
+          docsUrl: "https://docs.docker.com/",
+        },
         { name: "Git", icon: "SiGit", docsUrl: "https://git-scm.com/doc" },
-        { name: "GitHub", icon: "SiGithub", docsUrl: "https://docs.github.com" },
+        {
+          name: "GitHub",
+          icon: "SiGithub",
+          docsUrl: "https://docs.github.com",
+        },
         { name: "Linux", icon: "SiLinux", docsUrl: "https://linux.org" },
-        { name: "Vercel", icon: "SiVercel", docsUrl: "https://vercel.com/docs" },
-        { name: "Cloudflare", icon: "SiCloudflare", docsUrl: "https://developers.cloudflare.com" },
-        { name: "Nginx", icon: "SiNginx", docsUrl: "https://nginx.org/en/docs/" },
-        { name: "Hetzner", icon: "SiHetzner", docsUrl: "https://docs.hetzner.com" },
+        {
+          name: "Vercel",
+          icon: "SiVercel",
+          docsUrl: "https://vercel.com/docs",
+        },
+        {
+          name: "Cloudflare",
+          icon: "SiCloudflare",
+          docsUrl: "https://developers.cloudflare.com",
+        },
+        {
+          name: "Nginx",
+          icon: "SiNginx",
+          docsUrl: "https://nginx.org/en/docs/",
+        },
+        {
+          name: "Hetzner",
+          icon: "SiHetzner",
+          docsUrl: "https://docs.hetzner.com",
+        },
       ],
     },
     {
@@ -291,10 +431,26 @@ export const siteConfig: SiteConfig = {
       },
       skills: [
         { name: "n8n", icon: "SiN8N", docsUrl: "https://docs.n8n.io" },
-        { name: "Playwright", icon: "FaGlobe", docsUrl: "https://playwright.dev/docs" },
-        { name: "Selenium", icon: "SiSelenium", docsUrl: "https://www.selenium.dev/documentation" },
-        { name: "Web Scraping", icon: "FaDatabase", docsUrl: "https://scrapy.org/" },
-        { name: "UptimeRobot", icon: "FaHeartbeat", docsUrl: "https://uptimerobot.com" },
+        {
+          name: "Playwright",
+          icon: "FaGlobe",
+          docsUrl: "https://playwright.dev/docs",
+        },
+        {
+          name: "Selenium",
+          icon: "SiSelenium",
+          docsUrl: "https://www.selenium.dev/documentation",
+        },
+        {
+          name: "Web Scraping",
+          icon: "FaDatabase",
+          docsUrl: "https://scrapy.org/",
+        },
+        {
+          name: "UptimeRobot",
+          icon: "FaHeartbeat",
+          docsUrl: "https://uptimerobot.com",
+        },
       ],
     },
   ],
@@ -322,7 +478,7 @@ export const siteConfig: SiteConfig = {
         "Docker",
         "Hetzner",
         "Cloudefar e",
-        "PostgreSQL"        
+        "PostgreSQL",
       ],
       links: {
         code: "https://github.com/nunca-cierro/app.git",
@@ -400,30 +556,6 @@ export const siteConfig: SiteConfig = {
       featured: true,
       isProduction: true,
     },
-    
-    {
-      title: {
-        es: "Nexval",
-        en: "Nexval",
-      },
-      description: {
-        es: "De idea a SaaS funcionando, sin meses de desarrollo. Nexval convierte procesos de negocio en plataformas desplegables — landing pages rápidas, sistemas custom y todo reutilizable entre proyectos. Un solo código base para múltiples productos.",
-        en: "From idea to working SaaS, no months of dev time. Nexval turns business processes into deployable platforms — fast landing pages, custom systems and everything reusable across projects. One codebase for multiple products.",
-      },
-      image: "/projects/nexval.jpg",
-      imageAlt: {
-        es: "Vista previa del proyecto NEXVAL",
-        en: "Preview of NEXVAL project",
-      },
-      tags: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui", "SEO"],
-      links: {
-        code: "https://github.com/Beto18v/NEXVAL",
-        demo: "https://nexval.vercel.app/",
-      },
-      featured: true,
-      isProduction: true,
-    },
-
 
     {
       title: {
