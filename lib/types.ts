@@ -38,6 +38,10 @@ export interface HeroConfig {
   title: LocalizedText;
   subtitle: LocalizedText;
   badge: LocalizedText;
+  proof: LocalizedText[];
+  workPreview: {
+    title: LocalizedText;
+  };
   primaryCTA: {
     label: LocalizedText;
     href: string;
@@ -76,6 +80,13 @@ export interface StatsMetric {
   since?: { year: number; month: number };
 }
 
+export type ProjectCategory = "production" | "academic";
+
+export interface ProjectMetric {
+  label: LocalizedText;
+  value: string;
+}
+
 export interface Project {
   title: LocalizedText;
   description: LocalizedText;
@@ -87,6 +98,12 @@ export interface Project {
   isStar?: boolean;
   /** Display an "in production" badge in project cards */
   isProduction?: boolean;
+  /** Where this project lives in the portfolio narrative */
+  category: ProjectCategory;
+  /** Per-project override for the demo button label (e.g. "Visit Site") */
+  demoLabel?: LocalizedText;
+  /** Optional placeholder stats shown in the info panel (fill with real data) */
+  metrics?: ProjectMetric[];
   features?: string[];
 }
 
@@ -96,6 +113,10 @@ export interface Contact {
     countryCode: string;
     number: string;
     defaultMessage: LocalizedText;
+  };
+  booking?: {
+    label: LocalizedText;
+    url: string;
   };
 }
 
@@ -135,6 +156,7 @@ export interface Labels {
   coreStackTitle: LocalizedText;
   coreStackDesc: LocalizedText;
   inProduction: LocalizedText;
+  otherProjects: LocalizedText;
   prevProject: LocalizedText;
   nextProject: LocalizedText;
 }

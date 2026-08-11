@@ -1,12 +1,25 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { Briefcase, Rocket, Code2, CheckCircle2 } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import SectionDivider from "@/components/shared/section-divider";
 import { useLocale } from "@/components/shared/locale-provider";
-import { staggerContainer, fadeUp, springHover } from "@/lib/motion";
+import { fadeUp, springHover } from "@/lib/motion";
+
+const statCardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: index * 0.12,
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
 
 function StatIcon({ name, className }: { name: string; className?: string }) {
   switch (name) {
@@ -88,8 +101,6 @@ export function Stats() {
     Promise.resolve().then(() => setNow(Date.now()));
   }, []);
 
-  const containerVariants = shouldReduceMotion ? {} : staggerContainer;
-
   return (
     <section className="scroll-mt-20 px-4 py-20 md:px-6">
       <SectionDivider variant="glow" label={sectionBadge.toLowerCase()} />
@@ -109,14 +120,8 @@ export function Stats() {
           </h2>
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-2 gap-4 md:grid-cols-4"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {siteConfig.stats.map((stat) => {
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {siteConfig.stats.map((stat, index) => {
             const displayValue =
               stat.since && now
                 ? Math.round(
@@ -131,8 +136,12 @@ export function Stats() {
             return (
               <motion.div
                 key={stat.icon}
-                variants={!shouldReduceMotion ? fadeUp : undefined}
-                className="rounded-2xl border border-indigo-500/20 bg-card/60 backdrop-blur-md p-6 text-center transition-all duration-300"
+                variants={!shouldReduceMotion ? statCardVariants : undefined}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                custom={index}
+                className="rounded-2xl border border-accent-teal/20 bg-card/60 backdrop-blur-md p-6 text-center transition-all duration-300"
                 whileHover={
                   !shouldReduceMotion
                     ? { y: -6, scale: 1.02, ...springHover }
@@ -152,7 +161,7 @@ export function Stats() {
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

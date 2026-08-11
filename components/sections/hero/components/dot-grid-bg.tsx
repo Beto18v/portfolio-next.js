@@ -27,8 +27,8 @@ export default function DotGridBg() {
   const scrollRef = useRef(0);
   const animFrameRef = useRef(0);
   const colorsRef = useRef({
-    particle: "rgba(99, 102, 241, 0.6)",
-    line: "rgba(99, 102, 241, 0.15)",
+    particle: "rgba(46, 107, 138, 0.5)",
+    line: "rgba(46, 107, 138, 0.14)",
   });
   const shouldReduceMotion = useReducedMotion();
 
@@ -48,11 +48,11 @@ export default function DotGridBg() {
       const isDark = mq.matches;
       colorsRef.current = {
         particle: isDark
-          ? "rgba(99, 102, 241, 0.6)"
-          : "rgba(79, 70, 229, 0.4)",
+          ? "rgba(76, 147, 180, 0.55)"
+          : "rgba(46, 107, 138, 0.35)",
         line: isDark
-          ? "rgba(99, 102, 241, 0.15)"
-          : "rgba(79, 70, 229, 0.1)",
+          ? "rgba(76, 147, 180, 0.14)"
+          : "rgba(46, 107, 138, 0.1)",
       };
     };
     updateColors();

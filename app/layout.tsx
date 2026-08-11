@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, DM_Sans } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import { LenisProvider } from "@/components/shared/lenis-provider";
@@ -11,9 +11,10 @@ import { cn } from "@/lib/utils";
 import { LocaleProvider } from "@/components/shared/locale-provider";
 
 const inter = Inter({ subsets: ["latin"] });
-const dmSans = DM_Sans({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  style: ["normal", "italic"],
+  variable: "--font-display",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +32,7 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          dmSans.variable,
+          fraunces.variable,
           "min-h-screen bg-background antialiased",
         )}
       >

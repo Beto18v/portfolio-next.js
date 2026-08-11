@@ -62,9 +62,9 @@ export function CertificationsContent({
                   href={cert.file}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 rounded-2xl border border-indigo-500/20 bg-card/60 p-5 shadow-sm backdrop-blur-md transition-all duration-200 hover:border-indigo-400/40 hover:bg-card/80 hover:shadow-[0_0_28px_hsl(250_84%_60%/.12)]"
+                  className="group flex items-center gap-4 rounded-2xl border border-accent-teal/20 bg-card/60 p-5 shadow-sm backdrop-blur-md transition-all duration-200 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_12%,transparent)]"
                 >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-indigo-500/25 bg-indigo-500/10 text-indigo-300 transition-colors group-hover:border-indigo-400/40 group-hover:bg-indigo-500/15">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent-teal/25 bg-accent-teal/10 text-accent-teal transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
                     <Award className="h-5 w-5" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -73,7 +73,7 @@ export function CertificationsContent({
                     </p>
                     <p className="text-xs text-muted-foreground">PDF</p>
                   </div>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-indigo-300" />
+                  <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent-teal" />
                 </Link>
               ))
             ) : (
@@ -89,7 +89,7 @@ export function CertificationsContent({
               onClick={() => router.push("/")}
               variant="outline"
               size="lg"
-              className="h-11 rounded-full border-indigo-500/30 bg-background/70 px-7 hover:border-indigo-400/60"
+              className="h-11 rounded-full border-border/70 bg-background/70 px-7 hover:border-primary/40"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               {backLabel}

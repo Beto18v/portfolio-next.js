@@ -21,10 +21,12 @@ export default function Home() {
       {sections.map(({ id, Component, delay }) => (
         <motion.div
           key={id}
-          initial={{ opacity: 0, y: 20 }}
+          // Opacity-only reveal: no `y` transform here so section offsets
+          // stay stable (a translateY on the wrapper would make the next
+          // section appear ~20px lower and break exact scroll-to-section).
+          initial={{ opacity: 0 }}
           whileInView={{
             opacity: 1,
-            y: 0,
             transition: {
               delay,
               duration: 0.6,

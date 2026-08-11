@@ -1,11 +1,12 @@
 "use client";
 
 import { siteConfig } from "@/lib/site";
-import { Mail, Github, Linkedin, MessageCircle } from "lucide-react";
+import { Mail, Github, Linkedin, MessageCircle, CalendarClock } from "lucide-react";
 import { useLocale, useT } from "@/components/shared/locale-provider";
 import SectionDivider from "@/components/shared/section-divider";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
+import { Button } from "@/components/ui/button";
 
 export function Contact() {
   const { locale } = useLocale();
@@ -17,6 +18,7 @@ export function Contact() {
   const githubAria = useT(siteConfig.labels.openGithub);
   const linkedinAria = useT(siteConfig.labels.openLinkedin);
   const contactWhatsappAria = useT(siteConfig.labels.contactWhatsapp);
+  const booking = siteConfig.contact.booking;
 
   return (
     <section
@@ -31,7 +33,7 @@ export function Contact() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,hsl(250_80%_60%/0.10),transparent_45%),radial-gradient(circle_at_bottom_right,hsl(160_80%_60%/0.08),transparent_35%)]" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--accent-teal)_10%,transparent),transparent_45%),radial-gradient(circle_at_bottom_right,color-mix(in_oklch,var(--accent)_8%,transparent),transparent_35%)]" />
 
         <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-gradient">
           {title}
@@ -43,7 +45,24 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-3">
+        {booking ? (
+          <div className="mb-8 flex justify-center">
+            <Button asChild size="lg" className="neon-button h-12 rounded-full px-8 text-base">
+              <a
+                href={booking.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CalendarClock className="h-4 w-4" />
+                {booking.label[locale]}
+              </a>
+            </Button>
+          </div>
+        ) : null}
+
+        <div
+          className={`flex items-center justify-center gap-3 ${booking ? "" : "mt-8"}`}
+        >
           <a
             href={`mailto:${siteConfig.contact.email}`}
             aria-label={emailAria}

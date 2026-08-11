@@ -20,12 +20,12 @@ export const siteConfig: SiteConfig = {
       en: "online",
     },
     role: {
-      es: "Software Engineer | IA & Automatización",
-      en: "Software Engineer | AI & Automation",
+      es: "AI Engineer & Full Stack Developer",
+      en: "AI Engineer & Full Stack Developer",
     },
     tagline: {
-      es: "Construyo sistemas de automatización con IA que procesan miles de interacciones reales. Experiencia en producción con agentes multi-canal, SaaS y arquitecturas escalables.",
-      en: "I build AI automation systems that process thousands of real interactions. Production experience with multi-agent platforms, SaaS and scalable architectures.",
+      es: "Diseño y despliego sistemas de IA para empresas: atención al cliente 24/7, automatización de operaciones e integración de LLMs, todo corriendo en producción para que puedas escalar. También abierto a proyectos freelance.",
+      en: "I design and deploy AI systems for businesses: 24/7 customer service, operations automation and LLM integration — running in production so you can scale. Also open to freelance projects.",
     },
     location: {
       es: "Colombia",
@@ -42,12 +42,24 @@ export const siteConfig: SiteConfig = {
       en: "Nicolas Valenzuela",
     },
     subtitle: {
-      es: "Construyo sistemas de automatización con IA que procesan miles de interacciones reales. Experiencia en producción con agentes multi-canal, SaaS y arquitecturas escalables.",
-      en: "I build AI automation systems that process thousands of real interactions. Production experience with multi-agent platforms, SaaS and scalable architectures.",
+      es: "Diseño y despliego sistemas de IA para empresas: atención al cliente 24/7, automatización de operaciones e integración de LLMs, todo corriendo en producción para que puedas escalar. También abierto a proyectos freelance.",
+      en: "I design and deploy AI systems for businesses: 24/7 customer service, operations automation and LLM integration — running in production so you can scale. Also open to freelance projects.",
     },
     badge: {
-      es: "Disponible para oportunidades full-time",
-      en: "Available for full-time opportunities",
+      es: "Soluciones de IA para empresas — y proyectos freelance",
+      en: "AI solutions for businesses — and freelance projects",
+    },
+    proof: [
+      { es: "AI Engineering", en: "AI Engineering" },
+      { es: "Automatización", en: "Automation" },
+      { es: "Full Stack", en: "Full Stack" },
+      { es: "ES / EN", en: "ES / EN" },
+    ],
+    workPreview: {
+      title: {
+        es: "Proyectos en producción",
+        en: "Production work",
+      },
     },
     primaryCTA: {
       label: {
@@ -91,8 +103,8 @@ export const siteConfig: SiteConfig = {
         en: "Projects",
       },
       badge: {
-        es: "Portafolio",
-        en: "Portfolio",
+        es: "Proyectos",
+        en: "Projects",
       },
       title: {
         es: "Proyectos destacados",
@@ -118,8 +130,8 @@ export const siteConfig: SiteConfig = {
         en: "Let's build your next AI solution",
       },
       subtitle: {
-        es: "Si tienes una idea para automatizar procesos, integrar modelos de IA o desarrollar una plataforma moderna, conversemos.",
-        en: "If you're looking to automate workflows, integrate AI models or build a modern platform, let's talk.",
+        es: "¿Quieres automatizar operaciones, integrar IA en tu producto o escalar tu negocio con agentes que trabajan 24/7? Hablemos — los proyectos freelance también son bienvenidos.",
+        en: "Looking to automate operations, integrate AI into your product or scale your business with agents that work 24/7? Let's talk — freelance projects are welcome too.",
       },
     },
     stats: {
@@ -477,15 +489,24 @@ export const siteConfig: SiteConfig = {
         "FastAPI",
         "Docker",
         "Hetzner",
-        "Cloudefar e",
+        "Cloudflare",
         "PostgreSQL",
       ],
       links: {
         code: "https://github.com/nunca-cierro/app.git",
         demo: "https://nuncacierro.com/",
       },
+      demoLabel: {
+        es: "Ver sitio",
+        en: "Visit Site",
+      },
+      // metrics: [
+      //   { label: { es: "Negocios activos", en: "Active businesses" }, value: "" },
+      //   { label: { es: "Mensajes procesados/mes", en: "Messages processed/mo" }, value: "" },
+      // ],
       featured: true,
       isProduction: true,
+      category: "production",
     },
 
     {
@@ -524,6 +545,7 @@ export const siteConfig: SiteConfig = {
       featured: true,
       isStar: true,
       isProduction: true,
+      category: "production",
     },
 
     {
@@ -555,6 +577,7 @@ export const siteConfig: SiteConfig = {
       },
       featured: true,
       isProduction: true,
+      category: "production",
     },
 
     {
@@ -591,6 +614,7 @@ export const siteConfig: SiteConfig = {
         },
       },
       featured: true,
+      category: "academic",
     },
 
     {
@@ -622,6 +646,7 @@ export const siteConfig: SiteConfig = {
         code: "https://github.com/Beto18v/Canva-app",
       },
       featured: true,
+      category: "academic",
     },
 
     {
@@ -651,6 +676,7 @@ export const siteConfig: SiteConfig = {
         code: "https://github.com/Beto18v/Video-Programmer",
       },
       featured: true,
+      category: "academic",
     },
 
     {
@@ -679,6 +705,7 @@ export const siteConfig: SiteConfig = {
         code: "https://github.com/Beto18v/Portfolio",
       },
       featured: true,
+      category: "academic",
     },
   ],
   contact: {
@@ -690,6 +717,13 @@ export const siteConfig: SiteConfig = {
         es: "Vi tu portafolio y me interesa trabajar contigo",
         en: "I saw your portfolio and I am interested in working with you",
       },
+    },
+    booking: {
+      label: {
+        es: "Agenda una llamada de 15 min",
+        en: "Book a 15-min call",
+      },
+      url: "https://calendly.com/nicolasalbertov18/discovery-call",
     },
   },
   footer: {
@@ -816,6 +850,10 @@ export const siteConfig: SiteConfig = {
     inProduction: {
       es: "En producción",
       en: "In production",
+    },
+    otherProjects: {
+      es: "Otros proyectos",
+      en: "Other projects",
     },
     prevProject: {
       es: "Anterior",

@@ -19,8 +19,8 @@ export function WhatsAppButton() {
       className="fixed right-4 z-60 bottom-[max(1rem,env(safe-area-inset-bottom))] sm:bottom-5 sm:right-5"
       aria-label={aria}
     >
-      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 shadow-lg transition-transform duration-200 hover:scale-110 sm:h-14 sm:w-14">
-        <FaWhatsapp className="h-8 w-8 text-white transition-colors duration-200" />
+      <span className="flex h-12 w-12 items-center justify-center rounded-full border border-border/70 bg-primary text-primary-foreground shadow-[0_0_18px_color-mix(in_oklch,var(--accent-teal)_18%,transparent)] transition-all duration-200 hover:scale-110 hover:border-accent/40 hover:shadow-[0_0_18px_color-mix(in_oklch,var(--accent)_18%,transparent)] sm:h-14 sm:w-14">
+        <FaWhatsapp className="h-8 w-8 transition-colors duration-200" />
       </span>
     </a>
   );
