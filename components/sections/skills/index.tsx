@@ -167,7 +167,7 @@ export function Skills() {
           y: 0,
           duration: 0.35,
           ease: "power2.out",
-          onComplete: () => breathers[i]?.play(),
+          onComplete: () => { breathers[i]?.play(); },
         });
         gsap.to(card, { z: 0, scale: 1, duration: 0.3, ease: "power2.out" });
         if (icon) gsap.to(icon, { scale: 1, duration: 0.3, ease: "power2.out" });
