@@ -163,8 +163,12 @@ export function Skills() {
       const onLeave = () => {
         rotate(0);
         tilt(0);
-        lift(0);
-        breathers[i]?.play();
+        gsap.to(card, {
+          y: 0,
+          duration: 0.35,
+          ease: "power2.out",
+          onComplete: () => breathers[i]?.play(),
+        });
         gsap.to(card, { z: 0, scale: 1, duration: 0.3, ease: "power2.out" });
         if (icon) gsap.to(icon, { scale: 1, duration: 0.3, ease: "power2.out" });
       };
@@ -189,6 +193,7 @@ export function Skills() {
       breathersIo?.disconnect();
       breathers.forEach((b) => b.kill());
       hoverCleanups.forEach((c) => c());
+      gsap.killTweensOf(cards);
     };
   }, [shouldReduceMotion]);
 

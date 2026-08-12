@@ -35,6 +35,10 @@ function absoluteTop(el: HTMLElement): number {
   return top;
 }
 
+function contentTop(el: HTMLElement): number {
+  return absoluteTop(el) + (parseFloat(getComputedStyle(el).paddingTop) || 0);
+}
+
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [sheetOpen, setSheetOpen] = React.useState(false);
@@ -90,14 +94,14 @@ export function Navbar() {
   /**
    * Smooth-scrolls to an in-page anchor via Lenis.
    *
-   * Position is computed with `absoluteTop()` (document offset summed through
-   * offsetParents, ignoring transforms) rather than `getBoundingClientRect`,
-   * because the section wrappers in `app/page.tsx` animate in with a `y`
-   * transform — measuring the rect before that animation settles would offset
-   * the scroll target. The sticky header is `h-16` (64px), so we land the
-   * section title exactly under it. When Lenis is not available (reduced
-   * motion) we intentionally skip `preventDefault` so the browser's native
-   * anchor handling takes over.
+   * Position is computed with `contentTop()` — `absoluteTop()` summed through
+   * offsetParents plus the section's own padding-top — so every section lands
+   * with its content starting right under the sticky header. Sections pad
+   * themselves differently (`pt-2` skills vs `pt-24` projects), so landing on
+   * the raw element top would leave projects ~170px above its heading; the
+   * `-72` offset = 64px sticky header (`h-16`) + 8px breathing. When Lenis is
+   * not available (reduced motion) we intentionally skip `preventDefault` so
+   * the browser's native anchor handling takes over.
    */
   const scrollToSection = React.useCallback(
     (event: React.MouseEvent<HTMLAnchorElement>, href: string, delay = 0) => {
@@ -106,7 +110,7 @@ export function Navbar() {
       const run = () => {
         const el = document.querySelector<HTMLElement>(href);
         if (!el) return;
-        lenis.scrollTo(absoluteTop(el) - 64, { duration: 1.2 });
+        lenis.scrollTo(contentTop(el) - 72, { duration: 1.2 });
       };
       if (delay > 0) window.setTimeout(run, delay);
       else run();
@@ -203,7 +207,7 @@ export function Navbar() {
                           window.setTimeout(() => {
                             const el = document.querySelector<HTMLElement>(item.href);
                             if (!el) return;
-                            lenis.scrollTo(absoluteTop(el) - 64, { duration: 1.2 });
+                            lenis.scrollTo(contentTop(el) - 72, { duration: 1.2 });
                           }, 320);
                         }}
                         className="rounded-md px-3 py-2 text-base text-muted-foreground transition-all hover:text-accent-teal hover:bg-accent/40"

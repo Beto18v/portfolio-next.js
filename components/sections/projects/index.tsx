@@ -7,8 +7,18 @@ import { useLocale, useT } from "@/components/shared/locale-provider";
 import { useLenis } from "@/components/shared/lenis-provider";
 import SectionDivider from "@/components/shared/section-divider";
 import CardSwap, { Card } from "./components/card-swap";
-import { Coverflow, type CoverflowChildProps, CARD_HEIGHT } from "./components/coverflow";
-import { ChevronDown, ChevronLeft, ChevronRight, Github, ExternalLink } from "lucide-react";
+import {
+  Coverflow,
+  type CoverflowChildProps,
+  CARD_HEIGHT,
+} from "./components/coverflow";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Github,
+  ExternalLink,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { Project } from "@/lib/types";
@@ -61,7 +71,7 @@ function OtherProjectCard({
       className={
         // `will-change-transform` + shadow/filter deltas minimizan el repintado
         // durante la rotación 3D (backdrop-blur grande se recalcula por frame).
-        `group flex h-full flex-col overflow-hidden rounded-2xl border bg-card/95 text-left will-change-transform [backface-visibility:hidden] transition-colors duration-300 ` +
+        `group flex h-full flex-col overflow-hidden rounded-2xl border bg-card/95 text-left will-change-transform backface-hidden transition-colors duration-300 ` +
         (isFront
           ? "border-accent-teal/30 shadow-[0_28px_80px_color-mix(in_oklch,var(--primary)_16%,transparent)]"
           : "border-border/60 shadow-[0_18px_50px_rgba(23,21,15,0.18)]")
@@ -150,9 +160,7 @@ function OtherProjects({ projects }: { projects: Project[] }) {
 
   const goPrev = useCallback(
     () =>
-      setActiveIndex(
-        (prev) => (prev - 1 + projects.length) % projects.length,
-      ),
+      setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length),
     [projects.length],
   );
   const goNext = useCallback(
@@ -166,14 +174,17 @@ function OtherProjects({ projects }: { projects: Project[] }) {
       const next = !open;
       if (next) {
         // Scroll IMMEDIATELY (no waiting for the expand animation). The
-        // carousel sits `mt-8` below the button and is CARD_HEIGHT tall, so
+        // carousel sits `mt-12` below the button and is CARD_HEIGHT tall, so
         // we can compute its center deterministically and let Lenis glide
         // while the accordion expands underneath.
         const btn = buttonRef.current;
         if (btn && lenis) {
           const rect = btn.getBoundingClientRect();
-          const carouselCenter = window.scrollY + rect.top + rect.height + 32 + CARD_HEIGHT / 2;
-          lenis.scrollTo(carouselCenter - window.innerHeight / 2, { duration: 1 });
+          const carouselCenter =
+            window.scrollY + rect.top + rect.height + 48 + CARD_HEIGHT / 2;
+          lenis.scrollTo(carouselCenter - window.innerHeight / 2, {
+            duration: 1,
+          });
         }
       }
       return next;
@@ -191,7 +202,7 @@ function OtherProjects({ projects }: { projects: Project[] }) {
         onClick={toggleOpen}
         aria-expanded={isOpen}
         aria-controls="other-projects-body"
-        className="group mx-auto flex items-center justify-center gap-3 rounded-full border border-border/60 bg-background/50 px-5 py-2.5 backdrop-blur-sm transition-all duration-300 hover:border-accent-teal/40 hover:bg-accent-teal/10"
+        className="group mx-auto flex items-center justify-center gap-3 rounded-full border border-accent-teal/25 bg-background/50 px-5 py-2.5 shadow-[0_0_24px_color-mix(in_oklch,var(--accent-teal)_10%,transparent)] backdrop-blur-sm transition-all duration-300 hover:border-accent-teal/40 hover:bg-accent-teal/10"
       >
         <h3 className="text-2xl font-bold tracking-tight text-foreground">
           {otherProjectsLabel}
@@ -217,17 +228,21 @@ function OtherProjects({ projects }: { projects: Project[] }) {
                 : { opacity: 0, height: 0, y: -8 }
             }
             animate={
-              shouldReduceMotion ? { opacity: 1 } : { opacity: 1, height: "auto", y: 0 }
+              shouldReduceMotion
+                ? { opacity: 1 }
+                : { opacity: 1, height: "auto", y: 0 }
             }
             exit={
-              shouldReduceMotion ? { opacity: 1 } : { opacity: 0, height: 0, y: -8 }
+              shouldReduceMotion
+                ? { opacity: 1 }
+                : { opacity: 0, height: 0, y: -8 }
             }
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
             {/* pb-32 da espacio a la sombra azul del front card para que no se
                 corte con el overflow-hidden del accordion durante la animación */}
-            <div className="mx-auto mt-8 max-w-[1000px] px-2 pb-32">
+            <div className="mx-auto mt-12 max-w-250 px-10 pb-36">
               <Coverflow
                 activeIndex={activeIndex}
                 onActiveIndexChange={setActiveIndex}
@@ -252,7 +267,7 @@ function OtherProjects({ projects }: { projects: Project[] }) {
               </Coverflow>
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-3">
+            <div className="-mt-16 flex items-center justify-center gap-3">
               <Button
                 type="button"
                 variant="ghost"
@@ -371,7 +386,7 @@ export function Projects() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:items-center lg:gap-8"
+          className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:items-center lg:gap-16"
           variants={!shouldReduceMotion ? fadeUp : undefined}
           initial="hidden"
           whileInView="visible"
@@ -426,7 +441,7 @@ export function Projects() {
 
           {/* ─── Card Swap area (desktop + mobile) ─── */}
           <div
-            className="relative z-0 lg:col-span-7 lg:self-center lg:justify-self-start"
+            className="relative z-0 lg:col-span-7 lg:w-130.5 lg:self-center lg:justify-self-end"
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
@@ -439,7 +454,7 @@ export function Projects() {
               <CardSwap
                 width={390}
                 height={330}
-                cardDistance={64}
+                cardDistance={70}
                 verticalDistance={38}
                 delay={5000}
                 pauseOnHover

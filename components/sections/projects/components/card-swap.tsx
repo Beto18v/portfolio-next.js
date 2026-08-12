@@ -511,7 +511,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
       ref={container}
       className={
         resolvedAnchor === "left"
-          ? "absolute bottom-8 left-0 origin-bottom-left perspective-[1600px] overflow-visible max-[768px]:bottom-4 max-[768px]:scale-[0.75] max-[480px]:bottom-2 max-[480px]:scale-[0.55]"
+          ? "absolute bottom-20 left-0 origin-bottom-left perspective-[1600px] overflow-visible max-[768px]:bottom-4 max-[768px]:scale-[0.75] max-[480px]:bottom-2 max-[480px]:scale-[0.55]"
           : "absolute bottom-8 right-0 origin-bottom-right perspective-[1600px] overflow-visible max-[768px]:bottom-4 max-[768px]:scale-[0.75] max-[480px]:bottom-2 max-[480px]:scale-[0.55]"
       }
       style={{

@@ -14,9 +14,13 @@ interface TickerEvent {
 
 /**
  * Events reflect the REAL infrastructure behind the portfolio:
- * - Nunca Cierro runs on Hetzner (Docker, Cloudflare, PostgreSQL)
- * - Dinerance on Vercel + Supabase
- * - This site on Vercel, repo on GitHub, domain on is-a.dev via Cloudflare
+ * - cloudflare — edge routing for this site (nival.is-a.dev)
+ * - azure — Dinerance backend
+ * - supabase — Dinerance database
+ * - vercel — Dinerance frontend
+ * - hetzner — nunca-cierro environment
+ * - github — Actions CI
+ * - n8n — LinkedIn automation
  */
 const TICKER_EVENTS: TickerEvent[] = [
   {
@@ -95,6 +99,7 @@ export function ActivityTicker() {
       duration: 30,
       ease: "none",
       repeat: -1,
+      paused: true,
     });
 
     const io = new IntersectionObserver(

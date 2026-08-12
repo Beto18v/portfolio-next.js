@@ -482,7 +482,7 @@ export const siteConfig: SiteConfig = {
         en: "Preview of NUNCA CIERRO project",
       },
       tags: [
-        "WhatsApp Cloud API",
+        "WhatsApp API",
         "Telegram API",
         "Groq",
         "Next.js",
