@@ -226,7 +226,7 @@ export function Skills() {
 
                 return (
                   <div key={category.id}>
-                    <h3 className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+                    <h3 className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground/80">
                       {category.title[locale]}
                     </h3>
                     <div className="skill-grid grid grid-cols-4 gap-2 sm:grid-cols-4 md:grid-cols-4">

@@ -174,6 +174,7 @@ export function SkillIcon({
   const color = colorMap[name];
   return (
     <Icon
+      aria-hidden="true"
       className={`${className ?? ""} transition-colors duration-200 group-hover:text-(--skill-icon-color)`}
       style={{
         ...style,
