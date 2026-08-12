@@ -69,29 +69,86 @@ export function Skills() {
     const cards = Array.from(
       section.querySelectorAll<HTMLElement>(".skill-grid > *"),
     );
+    const sidebar = section.querySelector<HTMLElement>(".core-expertise-panel");
     if (cards.length === 0) return;
 
+    let breathers: gsap.core.Tween[] = [];
+    let breathersIo: IntersectionObserver | null = null;
+    let entered = false;
+
     // ── "Vida": cada card respira sutilmente (flotación yoyo con delay
-    //    aleatorio), como si el sistema estuviera vivo. ──
-    const breathers = cards.map((card, i) =>
-      gsap.to(card, {
-        y: "+=3",
-        duration: 2.4 + (i % 5) * 0.35,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: (i * 0.37) % 2,
-      }),
+    //    aleatorio). Arranca SOLO cuando termina la entrada (ambas animan `y`)
+    //    y se pausa cuando la sección sale de vista. ──
+    const startLifeAnimations = () => {
+      breathers = cards.map((card, i) =>
+        gsap.to(card, {
+          y: "+=3",
+          duration: 2.4 + (i % 5) * 0.35,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: (i * 0.37) % 2,
+        }),
+      );
+
+      breathersIo = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) breathers.forEach((b) => b.play());
+          else breathers.forEach((b) => b.pause());
+        },
+        { threshold: 0 },
+      );
+      breathersIo.observe(section);
+    };
+
+    // ── Entrada: reveal escalonado al entrar en viewport. `paused: true` +
+    //    fromTo aplica el estado oculto en el primer paint (useLayoutEffect)
+    //    y la IO lo dispara cuando la sección es visible. ──
+    const entrance = gsap.fromTo(
+      cards,
+      { opacity: 0, y: 24, scale: 0.94 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.65,
+        ease: "power3.out",
+        stagger: 0.04,
+        paused: true,
+        onComplete: startLifeAnimations,
+      },
     );
 
+    const sidebarEntrance = sidebar
+      ? gsap.fromTo(
+          sidebar,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", paused: true },
+        )
+      : null;
+
+    const entranceIo = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !entered) {
+          entered = true;
+          entrance.play();
+          sidebarEntrance?.play();
+          entranceIo.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -6% 0px" },
+    );
+    entranceIo.observe(section);
+
     // ── Hover 3D: la card se inclina hacia el mouse y se eleva. ──
-    const hoverCleanups = cards.map((card) => {
+    const hoverCleanups = cards.map((card, i) => {
       const icon = card.querySelector("svg");
       const tilt = gsap.quickTo(card, "rotationX", { duration: 0.35, ease: "power2.out" });
       const rotate = gsap.quickTo(card, "rotationY", { duration: 0.35, ease: "power2.out" });
       const lift = gsap.quickTo(card, "y", { duration: 0.35, ease: "power2.out" });
 
       const onEnter = () => {
+        breathers[i]?.pause();
         gsap.to(card, { z: 30, scale: 1.05, duration: 0.3, ease: "power2.out" });
         if (icon) gsap.to(icon, { scale: 1.2, duration: 0.3, ease: "back.out(2)" });
       };
@@ -107,6 +164,7 @@ export function Skills() {
         rotate(0);
         tilt(0);
         lift(0);
+        breathers[i]?.play();
         gsap.to(card, { z: 0, scale: 1, duration: 0.3, ease: "power2.out" });
         if (icon) gsap.to(icon, { scale: 1, duration: 0.3, ease: "power2.out" });
       };
@@ -123,6 +181,12 @@ export function Skills() {
     });
 
     return () => {
+      entrance.kill();
+      sidebarEntrance?.kill();
+      gsap.set(cards, { clearProps: "opacity,transform" });
+      if (sidebar) gsap.set(sidebar, { clearProps: "opacity,transform" });
+      entranceIo.disconnect();
+      breathersIo?.disconnect();
       breathers.forEach((b) => b.kill());
       hoverCleanups.forEach((c) => c());
     };
@@ -173,7 +237,7 @@ export function Skills() {
 
           {/* ─── AI Engineering Sidebar (Right) ─── */}
           <div className="w-full shrink-0 lg:w-64">
-            <div className="sticky top-24 rounded-2xl border border-accent-teal/25 bg-linear-to-br from-accent-teal/10 to-accent-teal/5 p-5 shadow-[0_0_24px_color-mix(in_oklch,var(--accent-teal)_8%,transparent)]">
+            <div className="core-expertise-panel sticky top-24 rounded-2xl border border-accent-teal/25 bg-linear-to-br from-accent-teal/10 to-accent-teal/5 p-5 shadow-[0_0_24px_color-mix(in_oklch,var(--accent-teal)_8%,transparent)]">
               <div className="mb-1 inline-block rounded-full border border-accent-teal/30 bg-accent-teal/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-accent-teal">
                 {coreExpertiseTitle}
               </div>

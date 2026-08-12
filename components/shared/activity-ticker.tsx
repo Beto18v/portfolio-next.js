@@ -20,54 +20,39 @@ interface TickerEvent {
  */
 const TICKER_EVENTS: TickerEvent[] = [
   {
-    project: "hetzner",
-    action: { es: "nunca-cierro · contenedor activo", en: "nunca-cierro · container up" },
-    result: "✓ 24/7",
-  },
-  {
-    project: "nunca-cierro",
-    action: { es: "agente de WhatsApp respondió un pedido", en: "WhatsApp agent replied to an order" },
-    result: "✓ 1.4s",
-  },
-  {
-    project: "nunca-cierro",
-    action: { es: "booking sincronizado al calendario", en: "booking synced to calendar" },
-    result: "✓",
-  },
-  {
-    project: "postgres",
-    action: { es: "nunca-cierro · consulta en producción", en: "nunca-cierro · prod query" },
-    result: "✓ 12ms",
-  },
-  {
-    project: "dinerance",
-    action: { es: "deploy en Vercel", en: "deploy on Vercel" },
-    result: "✓",
-  },
-  {
-    project: "dinerance",
-    action: { es: "balances sincronizados · Supabase", en: "balances synced · Supabase" },
-    result: "✓ 1.2s",
-  },
-  {
-    project: "dinerance",
-    action: { es: "consulta protegida por RLS", en: "RLS-protected query" },
-    result: "✓ 8ms",
-  },
-  {
     project: "cloudflare",
     action: { es: "nival.is-a.dev · edge", en: "nival.is-a.dev · edge" },
     result: "✓ 99.98%",
   },
   {
-    project: "github",
-    action: { es: "github.com/beto18v · CI verde", en: "github.com/beto18v · CI green" },
+    project: "azure",
+    action: { es: "back de dinerance", en: "dinerance backend" },
+    result: "✓",
+  },
+  {
+    project: "supabase",
+    action: { es: "db de dinerance", en: "dinerance database" },
     result: "✓",
   },
   {
     project: "vercel",
-    action: { es: "portfolio · build ok", en: "portfolio · build ok" },
-    result: "✓ 12.4s",
+    action: { es: "front de dinerance", en: "dinerance frontend" },
+    result: "✓",
+  },
+  {
+    project: "hetzner",
+    action: { es: "entorno de nunca-cierro", en: "nunca-cierro environment" },
+    result: "✓ 24/7",
+  },
+  {
+    project: "github",
+    action: { es: "actions · CI", en: "actions · CI" },
+    result: "✓",
+  },
+  {
+    project: "n8n",
+    action: { es: "automatización · linkedin", en: "linkedin automation" },
+    result: "✓",
   },
 ];
 
@@ -98,7 +83,8 @@ export function ActivityTicker() {
   const shouldReduceMotion = useReducedMotion();
 
   // Marquee infinito con GSAP: duplica el contenido y lo desplaza -50% en
-  // loop. Más confiable que keyframes CSS (que no se aplicaban).
+  // loop. Más confiable que keyframes CSS (que no se aplicaban). Se pausa
+  // cuando queda fuera de viewport para no robar frames del scroll de Lenis.
   useLayoutEffect(() => {
     const track = trackRef.current;
     if (!track) return;
@@ -111,7 +97,17 @@ export function ActivityTicker() {
       repeat: -1,
     });
 
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) tween.play();
+        else tween.pause();
+      },
+      { threshold: 0 },
+    );
+    io.observe(track);
+
     return () => {
+      io.disconnect();
       tween.kill();
     };
   }, [shouldReduceMotion]);

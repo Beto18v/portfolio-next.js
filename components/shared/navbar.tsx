@@ -10,7 +10,6 @@ import { useT } from "./locale-provider";
 import { useLenis } from "./lenis-provider";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -41,18 +40,44 @@ export function Navbar() {
   const [sheetOpen, setSheetOpen] = React.useState(false);
   const pathname = usePathname();
   const lenis = useLenis();
+  const progressBarRef = React.useRef<HTMLDivElement>(null);
   const skillsNav = useT(siteConfig.sections.skills.nav);
   const projectsNav = useT(siteConfig.sections.projects.nav);
   const contactNav = useT(siteConfig.sections.contact.nav);
-  const { scrollYProgress } = useScroll();
-  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
+  /**
+   * Scroll state + progress bar driven by Lenis's JS data when available.
+   * Reading `lenis.scroll`/`lenis.progress` (plain properties) instead of
+   * `window.scrollY` avoids forced reflows: Lenis writes the scroll position
+   * every rAF frame, so any layout read right after forces a synchronous
+   * layout (the perf trace showed ~530ms of forced reflows during scroll).
+   * Falls back to a native listener when Lenis is inactive (reduced motion).
+   */
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    if (lenis) {
+      const onLenis = ({ scroll, progress }: { scroll: number; progress: number }) => {
+        setScrolled(scroll > 10);
+        if (progressBarRef.current) {
+          progressBarRef.current.style.width = `${progress * 100}%`;
+        }
+      };
+      onLenis({ scroll: lenis.scroll, progress: lenis.progress });
+      lenis.on("scroll", onLenis);
+      return () => lenis.off("scroll", onLenis);
+    }
+
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+      const max = document.body.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? window.scrollY / max : 0;
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${progress * 100}%`;
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [lenis]);
 
   const isSpecialPage = pathname === "/cv" || pathname === "/certifications";
 
@@ -195,9 +220,10 @@ export function Navbar() {
       </div>
 
       {/* Scroll progress bar */}
-      <motion.div
+      <div
+        ref={progressBarRef}
         className="absolute bottom-0 left-0 h-0.5 bg-linear-to-r from-accent-teal via-accent-teal to-accent"
-        style={{ width: progressWidth }}
+        style={{ width: "0%" }}
       />
     </header>
   );

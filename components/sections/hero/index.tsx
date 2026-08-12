@@ -13,7 +13,6 @@ import {
   useTransform,
 } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
-import DotGridBg from "./components/dot-grid-bg";
 import { SplitTextTitle } from "./components/split-text-title";
 import { MagneticButton } from "./components/magnetic-button";
 import { ProjectPreview } from "./components/project-preview";
@@ -64,7 +63,6 @@ export function Hero() {
       ref={sectionRef}
       className="relative isolate flex h-[calc(100svh-64px)] items-center overflow-hidden px-4 pt-16 md:px-6 md:pt-20"
     >
-      <DotGridBg />
       {/* Fondo: cuadrícula ámbar grande. */}
       <div
         className="hero-grid absolute inset-0 z-0 pointer-events-none"
