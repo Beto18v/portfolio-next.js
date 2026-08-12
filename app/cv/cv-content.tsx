@@ -168,9 +168,9 @@ export function CvContent({
           <div className="space-y-3">
             {data.skillGroups.map((group, i) => (
               <div key={i} className="cv-entry border-b-0! pb-0!">
-                <h4 className="text-[0.82rem] font-bold uppercase tracking-[0.05em] text-slate-900">
+                <h3 className="text-[0.82rem] font-bold uppercase tracking-[0.05em] text-slate-900">
                   {group.title}
-                </h4>
+                </h3>
                 <p className="mt-0.5 text-[0.82rem] leading-relaxed text-slate-600">
                   {group.skills.join("  ·  ")}
                 </p>

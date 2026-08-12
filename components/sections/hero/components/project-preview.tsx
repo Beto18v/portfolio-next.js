@@ -33,9 +33,9 @@ function FeaturedProject({ project }: { project: Project }) {
         <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/25 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
           <div className="min-w-0">
-            <h4 className="truncate text-lg font-semibold tracking-tight text-foreground">
+            <h2 className="truncate text-lg font-semibold tracking-tight text-foreground">
               {project.title[locale]}
-            </h4>
+            </h2>
             {project.tags[0] ? (
               <p className="mt-0.5 truncate text-xs text-muted-foreground">
                 {project.tags[0]}
@@ -87,9 +87,9 @@ function ProjectRow({ project }: { project: Project }) {
         />
       </div>
       <div className="min-w-0 flex-1">
-        <h4 className="truncate text-sm font-semibold text-foreground">
+        <h2 className="truncate text-sm font-semibold text-foreground">
           {project.title[locale]}
-        </h4>
+        </h2>
         {project.tags[0] ? (
           <p className="mt-0.5 truncate text-xs text-muted-foreground">
             {project.tags[0]}
