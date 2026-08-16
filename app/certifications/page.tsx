@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CertificationsContent } from "./certifications-content";
-import { getCertifications } from "@/lib/get-certifications";
+import { getCertificationGroups } from "@/lib/get-certifications";
 
 export const metadata: Metadata = {
   title: "Certifications | Nicolás Voitovich",
@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function CertificationsPage() {
-  const certifications = getCertifications();
+  const groups = getCertificationGroups();
   return (
     <>
-      <CertificationsContent certifications={certifications} />
+      <CertificationsContent groups={groups} />
     </>
   );
 }

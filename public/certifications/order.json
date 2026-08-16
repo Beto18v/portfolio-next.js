@@ -1,0 +1,10 @@
+{
+  "order": ["Big School", "Codigo Facilito", "Sena"],
+  "cv": [
+    "Curso de AI Engineer",
+    "Desarrollo con IA - Programa con Agentes",
+    "Langchain, el framework de IA para desarrolladores",
+    "Cómo consumir la API de OpenAI",
+    "Ciberseguridad y hacking etico"
+  ]
+}

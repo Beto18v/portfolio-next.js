@@ -1,21 +1,26 @@
 "use client";
 
+import { useState } from "react";
 import { useLocale } from "@/components/shared/locale-provider";
-import { ArrowLeft, Award, ExternalLink } from "lucide-react";
+import { ArrowLeft, Award, ExternalLink, Folder } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import Link from "next/link";
+import type { CertificationGroup } from "@/lib/get-certifications";
 
 export function CertificationsContent({
-  certifications,
+  groups,
 }: {
-  certifications: { title: string; file: string }[];
+  groups: CertificationGroup[];
 }) {
   const { locale } = useLocale();
   const router = useRouter();
   const shouldReduceMotion = useReducedMotion();
+  const [activeGroup, setActiveGroup] = useState<CertificationGroup | null>(
+    null,
+  );
 
   const title = locale === "es" ? "Certificaciones" : "Certifications";
   const subtitle =
@@ -23,10 +28,20 @@ export function CertificationsContent({
       ? "Formación continua y certificaciones profesionales"
       : "Continuous learning and professional certifications";
   const backLabel = locale === "es" ? "Volver al inicio" : "Back to home";
+  const backToInstitutions =
+    locale === "es" ? "Volver a instituciones" : "Back to institutions";
   const emptyLabel =
     locale === "es"
       ? "No hay certificaciones disponibles por el momento."
       : "No certifications available at the moment.";
+  const certificationsCount = (count: number) =>
+    count === 1
+      ? locale === "es"
+        ? "1 certificado"
+        : "1 certificate"
+      : locale === "es"
+        ? `${count} certificados`
+        : `${count} certificates`;
 
   const animProps = shouldReduceMotion ? {} : { variants: fadeUp };
 
@@ -50,51 +65,104 @@ export function CertificationsContent({
             <p className="mx-auto max-w-xl text-muted-foreground">{subtitle}</p>
           </motion.div>
 
-          {/* ── Certifications List ── */}
-          <motion.div
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
-            {...animProps}
-          >
-            {certifications.length > 0 ? (
-              certifications.map((cert, i) => (
-                <Link
-                  key={i}
-                  href={cert.file}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-4 rounded-2xl border border-accent-teal/20 bg-card/60 p-5 shadow-sm backdrop-blur-md transition-all duration-200 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_12%,transparent)]"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent-teal/25 bg-accent-teal/10 text-accent-teal transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
-                    <Award className="h-5 w-5" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-foreground">
-                      {cert.title}
-                    </p>
-                    <p className="text-xs text-muted-foreground">PDF</p>
-                  </div>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent-teal" />
-                </Link>
-              ))
-            ) : (
-              <p className="col-span-full text-center text-sm text-muted-foreground">
-                {emptyLabel}
-              </p>
-            )}
-          </motion.div>
+          {activeGroup ? (
+            <>
+              {/* ── Group Certifications ── */}
+              <motion.div
+                className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+                {...animProps}
+              >
+                {activeGroup.certifications.length > 0 ? (
+                  activeGroup.certifications.map((cert, i) => (
+                    <Link
+                      key={i}
+                      href={cert.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-4 rounded-2xl border border-accent-teal/20 bg-card/60 p-5 shadow-sm backdrop-blur-md transition-all duration-200 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_12%,transparent)]"
+                    >
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent-teal/25 bg-accent-teal/10 text-accent-teal transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
+                        <Award className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-foreground">
+                          {cert.title}
+                        </p>
+                        <p className="text-xs text-muted-foreground">PDF</p>
+                      </div>
+                      <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent-teal" />
+                    </Link>
+                  ))
+                ) : (
+                  <p className="col-span-full text-center text-sm text-muted-foreground">
+                    {emptyLabel}
+                  </p>
+                )}
+              </motion.div>
 
-          {/* ── Back to Home ── */}
-          <motion.div className="flex justify-center pt-4" {...animProps}>
-            <Button
-              onClick={() => router.push("/")}
-              variant="outline"
-              size="lg"
-              className="h-11 rounded-full border-border/70 bg-background/70 px-7 hover:border-primary/40"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              {backLabel}
-            </Button>
-          </motion.div>
+              {/* ── Back to Institutions ── */}
+              <motion.div className="flex justify-center pt-4" {...animProps}>
+                <Button
+                  onClick={() => setActiveGroup(null)}
+                  variant="outline"
+                  size="lg"
+                  className="h-11 rounded-full border-border/70 bg-background/70 px-7 hover:border-primary/40"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  {backToInstitutions}
+                </Button>
+              </motion.div>
+            </>
+          ) : (
+            <>
+              {/* ── Institution Groups ── */}
+              <motion.div
+                className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+                {...animProps}
+              >
+                {groups.length > 0 ? (
+                  groups.map((group, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setActiveGroup(group)}
+                      className="group flex cursor-pointer items-center gap-4 rounded-2xl border border-accent-teal/20 bg-card/60 p-5 text-left shadow-sm backdrop-blur-md transition-all duration-200 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_12%,transparent)]"
+                    >
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent-teal/25 bg-accent-teal/10 text-accent-teal transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
+                        <Folder className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-foreground">
+                          {group.name}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {certificationsCount(group.certifications.length)}
+                        </p>
+                      </div>
+                      <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent-teal" />
+                    </button>
+                  ))
+                ) : (
+                  <p className="col-span-full text-center text-sm text-muted-foreground">
+                    {emptyLabel}
+                  </p>
+                )}
+              </motion.div>
+
+              {/* ── Back to Home ── */}
+              <motion.div className="flex justify-center pt-4" {...animProps}>
+                <Button
+                  onClick={() => router.push("/")}
+                  variant="outline"
+                  size="lg"
+                  className="h-11 rounded-full border-border/70 bg-background/70 px-7 hover:border-primary/40"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  {backLabel}
+                </Button>
+              </motion.div>
+            </>
+          )}
         </motion.div>
       </div>
 
