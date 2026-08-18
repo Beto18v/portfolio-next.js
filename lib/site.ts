@@ -469,6 +469,43 @@ export const siteConfig: SiteConfig = {
   projects: [
     {
       title: {
+        es: "Asistente Comercial IA (SIA)",
+        en: "AI Sales Assistant (SIA)",
+      },
+      description: {
+        es: "Un chatbot de IA embebible que responde consultas comerciales y captura leads con arquitectura RAG, bilingüe y listo para insertarse en cualquier sitio web. Incluye un dashboard en tiempo real con métricas de conversaciones, leads enriquecidos y costo por turno. Corriendo en producción para ITS Solutions.",
+        en: "An embeddable AI chatbot that answers commercial queries and captures leads with a RAG architecture — bilingual and ready to drop into any website. Includes a real-time dashboard with conversation metrics, enriched leads and cost-per-turn tracking. Running in production for ITS Solutions.",
+      },
+      image: "/projects/itssolutions.jpg",
+      imageAlt: {
+        es: "Vista previa del Asistente Comercial IA de ITS Solutions",
+        en: "Preview of the ITS Solutions AI Sales Assistant",
+      },
+      tags: [
+        "Python",
+        "FastAPI",
+        "LangGraph",
+        "FAISS",
+        "AWS Bedrock",
+        "Cohere",
+        "Next.js",
+        "SQLite",
+        "SSE",
+      ],
+      links: {
+        demo: "https://itssolutions.co",
+      },
+      demoLabel: {
+        es: "Ver sitio",
+        en: "Visit Site",
+      },
+      featured: true,
+      isProduction: true,
+      category: "production",
+    },
+
+    {
+      title: {
         es: "Nunca Cierro",
         en: "Nunca Cierro",
       },

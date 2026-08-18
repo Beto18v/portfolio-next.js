@@ -48,18 +48,19 @@ type Bilingual<T> = Record<Locale, T>;
 const cvDataByLocale: Bilingual<CvTexts> = {
   es: {
     professionalSummary:
-      "AI & Software Developer. Construyo sistemas RAG con LangChain y LangGraph, integrando modelos de Groq, OpenAI y HuggingFace en producción. Full stack con Next.js, Angular, FastAPI y Spring Boot. Despliego en Docker, Hetzner y Vercel. Del prompt engineering al deploy: soluciones integrales con foco en resultado.",
+      "AI & Software Developer. Diseño e implemento sistemas de IA generativa con arquitectura RAG, LLMs multi-proveedor (AWS Bedrock, OpenAI, Gemini) y búsqueda vectorial (Qdrant, FAISS), orquestados con LangChain y LangGraph en producción. Full stack con Next.js, Angular, FastAPI y Spring Boot. Despliego en AWS, Docker, Hetzner y Vercel. Del prompt engineering al deploy: soluciones integrales con foco en resultado.",
 
     experience: [
       {
         title: "Desarrollador de IA & Software",
-        company: "ITSSolutions",
+        company: "ITS Solutions",
         environment: "Bogotá, Colombia · Desde Abr 2026",
         bullets: [
-          "Implementé un nodo de procesamiento de documentos usando LangChain y LangGraph, integrando embeddings de HuggingFace y modelos de Groq y OpenAI para análisis semántico.",
-          "Desarrollé y mantuve APIs RESTful con FastAPI y Spring Boot, conectando servicios de IA con frontends en Angular mediante autenticación JWT.",
-          "Diseñé flujos de prompt engineering para modelos LLM, optimizando la precisión de extracción y clasificación de datos en pipelines automatizados.",
-          "Gestioné bases de datos MySQL para los servicios de la plataforma, modelando esquemas y optimizando consultas.",
+          "Diseñé e implementé sistemas de IA generativa con arquitectura RAG y LLMs multi-proveedor (AWS Bedrock, OpenAI, Gemini) orquestados con LangGraph, en producción desde el inicio.",
+          "Desarrollé el backend de un chatbot comercial de IA en FastAPI: pipeline RAG con LangGraph, captura y enriquecimiento de leads, rate limiting en 3 capas, telemetría de costo y defensas contra prompt injection.",
+          "Desarrollé un dashboard de monitoreo en tiempo real en Next.js con SSE (Server-Sent Events), mostrando KPIs, conversaciones, leads y costo por turno.",
+          "Implementé búsqueda semántica con búsqueda vectorial (Qdrant, FAISS) y embeddings sobre AWS Bedrock, con pipelines de ingesta y chunking semántico.",
+          "Diseñé arquitecturas multi-capa comunicadas por HTTP (Angular, Spring Boot, FastAPI) con ranking por fusión de resultados y procesamiento automatizado de documentos.",
         ],
       },
       {
@@ -121,6 +122,9 @@ const cvDataByLocale: Bilingual<CvTexts> = {
           "LangChain",
           "LangGraph",
           "RAG",
+          "AWS Bedrock",
+          "Cohere Embed",
+          "FAISS",
           "Groq",
           "Ollama",
           "OpenAI API",
@@ -148,6 +152,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
           "Laravel (PHP)",
           "RESTful APIs",
           "JWT",
+          "SSE (Server-Sent Events)",
         ],
       },
       {
@@ -165,6 +170,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         title: "DevOps & Cloud",
         skills: [
           "Docker",
+          "AWS (EC2, S3, CloudFront)",
           "Hetzner",
           "Vercel",
           "Git / GitHub",
@@ -197,18 +203,19 @@ const cvDataByLocale: Bilingual<CvTexts> = {
 
   en: {
     professionalSummary:
-      "AI & Software Developer. I build RAG systems with LangChain and LangGraph, integrating Groq, OpenAI, and HuggingFace models in production. Full stack with Next.js, Angular, FastAPI, and Spring Boot. I deploy on Docker, Hetzner, and Vercel. From prompt engineering to deployment: end-to-end solutions with a results-driven focus.",
+      "AI & Software Developer. I design and implement generative AI systems with RAG architecture, multi-provider LLMs (AWS Bedrock, OpenAI, Gemini) and vector search (Qdrant, FAISS), orchestrated with LangChain and LangGraph in production. Full stack with Next.js, Angular, FastAPI, and Spring Boot. I deploy on AWS, Docker, Hetzner, and Vercel. From prompt engineering to deployment: end-to-end solutions with a results-driven focus.",
 
     experience: [
       {
         title: "AI & Software Developer",
-        company: "ITSSolutions",
+        company: "ITS Solutions",
         environment: "Bogotá, Colombia · Since Apr 2026",
         bullets: [
-          "Implemented a document processing node using LangChain and LangGraph, integrating HuggingFace embeddings and Groq and OpenAI models for semantic analysis.",
-          "Built and maintained RESTful APIs with FastAPI and Spring Boot, connecting AI services to Angular frontends with JWT authentication.",
-          "Designed prompt engineering flows for LLM models, optimizing data extraction and classification accuracy in automated pipelines.",
-          "Managed MySQL databases for platform services, modeling schemas and optimizing queries.",
+          "Designed and implemented generative AI systems with a RAG architecture and multi-provider LLMs (AWS Bedrock, OpenAI, Gemini) orchestrated with LangGraph — in production from day one.",
+          "Developed the backend of a commercial AI chatbot in FastAPI: RAG pipeline with LangGraph, lead capture and enrichment, 3-layer rate limiting, cost telemetry and prompt injection defenses.",
+          "Developed a real-time monitoring dashboard in Next.js with SSE (Server-Sent Events), showing KPIs, conversations, leads and cost per turn.",
+          "Implemented semantic search with vector search (Qdrant, FAISS) and embeddings on AWS Bedrock, with ingestion pipelines and semantic chunking.",
+          "Designed multi-layer architectures communicating over HTTP (Angular, Spring Boot, FastAPI) with fusion-based ranking and automated document processing.",
         ],
       },
       {
@@ -270,6 +277,9 @@ const cvDataByLocale: Bilingual<CvTexts> = {
           "LangChain",
           "LangGraph",
           "RAG",
+          "AWS Bedrock",
+          "Cohere Embed",
+          "FAISS",
           "Groq",
           "Ollama",
           "OpenAI API",
@@ -297,6 +307,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
           "Laravel (PHP)",
           "RESTful APIs",
           "JWT",
+          "SSE (Server-Sent Events)",
         ],
       },
       {
@@ -314,6 +325,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         title: "DevOps & Cloud",
         skills: [
           "Docker",
+          "AWS (EC2, S3, CloudFront)",
           "Hetzner",
           "Vercel",
           "Git / GitHub",
