@@ -48,13 +48,13 @@ type Bilingual<T> = Record<Locale, T>;
 const cvDataByLocale: Bilingual<CvTexts> = {
   es: {
     professionalSummary:
-      "AI & Software Developer. Diseño e implemento sistemas de IA generativa con arquitectura RAG, LLMs multi-proveedor (AWS Bedrock, OpenAI, Gemini) y búsqueda vectorial (Qdrant, FAISS), orquestados con LangChain y LangGraph en producción. Full stack con Next.js, Angular, FastAPI y Spring Boot. Despliego en AWS, Docker, Hetzner y Vercel. Del prompt engineering al deploy: soluciones integrales con foco en resultado.",
+      "AI & Software Developer con {years}+ años de experiencia. Diseño e implemento sistemas de IA generativa con arquitectura RAG, LLMs multi-proveedor (AWS Bedrock, OpenAI, Gemini) y búsqueda vectorial (Qdrant, FAISS), orquestados con LangChain y LangGraph en producción. Full stack con Next.js, Angular, FastAPI y Spring Boot. Despliego en AWS, Docker, Hetzner y Vercel. Del prompt engineering al deploy: soluciones integrales con foco en resultado.",
 
     experience: [
       {
         title: "Desarrollador de IA & Software",
         company: "ITS Solutions",
-        environment: "Bogotá, Colombia · Desde Abr 2026",
+        environment: "Bogotá, Colombia · Abr 2026 – Presente",
         bullets: [
           "Diseñé e implementé sistemas de IA generativa con arquitectura RAG y LLMs multi-proveedor (AWS Bedrock, OpenAI, Gemini) orquestados con LangGraph, en producción desde el inicio.",
           "Desarrollé el backend de un chatbot comercial de IA en FastAPI: pipeline RAG con LangGraph, captura y enriquecimiento de leads, rate limiting en 3 capas, telemetría de costo y defensas contra prompt injection.",
@@ -66,7 +66,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Ingeniero de IA & Desarrollador Full Stack",
         company: "Nunca Cierro",
-        environment: "Proyecto Propio · En Producción",
+        environment: "Proyecto Propio · 2026 – Presente · En Producción",
         bullets: [
           "Automaticé la atención al cliente 24/7 integrando WhatsApp y Telegram APIs con modelos de Groq y Ollama para procesamiento de lenguaje natural en tiempo real.",
           "Desarrollé el frontend con Next.js y la API con FastAPI, desplegando la arquitectura multi-servicio en Hetzner con Docker y Cloudflare, usando PostgreSQL.",
@@ -76,7 +76,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Desarrollador Core & Arquitecto SaaS",
         company: "Dinerance",
-        environment: "Proyecto Propio · En Producción",
+        environment: "Proyecto Propio · 2025 – Presente · En Producción",
         bullets: [
           "Diseñé esquemas PostgreSQL con Supabase aplicando Row-Level Security para aislamiento multi-tenant, soportando operaciones concurrentes.",
           "Construí la API con FastAPI y SQLAlchemy, aplicando migraciones controladas con Alembic y autenticación JWT.",
@@ -203,13 +203,13 @@ const cvDataByLocale: Bilingual<CvTexts> = {
 
   en: {
     professionalSummary:
-      "AI & Software Developer. I design and implement generative AI systems with RAG architecture, multi-provider LLMs (AWS Bedrock, OpenAI, Gemini) and vector search (Qdrant, FAISS), orchestrated with LangChain and LangGraph in production. Full stack with Next.js, Angular, FastAPI, and Spring Boot. I deploy on AWS, Docker, Hetzner, and Vercel. From prompt engineering to deployment: end-to-end solutions with a results-driven focus.",
+      "AI & Software Developer with {years}+ years of experience. I design and implement generative AI systems with RAG architecture, multi-provider LLMs (AWS Bedrock, OpenAI, Gemini) and vector search (Qdrant, FAISS), orchestrated with LangChain and LangGraph in production. Full stack with Next.js, Angular, FastAPI, and Spring Boot. I deploy on AWS, Docker, Hetzner, and Vercel. From prompt engineering to deployment: end-to-end solutions with a results-driven focus.",
 
     experience: [
       {
         title: "AI & Software Developer",
         company: "ITS Solutions",
-        environment: "Bogotá, Colombia · Since Apr 2026",
+        environment: "Bogotá, Colombia · Apr 2026 – Present",
         bullets: [
           "Designed and implemented generative AI systems with a RAG architecture and multi-provider LLMs (AWS Bedrock, OpenAI, Gemini) orchestrated with LangGraph — in production from day one.",
           "Developed the backend of a commercial AI chatbot in FastAPI: RAG pipeline with LangGraph, lead capture and enrichment, 3-layer rate limiting, cost telemetry and prompt injection defenses.",
@@ -221,7 +221,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "AI Engineer & Full Stack Developer",
         company: "Nunca Cierro",
-        environment: "Personal Project · Production",
+        environment: "Personal Project · 2026 – Present · In Production",
         bullets: [
           "Automated 24/7 customer support by integrating WhatsApp and Telegram APIs with Groq and Ollama models for real-time natural language processing.",
           "Built the frontend with Next.js and the API with FastAPI, deploying the multi-service architecture on Hetzner with Docker and Cloudflare, using PostgreSQL.",
@@ -231,7 +231,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Core Developer & SaaS Architect",
         company: "Dinerance",
-        environment: "Personal Project · Production",
+        environment: "Personal Project · 2025 – Present · In Production",
         bullets: [
           "Designed PostgreSQL schemas with Supabase applying Row-Level Security for multi-tenant isolation, supporting concurrent operations.",
           "Built the API with FastAPI and SQLAlchemy, applying controlled migrations with Alembic and JWT authentication.",
@@ -357,10 +357,22 @@ const cvDataByLocale: Bilingual<CvTexts> = {
   },
 };
 
+/** Years of experience derived from the same `since` source as the site metrics (site.ts stats). */
+function getYearsOfExperience(): number {
+  const stat = siteConfig.stats.find((s) => s.since);
+  if (!stat?.since) return stat?.value ?? 0;
+  const start = new Date(stat.since.year, stat.since.month - 1).getTime();
+  return Math.round((Date.now() - start) / (365.25 * 86400000));
+}
+
 /** Returns CV data for the given locale, with profile info merged from site.ts */
 export function getCvData(locale: Locale) {
   return {
     ...cvDataByLocale[locale],
+    professionalSummary: cvDataByLocale[locale].professionalSummary.replace(
+      "{years}",
+      String(getYearsOfExperience()),
+    ),
     profile: {
       name: "NICOLAS A. VALENZUELA",
       role: profile.role[locale],
