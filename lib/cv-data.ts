@@ -68,9 +68,9 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         company: "Nunca Cierro",
         environment: "Proyecto Propio · 2026 – Presente · En Producción",
         bullets: [
-          "Automaticé la atención al cliente 24/7 integrando WhatsApp y Telegram APIs con modelos de Groq y Ollama para procesamiento de lenguaje natural en tiempo real.",
-          "Desarrollé el frontend con Next.js y la API con FastAPI, desplegando la arquitectura multi-servicio en Hetzner con Docker y Cloudflare, usando PostgreSQL.",
-          "Contenericé la infraestructura con Docker para escalar horizontalmente entre múltiples negocios, manteniendo 99.9% de disponibilidad.",
+          "Automaticé la atención al cliente 24/7 de múltiples negocios simultáneamente: agenda citas, responde consultas y procesa pedidos por WhatsApp y Telegram sin intervención humana.",
+          "Integré las APIs de WhatsApp y Telegram con modelos de Groq y Ollama para procesamiento de lenguaje natural en tiempo real, construyendo el frontend en Next.js y la API en FastAPI.",
+          "Desplegué la arquitectura multi-servicio en Hetzner con Docker, Cloudflare y PostgreSQL, escalando horizontalmente entre negocios con 99.9% de disponibilidad.",
         ],
       },
       {
@@ -223,9 +223,9 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         company: "Nunca Cierro",
         environment: "Personal Project · 2026 – Present · In Production",
         bullets: [
-          "Automated 24/7 customer support by integrating WhatsApp and Telegram APIs with Groq and Ollama models for real-time natural language processing.",
-          "Built the frontend with Next.js and the API with FastAPI, deploying the multi-service architecture on Hetzner with Docker and Cloudflare, using PostgreSQL.",
-          "Containerized the infrastructure with Docker to scale horizontally across multiple businesses, maintaining 99.9% uptime.",
+          "Automated 24/7 customer support for multiple businesses simultaneously: books appointments, answers questions and processes orders over WhatsApp and Telegram with no human intervention.",
+          "Integrated WhatsApp and Telegram APIs with Groq and Ollama models for real-time natural language processing, building the frontend with Next.js and the API with FastAPI.",
+          "Deployed the multi-service architecture on Hetzner with Docker, Cloudflare and PostgreSQL, scaling horizontally across businesses with 99.9% uptime.",
         ],
       },
       {
