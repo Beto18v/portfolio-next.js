@@ -1,10 +1,16 @@
 {
-  "order": ["Big School", "Codigo Facilito", "Sena"],
+  "order": ["IBM", "Sena", "Big School", "Codigo Facilito"],
   "cv": [
+    "AI Fundamentals Foundations.pdf",
     "Curso de AI Engineer",
     "Desarrollo con IA - Programa con Agentes",
     "Langchain, el framework de IA para desarrolladores",
-    "Cómo consumir la API de OpenAI",
     "Ciberseguridad y hacking etico"
-  ]
+  ],
+  "badges": {
+    "AI Fundamentals Foundations": {
+      "image": "/badges/ai-fundamentals-foundations-for-understanding-ai.png",
+      "url": "https://www.credly.com/badges/2cb27675-2cfc-450d-981a-04614d6c2006/public_url"
+    }
+  }
 }

@@ -1,9 +1,17 @@
 import fs from "fs";
 import path from "path";
 
+export interface CertificationBadge {
+  /** Badge image (public path) shown instead of the generic icon. */
+  image: string;
+  /** Optional external verification URL (e.g. Credly). */
+  url?: string;
+}
+
 export interface Certification {
   title: string;
   file: string;
+  badge?: CertificationBadge;
 }
 
 export interface CertificationGroup {
@@ -28,6 +36,38 @@ function readOrder(): string[] {
     // missing or invalid order.json → alphabetical fallback
   }
   return [];
+}
+
+/**
+ * Badge per certification title (normalized key → badge). Accepts a string
+ * shorthand (image path) or an object `{ image, url? }`.
+ */
+function readBadges(): Record<string, CertificationBadge> {
+  try {
+    const raw = JSON.parse(fs.readFileSync(ORDER_FILE, "utf8"));
+    if (raw && typeof raw.badges === "object" && raw.badges !== null) {
+      const badges: Record<string, CertificationBadge> = {};
+      for (const [title, value] of Object.entries(raw.badges)) {
+        if (typeof value === "string") {
+          badges[normalizeKey(title)] = { image: value };
+        } else if (
+          value &&
+          typeof value === "object" &&
+          typeof (value as { image?: unknown }).image === "string"
+        ) {
+          const { image, url } = value as { image: string; url?: unknown };
+          badges[normalizeKey(title)] = {
+            image,
+            url: typeof url === "string" ? url : undefined,
+          };
+        }
+      }
+      return badges;
+    }
+  } catch {
+    // missing or invalid → no badges
+  }
+  return {};
 }
 
 /** Titles selected for the CV, in display order. Empty → show all. */
@@ -60,15 +100,22 @@ function encodeSegment(segment: string): string {
   return encodeURI(segment).replace(/#/g, "%23");
 }
 
-function readCertifications(folder: string): Certification[] {
+function readCertifications(
+  folder: string,
+  badges: Record<string, CertificationBadge>,
+): Certification[] {
   const folderPath = path.join(CERTS_DIR, folder);
   return fs
     .readdirSync(folderPath)
     .filter((f) => f.toLowerCase().endsWith(".pdf"))
-    .map((f) => ({
-      title: f.replace(/\.pdf$/i, ""),
-      file: `/certifications/${encodeSegment(folder)}/${encodeSegment(f)}`,
-    }))
+    .map((f) => {
+      const title = f.replace(/\.pdf$/i, "");
+      return {
+        title,
+        file: `/certifications/${encodeSegment(folder)}/${encodeSegment(f)}`,
+        badge: badges[normalizeKey(title)],
+      };
+    })
     .sort((a, b) => a.title.localeCompare(b.title, "es"));
 }
 
@@ -82,6 +129,7 @@ export function getCertificationGroups(): CertificationGroup[] {
       .map((entry) => entry.name);
 
     const order = readOrder();
+    const badges = readBadges();
     const sortedFolders = [...folders].sort((a, b) =>
       a.localeCompare(b, "es"),
     );
@@ -90,7 +138,7 @@ export function getCertificationGroups(): CertificationGroup[] {
 
     return [...ordered, ...unlisted].map((name) => ({
       name,
-      certifications: readCertifications(name),
+      certifications: readCertifications(name, badges),
     }));
   } catch {
     return [];

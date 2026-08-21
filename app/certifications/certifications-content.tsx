@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useLocale } from "@/components/shared/locale-provider";
 import { ArrowLeft, Award, ExternalLink, Folder } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
@@ -34,6 +35,8 @@ export function CertificationsContent({
     locale === "es"
       ? "No hay certificaciones disponibles por el momento."
       : "No certifications available at the moment.";
+  const verifyLabel =
+    locale === "es" ? "Verificar certificado" : "Verify certificate";
   const certificationsCount = (count: number) =>
     count === 1
       ? locale === "es"
@@ -74,24 +77,64 @@ export function CertificationsContent({
               >
                 {activeGroup.certifications.length > 0 ? (
                   activeGroup.certifications.map((cert, i) => (
-                    <Link
+                    <div
                       key={i}
-                      href={cert.file}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="group flex items-center gap-4 rounded-2xl border border-accent-teal/20 bg-card/60 p-5 shadow-sm backdrop-blur-md transition-all duration-200 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_12%,transparent)]"
                     >
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent-teal/25 bg-accent-teal/10 text-accent-teal transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
-                        <Award className="h-5 w-5" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-medium text-foreground">
-                          {cert.title}
-                        </p>
-                        <p className="text-xs text-muted-foreground">PDF</p>
-                      </div>
-                      <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent-teal" />
-                    </Link>
+                      {cert.badge ? (
+                        cert.badge.url ? (
+                          <a
+                            href={cert.badge.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={verifyLabel}
+                            className="shrink-0"
+                          >
+                            <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-lg border border-accent-teal/25 bg-accent-teal/10 transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
+                              <Image
+                                src={cert.badge.image}
+                                alt={cert.title}
+                                width={56}
+                                height={56}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                          </a>
+                        ) : (
+                          <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-accent-teal/25 bg-accent-teal/10 transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
+                            <Image
+                              src={cert.badge.image}
+                              alt={cert.title}
+                              width={56}
+                              height={56}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        )
+                      ) : (
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border border-accent-teal/25 bg-accent-teal/10 text-accent-teal transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
+                          <Award className="h-5 w-5" />
+                        </div>
+                      )}
+
+                      <Link
+                        href={cert.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${cert.title} (PDF)`}
+                        className="flex min-w-0 flex-1 items-center gap-4"
+                      >
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-sm font-medium text-foreground">
+                            {cert.title}
+                          </span>
+                          <span className="block text-xs text-muted-foreground">
+                            PDF
+                          </span>
+                        </span>
+                        <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-accent-teal" />
+                      </Link>
+                    </div>
                   ))
                 ) : (
                   <p className="col-span-full text-center text-sm text-muted-foreground">
