@@ -171,8 +171,18 @@ export function CertificationsContent({
                       onClick={() => setActiveGroup(group)}
                       className="group flex cursor-pointer items-center gap-4 rounded-2xl border border-accent-teal/20 bg-card/60 p-5 text-left shadow-sm backdrop-blur-md transition-all duration-200 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_12%,transparent)]"
                     >
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent-teal/25 bg-accent-teal/10 text-accent-teal transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
-                        <Folder className="h-5 w-5" />
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-accent-teal/25 bg-accent-teal/10 text-accent-teal transition-colors group-hover:border-accent-teal/40 group-hover:bg-accent-teal/15">
+                        {group.logo ? (
+                          <Image
+                            src={group.logo}
+                            alt={group.name}
+                            width={44}
+                            height={44}
+                            className="h-full w-full object-contain p-1"
+                          />
+                        ) : (
+                          <Folder className="h-5 w-5" />
+                        )}
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-medium text-foreground">

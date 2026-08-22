@@ -17,10 +17,13 @@ export interface Certification {
 export interface CertificationGroup {
   name: string;
   certifications: Certification[];
+  /** Institution logo (public path), shown in the group card when available. */
+  logo?: string;
 }
 
 const CERTS_DIR = path.join(process.cwd(), "public", "certifications");
 const ORDER_FILE = path.join(CERTS_DIR, "order.json");
+const LOGOS_DIR = path.join(CERTS_DIR, "logos");
 
 function readOrder(): string[] {
   try {
@@ -96,6 +99,27 @@ function normalizeKey(s: string): string {
     .trim();
 }
 
+/**
+ * Logo slug from an institution folder name, matching the convention
+ * `public/certifications/logos/{slug}-logo.png` ("Big School" → "bigschool").
+ */
+function logoSlug(groupName: string): string {
+  return normalizeKey(groupName).replace(/\s+/g, "");
+}
+
+/** Resolve the logo for a group when `logos/{slug}-logo.png` exists. */
+function readLogo(groupName: string): string | undefined {
+  const fileName = `${logoSlug(groupName)}-logo.png`;
+  try {
+    if (fs.existsSync(path.join(LOGOS_DIR, fileName))) {
+      return `/certifications/logos/${fileName}`;
+    }
+  } catch {
+    // unreadable → no logo
+  }
+  return undefined;
+}
+
 function encodeSegment(segment: string): string {
   return encodeURI(segment).replace(/#/g, "%23");
 }
@@ -124,21 +148,23 @@ export function getCertificationGroups(): CertificationGroup[] {
     const folders = fs
       .readdirSync(CERTS_DIR, { withFileTypes: true })
       .filter(
-        (entry) => entry.isDirectory() && entry.name !== "order.json",
+        (entry) =>
+          entry.isDirectory() &&
+          entry.name !== "order.json" &&
+          entry.name !== "logos",
       )
       .map((entry) => entry.name);
 
     const order = readOrder();
     const badges = readBadges();
-    const sortedFolders = [...folders].sort((a, b) =>
-      a.localeCompare(b, "es"),
-    );
+    const sortedFolders = [...folders].sort((a, b) => a.localeCompare(b, "es"));
     const ordered = order.filter((name) => folders.includes(name));
     const unlisted = sortedFolders.filter((name) => !ordered.includes(name));
 
     return [...ordered, ...unlisted].map((name) => ({
       name,
       certifications: readCertifications(name, badges),
+      logo: readLogo(name),
     }));
   } catch {
     return [];
