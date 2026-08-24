@@ -171,6 +171,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         skills: [
           "Docker",
           "AWS (EC2, S3, CloudFront)",
+          "Google Cloud Platform",
           "Hetzner",
           "Vercel",
           "Git / GitHub",
@@ -325,7 +326,8 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         title: "DevOps & Cloud",
         skills: [
           "Docker",
-          "AWS (EC2, S3, CloudFront)",
+          "Amazon web services",
+          "Google Cloud Platform",
           "Hetzner",
           "Vercel",
           "Git / GitHub",
