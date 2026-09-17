@@ -535,7 +535,6 @@ export const siteConfig: SiteConfig = {
         "PostgreSQL",
       ],
       links: {
-        code: "https://github.com/nunca-cierro/app.git",
         demo: "https://nuncacierro.com/",
       },
       demoLabel: {
