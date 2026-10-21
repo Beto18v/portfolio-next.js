@@ -87,16 +87,18 @@ const cvDataByLocale: Bilingual<CvTexts> = {
 
     education: [
       {
-        title: "Tecnólogo en Análisis y Desarrollo de Software",
-        institution: "SENA (Servicio Nacional de Aprendizaje)",
-        period: "En curso",
+        title: "Ingeniería de Software",
+        institution: "Corporación Universitaria Iberoamericana",
+        period: "10/2026 – Presente",
         details:
-          "Ciclo técnico completado al 100%. Especialización en arquitectura de software, bases de datos y metodologías ágiles.",
+          "En curso · Ingreso por homologación a 5.° semestre profesional tras culminar tecnólogo SENA. Finalización estimada: 2028.",
       },
       {
-        title: "Curso en Conceptos de Ciberseguridad",
-        institution: "",
-        period: "Certificación Activa (2026)",
+        title: "Tecnólogo en Análisis y Desarrollo de Software",
+        institution: "SENA (Servicio Nacional de Aprendizaje)",
+        period: "07/2024 – 10/2026",
+        details:
+          "Graduado. Formación integral en arquitectura de software, bases de datos y metodologías ágiles.",
       },
     ],
 
@@ -255,16 +257,18 @@ const cvDataByLocale: Bilingual<CvTexts> = {
 
     education: [
       {
-        title: "Software Analysis and Development Technologist",
-        institution: "SENA (National Learning Service)",
-        period: "In Progress",
+        title: "B.S. in Software Engineering",
+        institution: "Corporación Universitaria Iberoamericana",
+        period: "10/2026 – Present",
         details:
-          "Technical cycle 100% completed. Specialized in software architecture, databases, and agile methodologies.",
+          "In progress · Direct credit transfer into 5th professional semester following SENA technologist degree. Expected graduation: 2028.",
       },
       {
-        title: "Cybersecurity Concepts Course",
-        institution: "",
-        period: "Active Certification (2026)",
+        title: "Software Analysis and Development Technologist",
+        institution: "SENA (National Learning Service)",
+        period: "07/2024 – 10/2026",
+        details:
+          "Graduated. Comprehensive training in software architecture, databases, and agile methodologies.",
       },
     ],
 
