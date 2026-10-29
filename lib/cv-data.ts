@@ -66,7 +66,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Ingeniero de IA & Desarrollador Full Stack",
         company: "Nunca Cierro",
-        environment: "Proyecto Propio · 2026 – Presente · En Producción",
+        environment: "Proyecto Propio · Nov 2025 – Presente · En Producción",
         bullets: [
           "Automaticé la atención al cliente 24/7 de múltiples negocios simultáneamente: agenda citas, responde consultas y procesa pedidos por WhatsApp y Telegram sin intervención humana.",
           "Integré las APIs de WhatsApp y Telegram con modelos de Groq y Ollama para procesamiento de lenguaje natural en tiempo real, construyendo el frontend en Next.js y la API en FastAPI.",
@@ -76,7 +76,8 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Desarrollador Core & Arquitecto SaaS",
         company: "Dinerance",
-        environment: "Proyecto Propio · 2025 – Presente · En Producción",
+        environment:
+          "Proyecto Propio · Diciembre 2024 – Presente · En Producción",
         bullets: [
           "Construí la API REST con FastAPI y SQLAlchemy bajo arquitectura modular, aplicando autenticación JWT y migraciones con Alembic.",
           "Desplegué el backend sobre Microsoft Azure (Azure App Service) con contenedores Docker, gestionando variables de entorno, redes seguras y disponibilidad continua.",
