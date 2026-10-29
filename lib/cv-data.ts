@@ -48,7 +48,7 @@ type Bilingual<T> = Record<Locale, T>;
 const cvDataByLocale: Bilingual<CvTexts> = {
   es: {
     professionalSummary:
-      "AI & Software Developer con {years}+ años de experiencia. Diseño e implemento sistemas de IA generativa con arquitectura RAG, LLMs multi-proveedor (AWS Bedrock, OpenAI, Gemini) y búsqueda vectorial (Qdrant, FAISS), orquestados con LangChain y LangGraph en producción. Full stack con Next.js, Angular, FastAPI y Spring Boot. Despliego en AWS, Docker, Hetzner y Vercel. Del prompt engineering al deploy: soluciones integrales con foco en resultado.",
+      "AI & Software Developer con {years}+ años de experiencia. Diseño e implemento sistemas de IA generativa con arquitectura RAG, LLMs multi-proveedor (AWS Bedrock, OpenAI, Gemini) y búsqueda vectorial (Qdrant, FAISS), orquestados con LangChain y LangGraph en producción. Full stack con Next.js, Angular, FastAPI y Spring Boot. Despliego en AWS, Azure, Docker, Hetzner y Vercel. Del prompt engineering al deploy: soluciones integrales con foco en resultado.",
 
     experience: [
       {
@@ -78,9 +78,9 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         company: "Dinerance",
         environment: "Proyecto Propio · 2025 – Presente · En Producción",
         bullets: [
-          "Diseñé esquemas PostgreSQL con Supabase aplicando Row-Level Security para aislamiento multi-tenant, soportando operaciones concurrentes.",
-          "Construí la API con FastAPI y SQLAlchemy, aplicando migraciones controladas con Alembic y autenticación JWT.",
-          "Desarrollé el dashboard financiero con Next.js, TypeScript, Tailwind CSS y shadcn/ui.",
+          "Construí la API REST con FastAPI y SQLAlchemy bajo arquitectura modular, aplicando autenticación JWT y migraciones con Alembic.",
+          "Desplegué el backend sobre Microsoft Azure (Azure App Service) con contenedores Docker, gestionando variables de entorno, redes seguras y disponibilidad continua.",
+          "Desarrollé el dashboard financiero en Next.js (TypeScript, shadcn/ui) integrado a Supabase/PostgreSQL con políticas Row-Level Security (RLS) multi-tenant.",
         ],
       },
     ],

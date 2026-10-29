@@ -1,18 +1,18 @@
 {
   "order": ["AWS", "IBM", "Sena", "Big School", "Codigo Facilito"],
   "cv": [
-    "AI Fundamentals Foundations",
-    "Amazon Q Developer Fundamentals",
+    "IBM AI Fundamentals Foundations",
+    "Amazon Q Developer Fundamentals (AWS)",
     "Desarrollo con IA - Programa con Agentes",
     "Langchain, el framework de IA para desarrolladores",
     "Aplicación de la Calidad del Software en el Proceso de Desarrollo"
   ],
   "badges": {
-    "AI Fundamentals Foundations": {
+    "IBM AI Fundamentals Foundations": {
       "image": "/badges/ibm/ai-fundamentals-foundations-for-understanding-ai.png",
       "url": "https://www.credly.com/badges/2cb27675-2cfc-450d-981a-04614d6c2006/public_url"
     },
-    "Amazon Q Developer Fundamentals": {
+    "Amazon Q Developer Fundamentals (AWS)": {
       "image": "/badges/aws/aws-knowledge-amazon-q-developer-fundamentals-train.png",
       "url": "https://www.credly.com/badges/410f4584-340f-4c77-b56c-90aed913c08f/public_url"
     }
