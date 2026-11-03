@@ -524,11 +524,11 @@ export const siteConfig: SiteConfig = {
         en: "Preview of NUNCA CIERRO project",
       },
       tags: [
+        "FastAPI",
+        "OpenAI API",
         "WhatsApp API",
         "Telegram API",
-        "Groq",
         "Next.js",
-        "FastAPI",
         "Docker",
         "Hetzner",
         "Cloudflare",
