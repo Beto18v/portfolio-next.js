@@ -757,35 +757,6 @@ export const siteConfig: SiteConfig = {
       featured: true,
       category: "academic",
     },
-
-    {
-      title: {
-        es: "Vue Portafolio ",
-        en: "Vue Portfolio",
-      },
-      description: {
-        es: "Mi primer portafolio profesional — multi-idioma, con renderizado del lado del servidor y UX tipo SPA. Construido con Vue.js y Laravel, fue el proyecto donde aprendí a arquitecturar aplicaciones complejas que escalan. Lo uso como referencia.",
-        en: "My first professional portfolio — multi-language, server-side rendered with SPA-like UX. Built with Vue.js and Laravel, this is where I learned to architect complex applications that scale. I use it as a reference.",
-      },
-      image: "/projects/vue-portfolio.jpg",
-      imageAlt: {
-        es: "Vista previa del proyecto Vue Portafolio",
-        en: "Preview of Vue Portfolio project",
-      },
-      tags: [
-        "Vue.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "Inertia.js",
-        "Laravel",
-        "MySQL",
-      ],
-      links: {
-        code: "https://github.com/Beto18v/Portfolio",
-      },
-      featured: true,
-      category: "academic",
-    },
   ],
   contact: {
     email: "nicolasalbertov18@gmail.com",
