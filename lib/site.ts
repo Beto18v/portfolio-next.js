@@ -590,7 +590,43 @@ export const siteConfig: SiteConfig = {
       isProduction: true,
       category: "production",
     },
-
+    {
+      title: {
+        es: "TrámiteFácil",
+        en: "TrámiteFácil",
+      },
+      description: {
+        es: "Plataforma web PWA para la creación y radicación instantánea de más de 15 documentos legales y laborales en Colombia. Diseñada bajo arquitectura Local-First de costo $0 con privacidad absoluta, generación nativa de PDF y Word en el cliente, motor dual de IA (Gemini Flash en la nube con fallback heurístico 100% offline) y experiencia accesible a cualquier usuario.",
+        en: "An offline-first PWA LegalTech platform for drafting and downloading 15+ official Colombian legal and labor documents in seconds. Built on a $0-cost client-side architecture with absolute privacy: in-browser PDF & DOCX compilation, dual AI engine (cloud Gemini Flash with seamless 100% offline heuristic fallback), and accessible for any user.",
+      },
+      image: "/projects/tramitefacil.jpg",
+      imageAlt: {
+        es: "Captura de pantalla de TrámiteFácil",
+        en: "Screenshot of TrámiteFácil platform",
+      },
+      tags: [
+        "React 19",
+        "TypeScript",
+        "Vite",
+        "PWA",
+        "Google Gemini",
+        "Vercel Serverless",
+        "Tailwind CSS",
+        "Client-Side PDF/Word",
+        "Offline-First",
+      ],
+      links: {
+        demo: "https://tramitefacil-hub.vercel.app/",
+        code: "https://github.com/Beto18v/tramitefacil",
+      },
+      demoLabel: {
+        es: "Probar App",
+        en: "Live Demo",
+      },
+      featured: true,
+      isProduction: true,
+      category: "production",
+    },
     {
       title: {
         es: "Pianio",
