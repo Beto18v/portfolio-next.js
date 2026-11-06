@@ -20,10 +20,6 @@ interface CvTexts {
     period: string;
     details?: string;
   }[];
-  certifications: {
-    title: string;
-    file: string;
-  }[];
   skillGroups: {
     title: string;
     skills: string[];
@@ -100,21 +96,6 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         period: "07/2024 – 10/2026",
         details:
           "Graduado. Formación integral en arquitectura de software, bases de datos y metodologías ágiles.",
-      },
-    ],
-
-    certifications: [
-      {
-        title: "Iniciación al Desarrollo con Inteligencia Artificial",
-        file: "/certifications/Certificado de iniciación al desarrollo con AI.pdf",
-      },
-      {
-        title: "Curso de Iniciación al Desarrollo con IA",
-        file: "/certifications/Curso de Iniciación al Desarrollo con IA.pdf",
-      },
-      {
-        title: "Ciberseguridad y Hacking Ético",
-        file: "/certifications/Certificado ciberseguridad y hacking eticow.pdf",
       },
     ],
 
@@ -270,21 +251,6 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         period: "07/2024 – 10/2026",
         details:
           "Graduated. Comprehensive training in software architecture, databases, and agile methodologies.",
-      },
-    ],
-
-    certifications: [
-      {
-        title: "Introduction to AI Development",
-        file: "/certifications/Certificado de iniciación al desarrollo con AI.pdf",
-      },
-      {
-        title: "AI Development Crash Course",
-        file: "/certifications/Curso de Iniciación al Desarrollo con IA.pdf",
-      },
-      {
-        title: "Cybersecurity & Ethical Hacking",
-        file: "/certifications/Certificado ciberseguridad y hacking eticow.pdf",
       },
     ],
 

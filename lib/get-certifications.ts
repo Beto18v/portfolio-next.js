@@ -6,6 +6,10 @@ export interface CertificationBadge {
   image: string;
   /** Optional external verification URL (e.g. Credly). */
   url?: string;
+  /** Optional label/tag shown on the card (e.g. "Título Oficial"). */
+  tag?: string;
+  /** Whether this certification card should have distinctive highlighted styling. */
+  highlight?: boolean;
 }
 
 export interface Certification {
@@ -43,7 +47,7 @@ function readOrder(): string[] {
 
 /**
  * Badge per certification title (normalized key → badge). Accepts a string
- * shorthand (image path) or an object `{ image, url? }`.
+ * shorthand (image path) or an object `{ image, url?, tag?, highlight? }`.
  */
 function readBadges(): Record<string, CertificationBadge> {
   try {
@@ -58,10 +62,17 @@ function readBadges(): Record<string, CertificationBadge> {
           typeof value === "object" &&
           typeof (value as { image?: unknown }).image === "string"
         ) {
-          const { image, url } = value as { image: string; url?: unknown };
+          const { image, url, tag, highlight } = value as {
+            image: string;
+            url?: unknown;
+            tag?: unknown;
+            highlight?: unknown;
+          };
           badges[normalizeKey(title)] = {
             image,
             url: typeof url === "string" ? url : undefined,
+            tag: typeof tag === "string" ? tag : undefined,
+            highlight: Boolean(highlight),
           };
         }
       }
@@ -69,6 +80,27 @@ function readBadges(): Record<string, CertificationBadge> {
     }
   } catch {
     // missing or invalid → no badges
+  }
+  return {};
+}
+
+/** Per-institution certification order mapping (group name -> ordered title list). */
+function readItemsOrder(): Record<string, string[]> {
+  try {
+    const raw = JSON.parse(fs.readFileSync(ORDER_FILE, "utf8"));
+    if (raw && typeof raw.items === "object" && raw.items !== null) {
+      const result: Record<string, string[]> = {};
+      for (const [group, list] of Object.entries(raw.items)) {
+        if (Array.isArray(list)) {
+          result[normalizeKey(group)] = list
+            .filter((item): item is string => typeof item === "string")
+            .map(normalizeKey);
+        }
+      }
+      return result;
+    }
+  } catch {
+    // missing or invalid → empty fallback
   }
   return {};
 }
@@ -127,8 +159,11 @@ function encodeSegment(segment: string): string {
 function readCertifications(
   folder: string,
   badges: Record<string, CertificationBadge>,
+  itemsOrder: Record<string, string[]>,
 ): Certification[] {
   const folderPath = path.join(CERTS_DIR, folder);
+  const preferred = itemsOrder[normalizeKey(folder)] ?? [];
+
   return fs
     .readdirSync(folderPath)
     .filter((f) => f.toLowerCase().endsWith(".pdf"))
@@ -140,7 +175,17 @@ function readCertifications(
         badge: badges[normalizeKey(title)],
       };
     })
-    .sort((a, b) => a.title.localeCompare(b.title, "es"));
+    .sort((a, b) => {
+      const normA = normalizeKey(a.title);
+      const normB = normalizeKey(b.title);
+      const indexA = preferred.indexOf(normA);
+      const indexB = preferred.indexOf(normB);
+
+      if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+      if (indexA !== -1) return -1;
+      if (indexB !== -1) return 1;
+      return a.title.localeCompare(b.title, "es");
+    });
 }
 
 export function getCertificationGroups(): CertificationGroup[] {
@@ -157,13 +202,14 @@ export function getCertificationGroups(): CertificationGroup[] {
 
     const order = readOrder();
     const badges = readBadges();
+    const itemsOrder = readItemsOrder();
     const sortedFolders = [...folders].sort((a, b) => a.localeCompare(b, "es"));
     const ordered = order.filter((name) => folders.includes(name));
     const unlisted = sortedFolders.filter((name) => !ordered.includes(name));
 
     return [...ordered, ...unlisted].map((name) => ({
       name,
-      certifications: readCertifications(name, badges),
+      certifications: readCertifications(name, badges, itemsOrder),
       logo: readLogo(name),
     }));
   } catch {

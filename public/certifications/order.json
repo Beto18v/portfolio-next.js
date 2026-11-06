@@ -1,5 +1,24 @@
 {
-  "order": ["AWS", "IBM", "Sena", "Big School", "Codigo Facilito"],
+  "order": ["Sena", "AWS", "IBM", "Big School", "Codigo Facilito"],
+  "items": {
+    "Sena": [
+      "Tecnólogo en Análisis y Desarrollo de Software",
+      "Aplicación de la Calidad del Software en el Proceso de Desarrollo",
+      "Mitigación y Prevención de Amenazas en Ciberseguridad",
+      "Apropiación de Conceptos en Ciberseguridad"
+    ],
+    "Big School": [
+      "Desarrollo con IA - Programa con Agentes",
+      "Iniciación al desarrollo con AI",
+      "Ciberseguridad y hacking etico"
+    ],
+    "Codigo Facilito": [
+      "Curso de AI Engineer",
+      "Langchain, el framework de IA para desarrolladores",
+      "Curso de ingeniería de prompts",
+      "Cómo consumir la API de OpenAI"
+    ]
+  },
   "cv": [
     "IBM AI Fundamentals Foundations",
     "Amazon Q Developer Fundamentals (AWS)",
@@ -8,6 +27,11 @@
     "Aplicación de la Calidad del Software en el Proceso de Desarrollo"
   ],
   "badges": {
+    "Tecnólogo en Análisis y Desarrollo de Software": {
+      "image": "/certifications/logos/sena-logo.png",
+      "tag": "Título Oficial",
+      "highlight": true
+    },
     "IBM AI Fundamentals Foundations": {
       "image": "/badges/ibm/ai-fundamentals-foundations-for-understanding-ai.png",
       "url": "https://www.credly.com/badges/2cb27675-2cfc-450d-981a-04614d6c2006/public_url"

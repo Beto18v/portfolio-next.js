@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import type { CertificationGroup } from "@/lib/get-certifications";
 
 export function CertificationsContent({
@@ -79,7 +80,12 @@ export function CertificationsContent({
                   activeGroup.certifications.map((cert, i) => (
                     <div
                       key={i}
-                      className="group flex items-center gap-4 rounded-2xl border border-accent-teal/20 bg-card/60 p-5 shadow-sm backdrop-blur-md transition-all duration-200 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_12%,transparent)]"
+                      className={cn(
+                        "group flex items-center gap-4 rounded-2xl border p-5 shadow-sm backdrop-blur-md transition-all duration-200",
+                        cert.badge?.highlight
+                          ? "border-accent-teal/50 bg-accent-teal/5 shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_18%,transparent)] hover:border-accent-teal/70 hover:bg-accent-teal/10 hover:shadow-[0_0_36px_color-mix(in_oklch,var(--accent-teal)_26%,transparent)]"
+                          : "border-accent-teal/20 bg-card/60 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_28px_color-mix(in_oklch,var(--accent-teal)_12%,transparent)]",
+                      )}
                     >
                       {cert.badge ? (
                         cert.badge.url ? (
@@ -96,7 +102,7 @@ export function CertificationsContent({
                                 alt={cert.title}
                                 width={56}
                                 height={56}
-                                className="h-full w-full object-cover"
+                                className="h-full w-full object-contain p-1"
                               />
                             </div>
                           </a>
@@ -107,7 +113,7 @@ export function CertificationsContent({
                               alt={cert.title}
                               width={56}
                               height={56}
-                              className="h-full w-full object-cover"
+                              className="h-full w-full object-contain p-1"
                             />
                           </div>
                         )
@@ -125,6 +131,11 @@ export function CertificationsContent({
                         className="flex min-w-0 flex-1 items-center gap-4"
                       >
                         <span className="min-w-0 flex-1">
+                          {cert.badge?.tag && (
+                            <span className="mb-1 inline-flex items-center rounded-full border border-accent-teal/40 bg-accent-teal/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent-teal">
+                              {cert.badge.tag}
+                            </span>
+                          )}
                           <span className="block truncate text-sm font-medium text-foreground">
                             {cert.title}
                           </span>
