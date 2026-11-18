@@ -108,9 +108,9 @@ function ProjectRow({ project }: { project: Project }) {
 
 export function ProjectPreview() {
   const caption = useT(siteConfig.hero.workPreview.title);
-  const projects = siteConfig.projects.filter(
-    (p) => p.category === "production" && p.featured,
-  );
+  const projects = siteConfig.projects
+    .filter((p) => p.category === "production" && p.featured)
+    .slice(0, 3);
 
   if (projects.length === 0) return null;
 
