@@ -130,8 +130,8 @@ export const siteConfig: SiteConfig = {
         en: "What I can build",
       },
       subtitle: {
-        es: "Desde una landing hasta un sistema de agentes en producción — soluciones prácticas y escalables adaptadas a lo que realmente necesitas.",
-        en: "From a landing page to a production agent system — practical, scalable solutions tailored to what you actually need.",
+        es: "Soluciones prácticas y escalables adaptadas a lo que realmente necesitas.",
+        en: "Practical, scalable solutions tailored to what you actually need.",
       },
     },
     testimonials: {
