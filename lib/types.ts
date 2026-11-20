@@ -78,6 +78,7 @@ export interface StatsMetric {
   label: LocalizedText;
   icon: string;
   since?: { year: number; month: number };
+  dynamic?: "experience" | "production_projects" | "total_projects" | "skills_count";
 }
 
 export type ProjectCategory = "production" | "academic";
@@ -173,6 +174,7 @@ export interface SiteConfig {
   sections: {
     skills: SectionText;
     projects: SectionText;
+    solutions: SectionText;
     contact: SectionText;
     stats: SectionText;
   };

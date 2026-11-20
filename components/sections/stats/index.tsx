@@ -166,17 +166,37 @@ export function Stats() {
 
         <div className="stat-grid grid grid-cols-2 gap-4 md:grid-cols-4">
           {siteConfig.stats.map((stat) => {
-            const displayValue =
-              stat.since && now
-                ? Math.round(
-                    (now -
-                      new Date(
-                        stat.since.year,
-                        stat.since.month - 1,
-                      ).getTime()) /
-                      (365.25 * 86400000),
-                  )
-                : stat.value;
+            let displayValue = stat.value;
+
+            if (stat.dynamic === "experience" && stat.since && now) {
+              displayValue = Math.round(
+                (now -
+                  new Date(
+                    stat.since.year,
+                    stat.since.month - 1,
+                  ).getTime()) /
+                  (365.25 * 86400000),
+              );
+            } else if (stat.dynamic === "production_projects") {
+              displayValue = siteConfig.projects.filter((p) => p.isProduction).length;
+            } else if (stat.dynamic === "total_projects") {
+              displayValue = siteConfig.projects.length;
+            } else if (stat.dynamic === "skills_count") {
+              displayValue = siteConfig.skills.reduce(
+                (sum, cat) => sum + cat.skills.length,
+                0,
+              );
+            } else if (stat.since && now) {
+              displayValue = Math.round(
+                (now -
+                  new Date(
+                    stat.since.year,
+                    stat.since.month - 1,
+                  ).getTime()) /
+                  (365.25 * 86400000),
+              );
+            }
+
             return (
               <div
                 key={stat.icon}

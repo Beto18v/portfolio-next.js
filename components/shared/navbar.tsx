@@ -47,6 +47,7 @@ export function Navbar() {
   const progressBarRef = React.useRef<HTMLDivElement>(null);
   const skillsNav = useT(siteConfig.sections.skills.nav);
   const projectsNav = useT(siteConfig.sections.projects.nav);
+  const solutionsNav = useT(siteConfig.sections.solutions.nav);
   const contactNav = useT(siteConfig.sections.contact.nav);
 
   /**
@@ -88,6 +89,7 @@ export function Navbar() {
   const navItems = [
     { href: `#${siteConfig.sections.skills.id}`, label: skillsNav },
     { href: `#${siteConfig.sections.projects.id}`, label: projectsNav },
+    { href: `#${siteConfig.sections.solutions.id}`, label: solutionsNav },
     { href: `#${siteConfig.sections.contact.id}`, label: contactNav },
   ];
 

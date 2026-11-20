@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { siteConfig } from "@/lib/site";
 import Link from "next/link";
-import { Github, MapPin, FileText, Award } from "lucide-react";
+import { Github, MapPin, FileText, Award, CalendarClock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocale, useT } from "@/components/shared/locale-provider";
 import {
@@ -158,8 +158,12 @@ export function Hero() {
                   <Button asChild size="lg" className="h-11 rounded-full px-7">
                     <Link
                       href={siteConfig.hero.primaryCTA.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       aria-label={primaryLabel}
+                      className="inline-flex items-center gap-2"
                     >
+                      <CalendarClock className="h-4 w-4" />
                       {primaryLabel}
                     </Link>
                   </Button>

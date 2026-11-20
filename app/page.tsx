@@ -4,12 +4,14 @@ import { Hero } from "@/components/sections/hero";
 import { Skills } from "@/components/sections/skills";
 import { Stats } from "@/components/sections/stats";
 import { Projects } from "@/components/sections/projects";
+import { Solutions } from "@/components/sections/solutions";
 import { Contact } from "@/components/sections/contact";
 
 const sections = [
   { id: "skills", Component: Skills },
   { id: "stats", Component: Stats },
   { id: "projects", Component: Projects },
+  { id: "solutions", Component: Solutions },
   { id: "contact", Component: Contact },
 ] as const;
 

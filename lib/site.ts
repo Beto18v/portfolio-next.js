@@ -20,12 +20,12 @@ export const siteConfig: SiteConfig = {
       en: "online",
     },
     role: {
-      es: "AI Engineer & Full Stack Developer",
-      en: "AI Engineer & Full Stack Developer",
+      es: "AI & Full-Stack Software Engineer",
+      en: "AI & Full-Stack Software Engineer",
     },
     tagline: {
-      es: "Diseño y despliego sistemas de IA para empresas: atención al cliente 24/7, automatización de operaciones e integración de LLMs, todo corriendo en producción para que puedas escalar. También abierto a proyectos freelance.",
-      en: "I design and deploy AI systems for businesses: 24/7 customer service, operations automation and LLM integration — running in production so you can scale. Also open to freelance projects.",
+      es: "Construyo agentes de IA, sistemas RAG, plataformas web, SaaS y automatizaciones listas para producción. Soluciones prácticas y escalables para proyectos, equipos y negocios que quieren resolver procesos reales y ahorrar tiempo.",
+      en: "I build production-ready AI agents, RAG systems, web platforms, SaaS products, and automations. Practical, scalable solutions for projects, teams, and businesses looking to solve real workflows and save time.",
     },
     location: {
       es: "Colombia",
@@ -42,18 +42,18 @@ export const siteConfig: SiteConfig = {
       en: "Nicolas Valenzuela",
     },
     subtitle: {
-      es: "Diseño y despliego sistemas de IA para empresas: atención al cliente 24/7, automatización de operaciones e integración de LLMs, todo corriendo en producción para que puedas escalar. También abierto a proyectos freelance.",
-      en: "I design and deploy AI systems for businesses: 24/7 customer service, operations automation and LLM integration — running in production so you can scale. Also open to freelance projects.",
+      es: "Construyo agentes de IA, sistemas RAG, plataformas web, SaaS y automatizaciones listas para producción. Soluciones prácticas y escalables para proyectos, equipos y negocios que quieren resolver procesos reales y ahorrar tiempo.",
+      en: "I build production-ready AI agents, RAG systems, web platforms, SaaS products, and automations. Practical, scalable solutions for projects, teams, and businesses looking to solve real workflows and save time.",
     },
     badge: {
-      es: "Soluciones de IA para empresas — y proyectos freelance",
-      en: "AI solutions for businesses — and freelance projects",
+      es: "IA, Web, SaaS & Automatización",
+      en: "AI, Web, SaaS & Automation",
     },
     proof: [
-      { es: "AI Engineering", en: "AI Engineering" },
-      { es: "Automatización", en: "Automation" },
+      { es: "Agentes de IA", en: "AI Agents" },
+      { es: "RAG & LLMs", en: "RAG & LLMs" },
       { es: "Full Stack", en: "Full Stack" },
-      { es: "ES / EN", en: "ES / EN" },
+      { es: "Automatización", en: "Automation" },
     ],
     workPreview: {
       title: {
@@ -63,10 +63,10 @@ export const siteConfig: SiteConfig = {
     },
     primaryCTA: {
       label: {
-        es: "Ver proyectos",
-        en: "View projects",
+        es: "Agendar llamada",
+        en: "Book a call",
       },
-      href: "#projects",
+      href: "https://calendly.com/nicolasalbertov18/discovery-call",
     },
     secondaryCTA: {
       label: {
@@ -113,6 +113,25 @@ export const siteConfig: SiteConfig = {
       subtitle: {
         es: "Productos reales enfocados en UX, rendimiento y escalabilidad.",
         en: "Real products focused on UX, performance and scalability.",
+      },
+    },
+    solutions: {
+      id: "solutions",
+      nav: {
+        es: "Soluciones",
+        en: "Solutions",
+      },
+      badge: {
+        es: "Soluciones",
+        en: "Solutions",
+      },
+      title: {
+        es: "Qué puedo construir",
+        en: "What I can build",
+      },
+      subtitle: {
+        es: "Desde una landing hasta un sistema de agentes en producción — soluciones prácticas y escalables adaptadas a lo que realmente necesitas.",
+        en: "From a landing page to a production agent system — practical, scalable solutions tailored to what you actually need.",
       },
     },
     contact: {
@@ -177,6 +196,7 @@ export const siteConfig: SiteConfig = {
       value: 2,
       suffix: "+",
       since: { year: 2024, month: 6 },
+      dynamic: "experience",
       label: {
         es: "Años de experiencia",
         en: "Years of experience",
@@ -186,6 +206,7 @@ export const siteConfig: SiteConfig = {
     {
       value: 4,
       suffix: "+",
+      dynamic: "production_projects",
       label: {
         es: "Proyectos en producción",
         en: "Projects in production",
@@ -195,6 +216,7 @@ export const siteConfig: SiteConfig = {
     {
       value: 30,
       suffix: "+",
+      dynamic: "skills_count",
       label: {
         es: "Tecnologías dominadas",
         en: "Technologies mastered",
@@ -204,6 +226,7 @@ export const siteConfig: SiteConfig = {
     {
       value: 8,
       suffix: "+",
+      dynamic: "total_projects",
       label: {
         es: "Proyectos completados",
         en: "Completed projects",
@@ -473,8 +496,8 @@ export const siteConfig: SiteConfig = {
         en: "AI Sales Assistant (SIA)",
       },
       description: {
-        es: "Un chatbot de IA embebible que responde consultas comerciales y captura leads con arquitectura RAG, bilingüe y listo para insertarse en cualquier sitio web. Incluye un dashboard en tiempo real con métricas de conversaciones, leads enriquecidos y costo por turno. Corriendo en producción para ITS Solutions.",
-        en: "An embeddable AI chatbot that answers commercial queries and captures leads with a RAG architecture — bilingual and ready to drop into any website. Includes a real-time dashboard with conversation metrics, enriched leads and cost-per-turn tracking. Running in production for ITS Solutions.",
+        es: "Asistente conversacional con RAG y búsqueda vectorial que responde consultas con base en documentación real, captura leads y expone métricas de conversaciones en tiempo real. Bilingüe, embebible en cualquier sitio y corriendo en producción para ITS Solutions.",
+        en: "Conversational assistant with RAG and vector search that answers queries from real documentation, captures leads, and surfaces real-time conversation metrics. Bilingual, embeddable on any website, and running in production for ITS Solutions.",
       },
       image: "/projects/itssolutions.jpg",
       imageAlt: {
@@ -482,12 +505,12 @@ export const siteConfig: SiteConfig = {
         en: "Preview of the ITS Solutions AI Sales Assistant",
       },
       tags: [
-        "LangChain",
+        "RAG | LangChain",
         "LangGraph",
+
         "LangSmith",
         "AWS Bedrock",
         "Cohere embedding",
-        "RAG",
         "Qdrant",
         "FAISS",
         "FastAPI",
@@ -515,8 +538,8 @@ export const siteConfig: SiteConfig = {
         en: "Nunca Cierro",
       },
       description: {
-        es: "Tus clientes te escriben a las 3am y alguien les responde. Nunca Cierro es un sistema de agentes que atiende WhatsApp y Telegram de forma autónoma — agenda citas, responde consultas y procesa pedidos sin que tengas que estar pegado al teléfono. Funciona 24/7 para múltiples negocios al mismo tiempo.",
-        en: "Your customers text at 3am and someone actually replies. Nunca Cierro is a multi-agent system that handles WhatsApp and Telegram autonomously — books appointments, answers questions and processes orders without you glued to your phone. Runs 24/7 across multiple businesses simultaneously.",
+        es: "Plataforma de agentes conversacionales para WhatsApp y web orientada a atención continua, captura de información y seguimiento automatizado de clientes. Desplegada en producción para múltiples negocios simultáneamente.",
+        en: "Conversational agent platform for WhatsApp and web focused on continuous customer support, information capture, and automated follow-up. Running in production across multiple businesses simultaneously.",
       },
       image: "/projects/nuncacierro.jpg",
       imageAlt: {
@@ -557,8 +580,8 @@ export const siteConfig: SiteConfig = {
         en: "Dinerance",
       },
       description: {
-        es: "Tu dinero, tus datos, sin vueltas. Dinerance es un SaaS de finanzas personales donde cada usuario solo ve lo suyo — cero posibilidad de que tus datos se mezclen con los de otro. Diseñado para crecer sin romperse, con autenticación robusta y preparado para conectar con bancos.",
-        en: "Your money, your data, no leaks. Dinerance is a personal finance SaaS where each user only sees their own stuff — zero chance of data mixing between accounts. Built to scale without breaking, with robust auth and ready for bank integration.",
+        es: "Aplicación web y backend en producción diseñada para operación confiable, gestión de datos financieros por usuario con Row Level Security, y experiencia fluida desde el primer acceso. Stack completo con autenticación, API propia y base de datos relacional.",
+        en: "Production web app and backend built for reliable operation, per-user financial data management with Row Level Security, and a smooth experience from first login. Full stack with authentication, custom API, and relational database.",
       },
       image: "/projects/dinerance.jpg",
       imageAlt: {
@@ -665,8 +688,8 @@ export const siteConfig: SiteConfig = {
         en: "Adoptafacil",
       },
       description: {
-        es: "Adoptar una mascota no debería ser un trámite eterno. Adoptafacil te guía desde la primera consulta con un chatbot de IA hasta el pago final — todo automatizado. Encuentra refugios cerca tuyo, resuelve dudas y completa la adopción sin papeleos innecesarios. (Proyecto academico)",
-        en: "Adopting a pet shouldn't be a bureaucratic nightmare. Adoptafacil guides you from first chat with an AI bot to final payment — all automated. Finds nearby shelters, answers questions and completes the adoption without unnecessary paperwork.(Academic project)",
+        es: "Plataforma full-stack para conectar personas con mascotas en adopción, flujo asistido por un chatbot de IA, búsqueda de refugios por geolocalización, gestión de solicitudes y procesamiento de pagos integrado con Wompi.",
+        en: "Full-stack platform connecting people with pets available for adoption, AI chatbot-guided flow, shelter search by geolocation, adoption request management, and integrated payment processing with Wompi.",
       },
       image: "/projects/adoptafacil.jpg",
       imageAlt: {
