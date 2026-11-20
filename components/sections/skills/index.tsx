@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useReducedMotion } from "framer-motion";
 import { siteConfig } from "@/lib/site";
@@ -11,14 +11,14 @@ import type { SkillCategory, Skill } from "@/lib/types";
 
 function SkillCard({ skill }: { skill: Skill }) {
   const sharedClasses =
-    "group flex h-16 w-full flex-col items-center justify-center gap-1.5 rounded-xl border border-accent-teal/20 bg-card/40 px-1.5 py-2 transition-all duration-200 hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_16px_color-mix(in_oklch,var(--accent-teal)_15%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
+    "group flex h-16 w-full flex-col items-center justify-center gap-1.5 rounded-xl border border-accent-teal/20 bg-card/40 px-1.5 py-2 transition-all duration-200 will-change-transform hover:-translate-y-1 hover:scale-[1.03] hover:border-accent-teal/40 hover:bg-card/80 hover:shadow-[0_0_20px_color-mix(in_oklch,var(--accent-teal)_20%,transparent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
 
   const content = (
     <>
       {skill.icon ? (
         <SkillIcon
           name={skill.icon}
-          className="h-6 w-6 shrink-0 text-muted-foreground transition-all duration-200 group-hover:scale-110"
+          className="h-6 w-6 shrink-0 text-muted-foreground transition-transform duration-200 group-hover:scale-115"
         />
       ) : (
         <div className="flex h-6 w-6 shrink-0 items-center justify-center">
@@ -61,7 +61,7 @@ export function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
     if (shouldReduceMotion) return;
@@ -72,50 +72,20 @@ export function Skills() {
     const sidebar = section.querySelector<HTMLElement>(".core-expertise-panel");
     if (cards.length === 0) return;
 
-    let breathers: gsap.core.Tween[] = [];
-    let breathersIo: IntersectionObserver | null = null;
     let entered = false;
 
-    // ── "Vida": cada card respira sutilmente (flotación yoyo con delay
-    //    aleatorio). Arranca SOLO cuando termina la entrada (ambas animan `y`)
-    //    y se pausa cuando la sección sale de vista. ──
-    const startLifeAnimations = () => {
-      breathers = cards.map((card, i) =>
-        gsap.to(card, {
-          y: "+=3",
-          duration: 2.4 + (i % 5) * 0.35,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-          delay: (i * 0.37) % 2,
-        }),
-      );
-
-      breathersIo = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) breathers.forEach((b) => b.play());
-          else breathers.forEach((b) => b.pause());
-        },
-        { threshold: 0 },
-      );
-      breathersIo.observe(section);
-    };
-
-    // ── Entrada: reveal escalonado al entrar en viewport. `paused: true` +
-    //    fromTo aplica el estado oculto en el primer paint (useLayoutEffect)
-    //    y la IO lo dispara cuando la sección es visible. ──
+    // ── Entrada: reveal escalonado al entrar en viewport (corre 1 sola vez) ──
     const entrance = gsap.fromTo(
       cards,
-      { opacity: 0, y: 24, scale: 0.94 },
+      { opacity: 0, y: 20, scale: 0.96 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.65,
-        ease: "power3.out",
-        stagger: 0.04,
+        duration: 0.5,
+        ease: "power2.out",
+        stagger: 0.025,
         paused: true,
-        onComplete: startLifeAnimations,
       },
     );
 
@@ -123,7 +93,7 @@ export function Skills() {
       ? gsap.fromTo(
           sidebar,
           { opacity: 0, y: 18 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", paused: true },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", paused: true },
         )
       : null;
 
@@ -140,60 +110,12 @@ export function Skills() {
     );
     entranceIo.observe(section);
 
-    // ── Hover 3D: la card se inclina hacia el mouse y se eleva. ──
-    const hoverCleanups = cards.map((card, i) => {
-      const icon = card.querySelector("svg");
-      const tilt = gsap.quickTo(card, "rotationX", { duration: 0.35, ease: "power2.out" });
-      const rotate = gsap.quickTo(card, "rotationY", { duration: 0.35, ease: "power2.out" });
-      const lift = gsap.quickTo(card, "y", { duration: 0.35, ease: "power2.out" });
-
-      const onEnter = () => {
-        breathers[i]?.pause();
-        gsap.to(card, { z: 30, scale: 1.05, duration: 0.3, ease: "power2.out" });
-        if (icon) gsap.to(icon, { scale: 1.2, duration: 0.3, ease: "back.out(2)" });
-      };
-      const onMove = (e: MouseEvent) => {
-        const rect = card.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width - 0.5;
-        const py = (e.clientY - rect.top) / rect.height - 0.5;
-        rotate(px * 14);
-        tilt(-py * 10);
-        lift(-4);
-      };
-      const onLeave = () => {
-        rotate(0);
-        tilt(0);
-        gsap.to(card, {
-          y: 0,
-          duration: 0.35,
-          ease: "power2.out",
-          onComplete: () => { breathers[i]?.play(); },
-        });
-        gsap.to(card, { z: 0, scale: 1, duration: 0.3, ease: "power2.out" });
-        if (icon) gsap.to(icon, { scale: 1, duration: 0.3, ease: "power2.out" });
-      };
-
-      card.style.transformStyle = "preserve-3d";
-      card.addEventListener("mouseenter", onEnter);
-      card.addEventListener("mousemove", onMove);
-      card.addEventListener("mouseleave", onLeave);
-      return () => {
-        card.removeEventListener("mouseenter", onEnter);
-        card.removeEventListener("mousemove", onMove);
-        card.removeEventListener("mouseleave", onLeave);
-      };
-    });
-
     return () => {
       entrance.kill();
       sidebarEntrance?.kill();
       gsap.set(cards, { clearProps: "opacity,transform" });
       if (sidebar) gsap.set(sidebar, { clearProps: "opacity,transform" });
       entranceIo.disconnect();
-      breathersIo?.disconnect();
-      breathers.forEach((b) => b.kill());
-      hoverCleanups.forEach((c) => c());
-      gsap.killTweensOf(cards);
     };
   }, [shouldReduceMotion]);
 

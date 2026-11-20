@@ -1,7 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, useEffect } from "react";
-import gsap from "gsap";
+import { useState, useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import { Briefcase, Rocket, Code2, CheckCircle2 } from "lucide-react";
 import { siteConfig } from "@/lib/site";
@@ -78,79 +77,14 @@ export function Stats() {
   const { locale } = useLocale();
   const sectionBadge = siteConfig.sections.stats.badge[locale];
   const sectionTitle = siteConfig.sections.stats.title[locale];
-  const sectionRef = useRef<HTMLElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-
   const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
     Promise.resolve().then(() => setNow(Date.now()));
   }, []);
 
-  // ── "Vida + hover": cada card respira sutilmente (flotación yoyo) y al
-  //    pasar el mouse se inclina en 3D hacia el cursor y se eleva. ──
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    if (shouldReduceMotion) return;
-
-    const cards = Array.from(section.querySelectorAll<HTMLElement>(".stat-card"));
-    if (cards.length === 0) return;
-
-    const breathers = cards.map((card, i) =>
-      gsap.to(card, {
-        y: "+=3",
-        duration: 2.6 + (i % 4) * 0.3,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: i * 0.4,
-      }),
-    );
-
-    const hoverCleanups = cards.map((card) => {
-      const tilt = gsap.quickTo(card, "rotationX", { duration: 0.35, ease: "power2.out" });
-      const rotate = gsap.quickTo(card, "rotationY", { duration: 0.35, ease: "power2.out" });
-      const lift = gsap.quickTo(card, "y", { duration: 0.35, ease: "power2.out" });
-
-      const onEnter = () => {
-        gsap.to(card, { z: 30, scale: 1.04, duration: 0.3, ease: "power2.out" });
-      };
-      const onMove = (e: MouseEvent) => {
-        const rect = card.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width - 0.5;
-        const py = (e.clientY - rect.top) / rect.height - 0.5;
-        rotate(px * 12);
-        tilt(-py * 8);
-        lift(-4);
-      };
-      const onLeave = () => {
-        rotate(0);
-        tilt(0);
-        lift(0);
-        gsap.to(card, { z: 0, scale: 1, duration: 0.3, ease: "power2.out" });
-      };
-
-      card.style.transformStyle = "preserve-3d";
-      card.addEventListener("mouseenter", onEnter);
-      card.addEventListener("mousemove", onMove);
-      card.addEventListener("mouseleave", onLeave);
-      return () => {
-        card.removeEventListener("mouseenter", onEnter);
-        card.removeEventListener("mousemove", onMove);
-        card.removeEventListener("mouseleave", onLeave);
-      };
-    });
-
-    return () => {
-      breathers.forEach((b) => b.kill());
-      hoverCleanups.forEach((c) => c());
-    };
-  }, [shouldReduceMotion]);
-
   return (
     <section
-      ref={sectionRef}
       className="scroll-mt-20 px-4 pb-10 pt-24 md:px-6"
     >
       <SectionDivider variant="glow" label={sectionBadge.toLowerCase()} />

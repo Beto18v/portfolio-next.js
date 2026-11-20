@@ -31,15 +31,9 @@ export function Hero() {
   const githubAria = useT(siteConfig.labels.openGithub);
   const proof = siteConfig.hero.proof;
 
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
+  const { scrollY } = useScroll();
+  const titleY = useTransform(scrollY, [0, 500], [0, -60]);
+  const titleOpacity = useTransform(scrollY, [0, 500], [1, 0.3]);
 
   const enter = (delay: number) =>
     shouldReduceMotion
@@ -60,7 +54,6 @@ export function Hero() {
 
   return (
     <section
-      ref={sectionRef}
       className="relative isolate flex h-[calc(100svh-64px)] items-center overflow-hidden px-4 pt-10 md:px-6 md:pt-8"
     >
       {/* Fondo: cuadrícula ámbar grande. */}

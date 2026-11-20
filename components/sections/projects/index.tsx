@@ -6,7 +6,13 @@ import { siteConfig } from "@/lib/site";
 import { useLocale, useT } from "@/components/shared/locale-provider";
 import { useLenis } from "@/components/shared/lenis-provider";
 import SectionDivider from "@/components/shared/section-divider";
-import CardSwap, { Card } from "./components/card-swap";
+import dynamic from "next/dynamic";
+import { Card } from "./components/card";
+
+const CardSwap = dynamic(() => import("./components/card-swap"), {
+  ssr: false,
+  loading: () => <div className="h-130 w-full" />,
+});
 import {
   Coverflow,
   type CoverflowChildProps,

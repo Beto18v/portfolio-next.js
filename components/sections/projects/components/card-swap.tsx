@@ -9,11 +9,12 @@ import React, {
   ReactNode,
   RefObject,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
 } from "react";
 import gsap from "gsap";
+import { type CardProps } from "./card";
+export { Card, type CardProps } from "./card";
 
 export interface CardSwapProps {
   width?: number | string;
@@ -43,20 +44,7 @@ export interface CardSwapProps {
   children: ReactNode;
 }
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  customClass?: string;
-}
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ customClass, ...rest }, ref) => (
-    <div
-      ref={ref}
-      {...rest}
-      className={`absolute top-1/2 rounded-xl border-0 bg-transparent transform-gpu transform-3d will-change-transform backface-hidden ${customClass ?? ""} ${rest.className ?? ""}`.trim()}
-    />
-  ),
-);
-Card.displayName = "Card";
 
 type CardRef = RefObject<HTMLDivElement | null>;
 interface Slot {
@@ -318,8 +306,8 @@ const CardSwap: React.FC<CardSwapProps> = ({
     animateToOrder(nextOrder);
   };
 
-  // Apply initial transforms/zIndex BEFORE paint to avoid first-frame glitches.
-  useLayoutEffect(() => {
+  // Apply initial transforms/zIndex asynchronously without blocking initial render.
+  useEffect(() => {
     if (typeof activeIndex === "number" && Number.isFinite(activeIndex))
       bringToFront(activeIndex);
     else applyOrderNow();
@@ -485,7 +473,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
     anchorPos.origin,
   ]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (typeof activeIndex !== "number" || !Number.isFinite(activeIndex))
       return;
     bringToFront(activeIndex);

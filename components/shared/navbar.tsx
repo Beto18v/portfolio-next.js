@@ -72,14 +72,18 @@ export function Navbar() {
     }
 
     const onScroll = () => {
-      setScrolled(window.scrollY > 10);
-      const max = document.body.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? window.scrollY / max : 0;
+      const scroll = window.scrollY;
+      setScrolled(scroll > 10);
       if (progressBarRef.current) {
+        const doc = document.documentElement;
+        const max = (doc.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+        const progress = max > 0 ? scroll / max : 0;
         progressBarRef.current.style.width = `${progress * 100}%`;
       }
     };
-    onScroll();
+    if (window.scrollY > 10) {
+      onScroll();
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [lenis]);

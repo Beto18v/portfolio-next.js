@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useReducedMotion } from "framer-motion";
 import { useLocale } from "@/components/shared/locale-provider";
@@ -89,7 +89,7 @@ export function ActivityTicker() {
   // Marquee infinito con GSAP: duplica el contenido y lo desplaza -50% en
   // loop. Más confiable que keyframes CSS (que no se aplicaban). Se pausa
   // cuando queda fuera de viewport para no robar frames del scroll de Lenis.
-  useLayoutEffect(() => {
+  useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
     if (shouldReduceMotion) return;
