@@ -134,6 +134,25 @@ export const siteConfig: SiteConfig = {
         en: "From a landing page to a production agent system — practical, scalable solutions tailored to what you actually need.",
       },
     },
+    testimonials: {
+      id: "testimonials",
+      nav: {
+        es: "Testimonios",
+        en: "Testimonials",
+      },
+      badge: {
+        es: "Testimonios",
+        en: "Testimonials",
+      },
+      title: {
+        es: "Lo que dicen quienes han trabajado conmigo",
+        en: "What people say about working with me",
+      },
+      subtitle: {
+        es: "Experiencias reales sobre ejecución, claridad técnica y entrega de soluciones funcionales.",
+        en: "Real experiences on execution, technical clarity, and delivering functional solutions.",
+      },
+    },
     contact: {
       id: "contact",
       nav: {
@@ -145,12 +164,12 @@ export const siteConfig: SiteConfig = {
         en: "Contact",
       },
       title: {
-        es: "Construyamos tu próxima solución con IA",
-        en: "Let's build your next AI solution",
+        es: "Construyamos algo que funcione de verdad",
+        en: "Let's build something that truly works",
       },
       subtitle: {
-        es: "¿Quieres automatizar operaciones, integrar IA en tu producto o escalar tu negocio con agentes que trabajan 24/7? Hablemos — los proyectos freelance también son bienvenidos.",
-        en: "Looking to automate operations, integrate AI into your product or scale your business with agents that work 24/7? Let's talk — freelance projects are welcome too.",
+        es: "¿Tienes una idea, una web o SaaS por lanzar, un agente de IA o un proceso repetitivo que automatizar? Hablemos en 15 minutos y revisamos cómo llevarlo a cabo.",
+        en: "Have an idea, a web app or SaaS to launch, an AI agent, or a repetitive process to automate? Let's talk for 15 minutes and explore how to make it happen.",
       },
     },
     stats: {
@@ -781,6 +800,25 @@ export const siteConfig: SiteConfig = {
       category: "academic",
     },
   ],
+  /**
+   * Testimonios reales (Recomendaciones de LinkedIn o clientes directos).
+   * Si este array está vacío ([]), la sección se oculta automáticamente del sitio.
+   *
+   * Plantilla para cuando consigas tu primera recomendación real:
+   * {
+   *   id: "ejemplo-1",
+   *   author: "Nombre Apellido",
+   *   role: { es: "Fundador / Tech Lead", en: "Founder / Tech Lead" },
+   *   company: "Nombre Empresa",
+   *   quote: {
+   *     es: "Cita textual de lo que opinó sobre el proyecto...",
+   *     en: "Quote about the project outcome...",
+   *   },
+   *   source: "linkedin", // "linkedin" | "direct"
+   *   verifiedUrl: "https://www.linkedin.com/in/beto18v/details/recommendations/",
+   * },
+   */
+  testimonials: [],
   contact: {
     email: "nicolasalbertov18@gmail.com",
     whatsapp: {

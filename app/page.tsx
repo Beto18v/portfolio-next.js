@@ -5,6 +5,7 @@ import { Skills } from "@/components/sections/skills";
 import { Stats } from "@/components/sections/stats";
 import { Projects } from "@/components/sections/projects";
 import { Solutions } from "@/components/sections/solutions";
+import { Testimonials } from "@/components/sections/testimonials";
 import { Contact } from "@/components/sections/contact";
 
 const sections = [
@@ -12,6 +13,7 @@ const sections = [
   { id: "stats", Component: Stats },
   { id: "projects", Component: Projects },
   { id: "solutions", Component: Solutions },
+  { id: "testimonials", Component: Testimonials },
   { id: "contact", Component: Contact },
 ] as const;
 

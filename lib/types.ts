@@ -162,6 +162,19 @@ export interface Labels {
   nextProject: LocalizedText;
 }
 
+export type TestimonialSource = "linkedin" | "direct";
+
+export interface Testimonial {
+  id: string;
+  quote: LocalizedText;
+  author: string;
+  role: LocalizedText;
+  company?: string;
+  avatar?: string;
+  verifiedUrl?: string;
+  source: TestimonialSource;
+}
+
 export interface SiteConfig {
   locales: Locale[];
   defaultLocale: Locale;
@@ -175,12 +188,14 @@ export interface SiteConfig {
     skills: SectionText;
     projects: SectionText;
     solutions: SectionText;
+    testimonials?: SectionText;
     contact: SectionText;
     stats: SectionText;
   };
   coreExpertise: CoreExpertise;
   stats: StatsMetric[];
   projects: Project[];
+  testimonials?: Testimonial[];
   skills: SkillCategory[];
   contact: Contact;
   footer: FooterConfig;
