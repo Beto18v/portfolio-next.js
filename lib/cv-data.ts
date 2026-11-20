@@ -50,7 +50,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Desarrollador de IA & Software",
         company: "ITS Solutions",
-        environment: "Bogotá, Colombia · Abr 2026 – Presente",
+        environment: "Bogotá, Colombia · Abr 2026 – Oct 2026",
         bullets: [
           "Diseñé e implementé sistemas de IA generativa con arquitectura RAG y LLMs multi-proveedor (AWS Bedrock, OpenAI, Gemini) orquestados con LangGraph, en producción desde el inicio.",
           "Desarrollé el backend de un chatbot comercial de IA en FastAPI: pipeline RAG con LangGraph, captura y enriquecimiento de leads, rate limiting en 3 capas, telemetría de costo y defensas contra prompt injection.",
@@ -62,7 +62,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Ingeniero de IA & Desarrollador Full Stack",
         company: "Nunca Cierro",
-        environment: "Proyecto Propio · Nov 2025 – Presente · En Producción",
+        environment: "Proyecto Propio · Nov 2025 – Mar 2026 · En Producción",
         bullets: [
           "Automaticé la atención al cliente 24/7 de múltiples negocios simultáneamente: agenda citas, responde consultas y procesa pedidos por WhatsApp y Telegram sin intervención humana.",
           "Integré las APIs de WhatsApp y Telegram con modelos de Groq y Ollama para procesamiento de lenguaje natural en tiempo real, construyendo el frontend en Next.js y la API en FastAPI.",
@@ -73,7 +73,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         title: "Desarrollador Core & Arquitecto SaaS",
         company: "Dinerance",
         environment:
-          "Proyecto Propio · Diciembre 2024 – Presente · En Producción",
+          "Proyecto Propio · Dic 2024 – Jun 2025 · En Producción",
         bullets: [
           "Construí la API REST con FastAPI y SQLAlchemy bajo arquitectura modular, aplicando autenticación JWT y migraciones con Alembic.",
           "Desplegué el backend sobre Microsoft Azure (Azure App Service) con contenedores Docker, gestionando variables de entorno, redes seguras y disponibilidad continua.",
@@ -206,7 +206,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "AI & Software Developer",
         company: "ITS Solutions",
-        environment: "Bogotá, Colombia · Apr 2026 – Present",
+        environment: "Bogotá, Colombia · Apr 2026 – Oct 2026",
         bullets: [
           "Designed and implemented generative AI systems with a RAG architecture and multi-provider LLMs (AWS Bedrock, OpenAI, Gemini) orchestrated with LangGraph — in production from day one.",
           "Developed the backend of a commercial AI chatbot in FastAPI: RAG pipeline with LangGraph, lead capture and enrichment, 3-layer rate limiting, cost telemetry and prompt injection defenses.",
@@ -218,7 +218,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "AI Engineer & Full Stack Developer",
         company: "Nunca Cierro",
-        environment: "Personal Project · 2026 – Present · In Production",
+        environment: "Personal Project · Nov 2025 – Mar 2026 · In Production",
         bullets: [
           "Automated 24/7 customer support for multiple businesses simultaneously: books appointments, answers questions and processes orders over WhatsApp and Telegram with no human intervention.",
           "Integrated WhatsApp and Telegram APIs with Groq and Ollama models for real-time natural language processing, building the frontend with Next.js and the API with FastAPI.",
@@ -228,7 +228,7 @@ const cvDataByLocale: Bilingual<CvTexts> = {
       {
         title: "Core Developer & SaaS Architect",
         company: "Dinerance",
-        environment: "Personal Project · 2025 – Present · In Production",
+        environment: "Personal Project · Dec 2024 – Jun 2025 · In Production",
         bullets: [
           "Designed PostgreSQL schemas with Supabase applying Row-Level Security for multi-tenant isolation, supporting concurrent operations.",
           "Built the API with FastAPI and SQLAlchemy, applying controlled migrations with Alembic and JWT authentication.",
