@@ -823,7 +823,7 @@ export const siteConfig: SiteConfig = {
     email: "nicolasalbertov18@gmail.com",
     whatsapp: {
       countryCode: "57",
-      number: "3102079572",
+      number: "3124932822",
       defaultMessage: {
         es: "Vi tu portafolio y me interesa trabajar contigo",
         en: "I saw your portfolio and I am interested in working with you",

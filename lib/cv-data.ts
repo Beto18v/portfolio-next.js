@@ -375,7 +375,7 @@ export function getCvData(locale: Locale) {
       role: profile.role[locale],
       location: profile.location?.[locale] ?? "Bogotá, Colombia",
       email: "nicolasalbertov18@gmail.com",
-      phone: "+57 310 207 9572",
+      phone: "+57 312 4932822",
       website: links.website ?? "nival.is-a.dev",
       github: links.github,
       linkedin: links.linkedin ?? "",
