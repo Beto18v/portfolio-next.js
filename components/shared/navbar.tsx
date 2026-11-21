@@ -40,9 +40,12 @@ function contentTop(el: HTMLElement): number {
 }
 
 export function Navbar() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/demo")) {
+    return null;
+  }
   const [scrolled, setScrolled] = React.useState(false);
   const [sheetOpen, setSheetOpen] = React.useState(false);
-  const pathname = usePathname();
   const lenis = useLenis();
   const progressBarRef = React.useRef<HTMLDivElement>(null);
   const skillsNav = useT(siteConfig.sections.skills.nav);

@@ -1,10 +1,15 @@
 "use client";
 
 import { FaWhatsapp } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/site";
 import { useT } from "./locale-provider";
 
 export function WhatsAppButton() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/demo")) {
+    return null;
+  }
   const { countryCode, number } = siteConfig.contact.whatsapp;
   const defaultMessage = useT(siteConfig.contact.whatsapp.defaultMessage);
   const aria = useT(siteConfig.labels.contactWhatsapp);

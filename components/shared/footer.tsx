@@ -1,10 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/lib/site";
 import { useT } from "./locale-provider";
 
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/demo")) {
+    return null;
+  }
   const githubLabel = useT(siteConfig.footer.links.github);
   const linkedinLabel = useT(siteConfig.footer.links.linkedin);
   const copyrightText = useT(siteConfig.footer.copyright);
