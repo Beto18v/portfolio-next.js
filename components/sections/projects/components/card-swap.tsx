@@ -39,12 +39,12 @@ export interface CardSwapProps {
   controlledDuration?: number;
   /** Controlled-mode transition ease (GSAP ease string). */
   controlledEase?: string;
+  /** Maximum number of cards visible in the stack at once. Defaults to 5. */
+  maxVisibleCards?: number;
   /** Slightly increases card spread on hover. */
   hovered?: boolean;
   children: ReactNode;
 }
-
-
 
 type CardRef = RefObject<HTMLDivElement | null>;
 interface Slot {
@@ -60,18 +60,23 @@ const makeSlot = (
   distY: number,
   total: number,
   dirX: 1 | -1,
-): Slot => ({
-  x: i * distX * dirX,
-  y: -i * distY,
-  z: -i * distX * 1.5,
-  zIndex: total - i,
-});
+  maxVisible: number = 5,
+): Slot => {
+  const clamped = Math.min(i, maxVisible - 1);
+  return {
+    x: clamped * distX * dirX,
+    y: -clamped * distY,
+    z: -clamped * distX * 1.5 - (i >= maxVisible ? (i - maxVisible + 1) * 20 : 0),
+    zIndex: total - i,
+  };
+};
 
 const placeNow = (
   el: HTMLElement,
   slot: Slot,
   skew: number,
   anchorPos: { left: string; xPercent: number; origin: string },
+  isInteractive: boolean = true,
 ) =>
   gsap.set(el, {
     x: slot.x,
@@ -84,6 +89,7 @@ const placeNow = (
     transformOrigin: anchorPos.origin,
     zIndex: slot.zIndex,
     force3D: true,
+    pointerEvents: isInteractive ? "auto" : "none",
   });
 
 const CardSwap: React.FC<CardSwapProps> = ({
@@ -103,6 +109,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
   stackDirection,
   controlledDuration = 0.55,
   controlledEase = "power3.inOut",
+  maxVisibleCards = 5,
   hovered = false,
   children,
 }) => {
@@ -168,17 +175,22 @@ const CardSwap: React.FC<CardSwapProps> = ({
   }, [resolvedAnchor]);
 
   const opacityForPos = (pos: number) => {
+    if (pos >= maxVisibleCards) return 0;
     if (pos === 0) return 1;
     if (pos === 1) return 0.92;
     if (pos === 2) return 0.85;
-    return 0.78;
+    if (pos === 3) return 0.78;
+    if (pos === 4) return 0.65;
+    return 0;
   };
 
   const scaleForPos = (pos: number) => {
-    if (pos === 0) return 1;
-    if (pos === 1) return 0.985;
-    if (pos === 2) return 0.97;
-    return 0.955;
+    const clamped = Math.min(pos, maxVisibleCards - 1);
+    if (clamped === 0) return 1;
+    if (clamped === 1) return 0.985;
+    if (clamped === 2) return 0.97;
+    if (clamped === 3) return 0.955;
+    return 0.94;
   };
 
   const rotateForPos = (pos: number) => {
@@ -191,14 +203,16 @@ const CardSwap: React.FC<CardSwapProps> = ({
     order.current.forEach((idx, pos) => {
       const el = refs[idx]?.current;
       if (!el) return;
+      const isVisible = pos < maxVisibleCards;
       const slot = makeSlot(
         pos,
         effectiveCardDistance,
         effectiveVerticalDistance,
         total,
         dirX,
+        maxVisibleCards,
       );
-      placeNow(el, slot, skewAmount, anchorPos);
+      placeNow(el, slot, skewAmount, anchorPos, isVisible);
       gsap.set(el, {
         opacity: opacityForPos(pos),
         scale: scaleForPos(pos),
@@ -231,6 +245,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
         effectiveVerticalDistance,
         total,
         dirX,
+        maxVisibleCards,
       );
       gsap.set(el, { zIndex: slot.zIndex });
       gsap.set(el, {
@@ -244,12 +259,14 @@ const CardSwap: React.FC<CardSwapProps> = ({
     nextOrder.forEach((idx, pos) => {
       const el = refs[idx]?.current;
       if (!el) return;
+      const isVisible = pos < maxVisibleCards;
       const slot = makeSlot(
         pos,
         effectiveCardDistance,
         effectiveVerticalDistance,
         total,
         dirX,
+        maxVisibleCards,
       );
       tl.to(
         el,
@@ -264,6 +281,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
           duration: controlledDuration,
           ease: controlledEase,
           force3D: true,
+          pointerEvents: isVisible ? "auto" : "none",
         },
         0,
       );
@@ -359,6 +377,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
           effectiveVerticalDistance,
           refs.length,
           dirX,
+          maxVisibleCards,
         );
         tl.set(el, { zIndex: slot.zIndex }, "promote");
         tl.to(
@@ -372,6 +391,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
             rotateY: rotateForPos(i),
             duration: config.durMove,
             ease: config.ease,
+            pointerEvents: i < maxVisibleCards ? "auto" : "none",
           },
           `promote+=${i * 0.15}`,
         );
@@ -383,6 +403,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
         effectiveVerticalDistance,
         refs.length,
         dirX,
+        maxVisibleCards,
       );
       tl.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
       tl.call(
@@ -499,7 +520,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
       ref={container}
       className={
         resolvedAnchor === "left"
-          ? "absolute bottom-20 left-0 origin-bottom-left perspective-[1600px] overflow-visible max-[768px]:bottom-4 max-[768px]:scale-[0.75] max-[480px]:bottom-2 max-[480px]:scale-[0.55]"
+          ? "absolute bottom-8 left-0 origin-bottom-left perspective-[1600px] overflow-visible max-[768px]:bottom-4 max-[768px]:scale-[0.75] max-[480px]:bottom-2 max-[480px]:scale-[0.55]"
           : "absolute bottom-8 right-0 origin-bottom-right perspective-[1600px] overflow-visible max-[768px]:bottom-4 max-[768px]:scale-[0.75] max-[480px]:bottom-2 max-[480px]:scale-[0.55]"
       }
       style={{

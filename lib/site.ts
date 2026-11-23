@@ -107,8 +107,8 @@ export const siteConfig: SiteConfig = {
         en: "Projects",
       },
       title: {
-        es: "Proyectos destacados",
-        en: "Featured projects",
+        es: "Proyectos en producción",
+        en: "Production projects",
       },
       subtitle: {
         es: "Productos reales enfocados en UX, rendimiento y escalabilidad.",
@@ -510,6 +510,16 @@ export const siteConfig: SiteConfig = {
   ],
   projects: [
     {
+      id: "sia",
+      sectionId: "ai-automation",
+      sectionBadge: {
+        es: "IA & Automatización",
+        en: "AI & Automation",
+      },
+      statusBadge: {
+        es: "EN PRODUCCIÓN",
+        en: "IN PRODUCTION",
+      },
       title: {
         es: "Asistente Comercial IA (SIA)",
         en: "AI Sales Assistant (SIA)",
@@ -526,18 +536,11 @@ export const siteConfig: SiteConfig = {
       tags: [
         "RAG | LangChain",
         "LangGraph",
-
-        "LangSmith",
         "AWS Bedrock",
         "Cohere embedding",
-        "Qdrant",
-        "FAISS",
         "FastAPI",
         "Python",
         "Next.js",
-        "Typescript",
-        "SQLite",
-        "SSE",
       ],
       links: {
         demo: "https://itssolutions.co",
@@ -552,6 +555,16 @@ export const siteConfig: SiteConfig = {
     },
 
     {
+      id: "nunca-cierro",
+      sectionId: "ai-automation",
+      sectionBadge: {
+        es: "IA & Automatización",
+        en: "AI & Automation",
+      },
+      statusBadge: {
+        es: "EN PRODUCCIÓN",
+        en: "IN PRODUCTION",
+      },
       title: {
         es: "Nunca Cierro",
         en: "Nunca Cierro",
@@ -572,8 +585,6 @@ export const siteConfig: SiteConfig = {
         "Telegram API",
         "Next.js",
         "Docker",
-        "Hetzner",
-        "Cloudflare",
         "PostgreSQL",
       ],
       links: {
@@ -584,16 +595,22 @@ export const siteConfig: SiteConfig = {
         es: "Ver sitio",
         en: "Visit Site",
       },
-      // metrics: [
-      //   { label: { es: "Negocios activos", en: "Active businesses" }, value: "" },
-      //   { label: { es: "Mensajes procesados/mes", en: "Messages processed/mo" }, value: "" },
-      // ],
       featured: true,
       isProduction: true,
       category: "production",
     },
 
     {
+      id: "dinerance",
+      sectionId: "web-saas",
+      sectionBadge: {
+        es: "Web & SaaS",
+        en: "Web & SaaS",
+      },
+      statusBadge: {
+        es: "EN PRODUCCIÓN",
+        en: "IN PRODUCTION",
+      },
       title: {
         es: "Dinerance",
         en: "Dinerance",
@@ -611,14 +628,10 @@ export const siteConfig: SiteConfig = {
         "Next.js",
         "TypeScript",
         "Tailwind CSS",
-        "shadcn/ui",
         "Supabase",
         "FastAPI",
         "SQLAlchemy",
         "PostgreSQL",
-        "Google Cloud Platform",
-        "Alembic",
-        "RLS",
       ],
       links: {
         code: {
@@ -632,7 +645,18 @@ export const siteConfig: SiteConfig = {
       isProduction: true,
       category: "production",
     },
+
     {
+      id: "tramite-facil",
+      sectionId: "web-saas",
+      sectionBadge: {
+        es: "Web & SaaS",
+        en: "Web & SaaS",
+      },
+      statusBadge: {
+        es: "EN PRODUCCIÓN",
+        en: "IN PRODUCTION",
+      },
       title: {
         es: "TrámiteFácil",
         en: "TrámiteFácil",
@@ -652,10 +676,8 @@ export const siteConfig: SiteConfig = {
         "Vite",
         "PWA",
         "Google Gemini",
-        "Vercel Serverless",
         "Tailwind CSS",
         "Client-Side PDF/Word",
-        "Offline-First",
       ],
       links: {
         demo: "https://tramitefacil-hub.vercel.app/",
@@ -665,11 +687,22 @@ export const siteConfig: SiteConfig = {
         es: "Probar App",
         en: "Live Demo",
       },
-      featured: true,
+      featured: false,
       isProduction: true,
       category: "production",
     },
+
     {
+      id: "pianio",
+      sectionId: "web-saas",
+      sectionBadge: {
+        es: "Web & SaaS",
+        en: "Web & SaaS",
+      },
+      statusBadge: {
+        es: "ACTIVO",
+        en: "ACTIVE",
+      },
       title: {
         es: "Pianio",
         en: "Pianio",
@@ -690,13 +723,162 @@ export const siteConfig: SiteConfig = {
         "RxJS",
         "Vitest",
         "Playwright",
-        "Web MIDI API + Web Audio API",
+        "Web MIDI & Audio API",
       ],
       links: {
         code: "https://github.com/Beto18v/Pianio",
         demo: "https://pianio.vercel.app/",
       },
-      featured: true,
+      demoLabel: {
+        es: "Probar App",
+        en: "Live Demo",
+      },
+      featured: false,
+      isProduction: true,
+      category: "production",
+    },
+
+    {
+      id: "recordflow",
+      sectionId: "extensions-tools",
+      sectionBadge: {
+        es: "Extensiones & Tools",
+        en: "Extensions & Tools",
+      },
+      statusBadge: {
+        es: "ACTIVO",
+        en: "ACTIVE",
+      },
+      title: {
+        es: "RecordFlow",
+        en: "RecordFlow",
+      },
+      description: {
+        es: "Alternativa libre que permite grabar pantalla, cámara o ambas a la vez con una burbuja de video circular y arrastrable. Sin límite ni marcas de agua, almacena los videos de forma privada y local en el navegador y permite descargarlos en alta calidad al instante.",
+        en: "Free alternative that records screen, camera, or both simultaneously with a draggable circular video bubble. Free of limits or watermarks, it stores recordings privately and locally in the browser with instant high-quality downloads.",
+      },
+      image: "/projects/recordflow.jpg",
+      imageAlt: {
+        es: "Vista previa del grabador de pantalla y webcam RecordFlow",
+        en: "Preview of RecordFlow screen and webcam recorder",
+      },
+      tags: [
+        "Screen & Webcam",
+        "MediaRecorder API",
+        "Shadow DOM",
+        "IndexedDB",
+        "Web Audio API",
+        "Local-First",
+        "TypeScript",
+      ],
+      links: {
+        code: "https://github.com/Beto18v/browser-extensions",
+        demo: "https://github.com/Beto18v/browser-extensions/releases",
+      },
+      demoLabel: {
+        es: "Descargar Release (ZIP)",
+        en: "Download Release (ZIP)",
+      },
+      featured: false,
+      isProduction: true,
+      category: "production",
+    },
+
+    {
+      id: "docguard",
+      sectionId: "extensions-tools",
+      sectionBadge: {
+        es: "Extensiones & Tools",
+        en: "Extensions & Tools",
+      },
+      statusBadge: {
+        es: "ACTIVO",
+        en: "ACTIVE",
+      },
+      title: {
+        es: "DocGuard",
+        en: "DocGuard",
+      },
+      description: {
+        es: "Extensión con panel lateral para Google Docs que verifica la originalidad y similitud de documentos mientras escribes. Analiza el texto 100% en tu navegador (sin enviar datos a servidores externos) y lo contrasta contra más de 250M de papers científicos en OpenAlex y Wikipedia con costo $0 en APIs.",
+        en: "Google Docs side panel extension that verifies document originality and similarity as you write. Analyzes text 100% in your browser (without sending data to external servers) and cross-references against 250M+ scientific papers in OpenAlex and Wikipedia at $0 in API costs.",
+      },
+      image: "/projects/docguard.jpg",
+      imageAlt: {
+        es: "Vista previa de la extensión DocGuard en Google Docs",
+        en: "Preview of DocGuard browser extension in Google Docs",
+      },
+      tags: [
+        "Google Docs",
+        "SidePanel API",
+        "Client NLP (5-gram)",
+        "OpenAlex API",
+        "Wikipedia REST",
+        "TypeScript",
+        "Local-First",
+      ],
+      links: {
+        code: "https://github.com/Beto18v/browser-extensions",
+        demo: "https://microsoftedge.microsoft.com/addons/detail/docguard/lmlplbcejkdghmapnoglbhnjhocdgepf",
+        extraLinks: [
+          {
+            label: { es: "Web Store", en: "Web Store" },
+            href: "https://chromewebstore.google.com/search/Nicolas%20Valenzuela",
+            icon: "store",
+          },
+        ],
+      },
+      demoLabel: {
+        es: "Edge Store",
+        en: "Edge Store",
+      },
+      featured: false,
+      isProduction: true,
+      category: "production",
+    },
+
+    {
+      id: "eclipse",
+      sectionId: "extensions-tools",
+      sectionBadge: {
+        es: "Extensiones & Tools",
+        en: "Extensions & Tools",
+      },
+      statusBadge: {
+        es: "ACTIVO",
+        en: "ACTIVE",
+      },
+      title: {
+        es: "Eclipse",
+        en: "Eclipse",
+      },
+      description: {
+        es: "Transforma cualquier sitio web a modo oscuro de manera suave y descansada para la vista. Se inyecta antes de que la página termine de cargar para evitar el molesto destello blanco, protege los colores originales de fotos y videos, y se activa o desactiva por sitio mediante popup o el atajo Alt + Shift + D.",
+        en: "Transforms any website into a smooth, eye-friendly dark theme. Injected before the page finishes loading to avoid annoying white flashes, it preserves natural colors for photos and videos, and toggles per site via popup or the Alt + Shift + D shortcut.",
+      },
+      image: "/projects/eclipse.jpg",
+      imageAlt: {
+        es: "Vista previa del modo oscuro universal Eclipse",
+        en: "Preview of Eclipse universal dark mode",
+      },
+      tags: [
+        "Zero-Flashbang",
+        "Smart Color Inversion",
+        "document_start",
+        "Alt+Shift+D",
+        "Storage Sync",
+        "WXT & Vite",
+        "TypeScript",
+      ],
+      links: {
+        code: "https://github.com/Beto18v/browser-extensions",
+        demo: "https://github.com/Beto18v/browser-extensions/releases",
+      },
+      demoLabel: {
+        es: "Descargar Release (ZIP)",
+        en: "Download Release (ZIP)",
+      },
+      featured: false,
       isProduction: true,
       category: "production",
     },

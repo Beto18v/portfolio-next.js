@@ -70,6 +70,7 @@ export type ProjectCodeLink =
 export interface ProjectLinks {
   code?: ProjectCodeLink;
   demo?: string;
+  extraLinks?: SubModuleLink[];
 }
 
 export interface StatsMetric {
@@ -83,12 +84,38 @@ export interface StatsMetric {
 
 export type ProjectCategory = "production" | "academic";
 
+export type ProjectSectionId =
+  | "ai-automation"
+  | "web-saas"
+  | "extensions-tools";
+
 export interface ProjectMetric {
   label: LocalizedText;
   value: string;
 }
 
+export interface SubModuleLink {
+  label: LocalizedText;
+  href: string;
+  icon?: "store" | "download" | "github" | "external";
+}
+
+export interface ProjectSubModule {
+  id: string;
+  name: string;
+  icon: "shield" | "video" | "moon";
+  image?: string;
+  imageAlt?: LocalizedText;
+  badge?: LocalizedText;
+  tagline: LocalizedText;
+  description: LocalizedText;
+  businessModel?: LocalizedText;
+  tags: string[];
+  links: SubModuleLink[];
+}
+
 export interface Project {
+  id?: string;
   title: LocalizedText;
   description: LocalizedText;
   image: string;
@@ -101,11 +128,16 @@ export interface Project {
   isProduction?: boolean;
   /** Where this project lives in the portfolio narrative */
   category: ProjectCategory;
+  /** Optional section categorization for filtered decks and bento views */
+  sectionId?: ProjectSectionId;
+  sectionBadge?: LocalizedText;
+  statusBadge?: LocalizedText;
   /** Per-project override for the demo button label (e.g. "Visit Site") */
   demoLabel?: LocalizedText;
   /** Optional placeholder stats shown in the info panel (fill with real data) */
   metrics?: ProjectMetric[];
   features?: string[];
+  subModules?: ProjectSubModule[];
 }
 
 export interface Contact {
