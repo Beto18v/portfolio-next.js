@@ -986,25 +986,23 @@ export const siteConfig: SiteConfig = {
       category: "academic",
     },
   ],
-  /**
-   * Testimonios reales (Recomendaciones de LinkedIn o clientes directos).
-   * Si este array está vacío ([]), la sección se oculta automáticamente del sitio.
-   *
-   * Plantilla para cuando consigas tu primera recomendación real:
-   * {
-   *   id: "ejemplo-1",
-   *   author: "Nombre Apellido",
-   *   role: { es: "Fundador / Tech Lead", en: "Founder / Tech Lead" },
-   *   company: "Nombre Empresa",
-   *   quote: {
-   *     es: "Cita textual de lo que opinó sobre el proyecto...",
-   *     en: "Quote about the project outcome...",
-   *   },
-   *   source: "linkedin", // "linkedin" | "direct"
-   *   verifiedUrl: "https://www.linkedin.com/in/beto18v/details/recommendations/",
-   * },
-   */
-  testimonials: [],
+  testimonials: [
+    {
+      id: "rec-1",
+      author: "Jhon Alexis Mendoza Rojas",
+      avatar: "/testimonials/jhon-alexis.jpg",
+      role: {
+        es: "Desarrollador de software",
+        en: "Software Developer",
+      },
+      quote: {
+        es: "Desde que estudiamos juntos hace un par de años, he tenido la oportunidad de conocer a Nicolás, colaborar en algunos proyectos y puedo ser testigo de su compromiso y calidad humana. Es una persona sumamente proactiva, con gran capacidad para adaptarse a los retos en poco tiempo y aportar ideas que suman valor real a cualquier equipo o proyecto.",
+        en: "Since studying together a couple of years ago, I've had the opportunity to know Nicolás, collaborate on several projects, and witness firsthand his commitment and strong character. He is an exceptionally proactive professional with a remarkable ability to adapt quickly to new challenges and bring ideas that add real, tangible value to any team or project.",
+      },
+      source: "linkedin",
+      verifiedUrl: "https://www.linkedin.com/in/jhon-alexis-mendoza/",
+    },
+  ],
   contact: {
     email: "nicolasalbertov18@gmail.com",
     whatsapp: {

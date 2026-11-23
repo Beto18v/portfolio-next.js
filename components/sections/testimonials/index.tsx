@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useReducedMotion, motion } from "framer-motion";
 import { Linkedin, ExternalLink, Quote } from "lucide-react";
 import Link from "next/link";
@@ -99,9 +100,21 @@ export function Testimonials() {
                   {/* Encabezado: Avatar + Autor + Badge */}
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 flex-1 items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-accent-teal/30 bg-accent-teal/10 font-mono text-xs font-bold text-accent-teal">
-                        {authorInitials}
-                      </div>
+                      {t.avatar ? (
+                        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-accent-teal/30">
+                          <Image
+                            src={t.avatar}
+                            alt={t.author}
+                            fill
+                            sizes="40px"
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-accent-teal/30 bg-accent-teal/10 font-mono text-xs font-bold text-accent-teal">
+                          {authorInitials}
+                        </div>
+                      )}
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-bold text-foreground">
                           {t.author}
