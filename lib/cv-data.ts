@@ -60,13 +60,15 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         ],
       },
       {
-        title: "Ingeniero de IA & Desarrollador Full Stack",
+        title: "Arquitecto de IA & Desarrollador Core",
         company: "Nunca Cierro",
-        environment: "Proyecto Propio · Nov 2025 – Mar 2026 · En Producción",
+        environment: "Plataforma SaaS · Nov 2025 – Presente · En Producción",
         bullets: [
-          "Automaticé la atención al cliente 24/7 de múltiples negocios simultáneamente: agenda citas, responde consultas y procesa pedidos por WhatsApp y Telegram sin intervención humana.",
-          "Integré las APIs de WhatsApp y Telegram con modelos de Groq y Ollama para procesamiento de lenguaje natural en tiempo real, construyendo el frontend en Next.js y la API en FastAPI.",
-          "Desplegué la arquitectura multi-servicio en Hetzner con Docker, Cloudflare y PostgreSQL, escalando horizontalmente entre negocios con 99.9% de disponibilidad.",
+          "Diseñé e implementé la orquestación de agentes con StateGraph compilado en LangGraph, automatizando atención, calificación y agendamiento 24/7 en WhatsApp y Telegram.",
+          "Construí un motor RAG multi-tenant con aislamiento estricto, ingesta bajo demanda de documentos y chunking dinámico.",
+          "Implementé control de concurrencia y mitigación de colisiones de mensajes mediante PostgreSQL Advisory Locks y debounce distribuido en Redis para serializar ráfagas de usuarios.",
+          "Desarrollé el modo copiloto humano con pausa automática de 48 horas tras intervención manual, retomando la atención autónoma sin desincronizar el contexto conversacional.",
+          "Construí la arquitectura como monolito modular en FastAPI (Python 3.12 con uv) y frontend en Next.js 16 (React 19, Tailwind CSS v4), desplegada con Docker y Caddy.",
         ],
       },
       {
@@ -216,13 +218,15 @@ const cvDataByLocale: Bilingual<CvTexts> = {
         ],
       },
       {
-        title: "AI Engineer & Full Stack Developer",
+        title: "AI Architect & Core Developer",
         company: "Nunca Cierro",
-        environment: "Personal Project · Nov 2025 – Mar 2026 · In Production",
+        environment: "SaaS Platform · Nov 2025 – Present · In Production",
         bullets: [
-          "Automated 24/7 customer support for multiple businesses simultaneously: books appointments, answers questions and processes orders over WhatsApp and Telegram with no human intervention.",
-          "Integrated WhatsApp and Telegram APIs with Groq and Ollama models for real-time natural language processing, building the frontend with Next.js and the API with FastAPI.",
-          "Deployed the multi-service architecture on Hetzner with Docker, Cloudflare and PostgreSQL, scaling horizontally across businesses with 99.9% uptime.",
+          "Architected and deployed agent orchestration with compiled LangGraph StateGraph, automating 24/7 support, qualification, and scheduling across WhatsApp and Telegram.",
+          "Engineered a multi-tenant RAG engine with strict isolation, on-demand document ingestion, and dynamic chunking.",
+          "Implemented concurrency control and race-condition mitigation using PostgreSQL Advisory Locks and distributed Redis debounce to serialize bursty user messages.",
+          "Designed a human co-pilot mode with a 48-hour automated pause upon manual agent takeover, seamlessly resuming autonomous operations without conversational state desync.",
+          "Built a modular monolith architecture in FastAPI (Python 3.12 with uv) and frontend in Next.js 16 (React 19, Tailwind CSS v4), deployed with Docker and Caddy.",
         ],
       },
       {
