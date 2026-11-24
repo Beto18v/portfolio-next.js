@@ -13,10 +13,25 @@ const CardSwap = dynamic(() => import("./components/card-swap"), {
   loading: () => <div className="h-130 w-full" />,
 });
 
+const N8nWorkflowsModal = dynamic(
+  () =>
+    import("./components/n8n-workflows-modal").then(
+      (mod) => mod.N8nWorkflowsModal,
+    ),
+  { ssr: false },
+);
+
+const ProjectDetailModal = dynamic(
+  () =>
+    import("./components/project-detail-modal").then(
+      (mod) => mod.ProjectDetailModal,
+    ),
+  { ssr: false },
+);
+
 import {
   ChevronLeft,
   ChevronRight,
-  Github,
   ExternalLink,
   Store,
   Download,
@@ -24,6 +39,8 @@ import {
   Globe,
   Blocks,
   Layers,
+  Workflow,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -67,30 +84,6 @@ const FILTER_TABS: TabConfig[] = [
   },
 ];
 
-function getProjectLinks(
-  project: Project,
-  labels: { frontend: string; backend: string },
-) {
-  const codeLinks: Array<{ href: string; labelSuffix?: string }> = [];
-  const code = project.links.code;
-  if (typeof code === "string") {
-    const href = code.trim();
-    if (href) codeLinks.push({ href });
-  } else if (code) {
-    if (code.frontend?.trim())
-      codeLinks.push({
-        href: code.frontend.trim(),
-        labelSuffix: labels.frontend,
-      });
-    if (code.backend?.trim())
-      codeLinks.push({
-        href: code.backend.trim(),
-        labelSuffix: labels.backend,
-      });
-  }
-  return { codeLinks };
-}
-
 export function Projects() {
   const { locale } = useLocale();
   const badge = useT(siteConfig.sections.projects.badge);
@@ -105,6 +98,9 @@ export function Projects() {
     useState<ProjectFilterTab>("ai-automation");
   const [activeIndex, setActiveIndex] = useState(0);
   const [isStackHovered, setIsStackHovered] = useState(false);
+  const [isWorkflowsModalOpen, setIsWorkflowsModalOpen] = useState(false);
+  const [selectedDetailProject, setSelectedDetailProject] =
+    useState<Project | null>(null);
 
   // Grouped project mapping by tab
   const projectsByTab = useMemo<Record<ProjectFilterTab, Project[]>>(() => {
@@ -269,7 +265,11 @@ export function Projects() {
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className="text-left"
                 >
-                  <ProjectInfo project={activeProject} />
+                  <ProjectInfo
+                    project={activeProject}
+                    onOpenWorkflows={() => setIsWorkflowsModalOpen(true)}
+                    onOpenDetail={(proj) => setSelectedDetailProject(proj)}
+                  />
                 </motion.div>
               ) : null}
             </AnimatePresence>
@@ -469,27 +469,39 @@ export function Projects() {
           </div>
         </motion.div>
       </div>
+
+      <N8nWorkflowsModal
+        open={isWorkflowsModalOpen}
+        onOpenChange={setIsWorkflowsModalOpen}
+      />
+
+      <ProjectDetailModal
+        project={selectedDetailProject}
+        open={!!selectedDetailProject}
+        onOpenChange={(open) => {
+          if (!open) setSelectedDetailProject(null);
+        }}
+      />
     </section>
   );
 }
 
-function ProjectInfo({ project }: { project: Project }) {
+function ProjectInfo({
+  project,
+  onOpenWorkflows,
+  onOpenDetail,
+}: {
+  project: Project;
+  onOpenWorkflows?: () => void;
+  onOpenDetail?: (project: Project) => void;
+}) {
   const { locale } = useLocale();
-  const codeLabel = useT(siteConfig.labels.code);
   const liveDemoLabel = useT(siteConfig.labels.liveDemo);
   const technologiesLabel = useT(siteConfig.labels.technologies);
-  const frontendLabel = useT(siteConfig.labels.frontend);
-  const backendLabel = useT(siteConfig.labels.backend);
-  const codeAriaPrefix = useT(siteConfig.labels.openCode);
   const demoAriaPrefix = useT(siteConfig.labels.openDemo);
   const demoLabel = project.demoLabel
     ? project.demoLabel[locale]
     : liveDemoLabel;
-
-  const { codeLinks } = getProjectLinks(project, {
-    frontend: frontendLabel,
-    backend: backendLabel,
-  });
 
   const isStoreLink =
     project.demoLabel?.en.toLowerCase().includes("store") ||
@@ -538,7 +550,19 @@ function ProjectInfo({ project }: { project: Project }) {
       </div>
 
       {/* Action buttons */}
-      <div className="flex flex-wrap items-center gap-2 pt-2">
+      <div className="flex flex-wrap items-center gap-2.5 pt-2">
+        {project.id === "n8n-pipelines" ? (
+          <Button
+            type="button"
+            size="sm"
+            className="neon-button rounded-full cursor-pointer"
+            onClick={onOpenWorkflows}
+          >
+            <Workflow className="mr-1.5 h-3.5 w-3.5" />
+            {locale === "es" ? "Ver flujos" : "View workflows"}
+          </Button>
+        ) : null}
+
         {project.links.demo ? (
           <Button asChild size="sm" className="neon-button rounded-full">
             <Link
@@ -557,26 +581,18 @@ function ProjectInfo({ project }: { project: Project }) {
           </Button>
         ) : null}
 
-        {codeLinks.map((link) => (
+        {project.technicalDetails ? (
           <Button
-            key={link.href}
-            asChild
+            type="button"
             variant="outline"
             size="sm"
-            className="rounded-full"
+            className="rounded-full cursor-pointer border-border/80 bg-background/50 hover:border-primary/50 hover:text-primary transition-colors"
+            onClick={() => onOpenDetail?.(project)}
           >
-            <Link
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${codeAriaPrefix} ${project.title[locale]}${link.labelSuffix ? ` (${link.labelSuffix})` : ""}`}
-            >
-              <Github className="h-3.5 w-3.5" />
-              {codeLabel}
-              {link.labelSuffix ? ` ${link.labelSuffix}` : ""}
-            </Link>
+            <FileText className="mr-1.5 h-3.5 w-3.5 text-primary" />
+            {locale === "es" ? "Ver detalle" : "View details"}
           </Button>
-        ))}
+        ) : null}
       </div>
     </div>
   );

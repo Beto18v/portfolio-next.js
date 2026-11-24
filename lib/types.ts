@@ -114,9 +114,28 @@ export interface ProjectSubModule {
   links: SubModuleLink[];
 }
 
+export interface ProjectTechnicalDetails {
+  commercialImpact: {
+    problem: LocalizedText;
+    solution: LocalizedText;
+    valueProposition: LocalizedText;
+  };
+  technicalArchitecture: {
+    description: LocalizedText;
+    components: Array<{
+      name: string;
+      role: LocalizedText;
+    }>;
+    challengesSolved?: LocalizedText[];
+  };
+  highlights?: LocalizedText[];
+  metrics?: ProjectMetric[];
+}
+
 export interface Project {
   id?: string;
   title: LocalizedText;
+  modalTitle?: LocalizedText;
   description: LocalizedText;
   image: string;
   imageAlt: LocalizedText;
@@ -138,6 +157,7 @@ export interface Project {
   metrics?: ProjectMetric[];
   features?: string[];
   subModules?: ProjectSubModule[];
+  technicalDetails?: ProjectTechnicalDetails;
 }
 
 export interface Contact {

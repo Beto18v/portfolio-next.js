@@ -1,0 +1,1733 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "content": "### Flujo 1: Ingesta de Ideas & Gemini AI\n- Recibe enlaces de referencia o ideas crudas desde Telegram.\n- Detecta duplicados en Google Sheets.\n- Gemini API procesa, genera gancho técnico y traducción bilingüe.\n- Guarda el post preparado en la hoja de Contenido.\n\n*Configura TU_GOOGLE_SHEET_ID y tus APIs.*",
+        "height": 200,
+        "width": 520,
+        "color": 4
+      },
+      "id": "sticky-li-ingestion",
+      "name": "Nota - Ingesta Telegram & IA",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Flujo 2: Publicador Automático LinkedIn (Cola FIFO)\n- Cron diario 12:00 PM.\n- Filtra posts en estado listo (priorizando prioritarios).\n- Descarga la imagen asociada desde Google Drive.\n- Publica directamente en LinkedIn y notifica la confirmación en Telegram.\n\n*Configura TU_LINKEDIN_PERSON_URN.*",
+        "height": 200,
+        "width": 520,
+        "color": 4
+      },
+      "id": "sticky-li-publishing",
+      "name": "Nota - Publicación FIFO LinkedIn",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtenemos todos los registros devueltos por Google Sheets\nconst items = $input.all();\n\n// Filtramos solo los que tengan status 'listo_prioritario' o 'listo'\nconst candidatos = items\n  .map(i => i.json)\n  .filter(j => j && (j.status === 'listo_prioritario' || j.status === 'listo'));\n\n// Si no hay ninguno listo para publicar, retornamos found = false\nif (candidatos.length === 0) {\n  return [{ json: { found: false } }];\n}\n\n// Ordenamiento por Prioridad Dinámica:\n// 1° Los que tengan status 'listo_prioritario'\n// 2° En caso de empate en status, orden cronológico FIFO (fecha más antigua primero)\ncandidatos.sort((a, b) => {\n  const prioA = a.status === 'listo_prioritario' ? 1 : 0;\n  const prioB = b.status === 'listo_prioritario' ? 1 : 0;\n  \n  if (prioA !== prioB) {\n    return prioB - prioA; // Mayor prioridad primero\n  }\n  \n  // Si ambos son prioritarios o ambos son normales, FIFO por fecha\n  return new Date(a.fecha) - new Date(b.fecha);\n});\n\n// Tomamos el ganador de la cola\nconst postElegido = candidatos[0];\n\nreturn [{\n  json: {\n    found: true,\n    ...postElegido\n  }\n}];"
+      },
+      "id": "5cd9c8a8-d342-4a43-9c90-eb38acb91fab",
+      "name": "3. Filtrar listo y fecha (FIFO)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -544,
+        1232
+      ]
+    },
+    {
+      "parameters": {
+        "person": "TU_LINKEDIN_PERSON_URN",
+        "text": "={{ $('3. Filtrar listo y fecha (FIFO)').item.json.texto_final }}",
+        "shareMediaCategory": "IMAGE",
+        "additionalFields": {}
+      },
+      "id": "60e784bd-9a0b-461e-b025-101fe9479973",
+      "name": "5. Publicar en LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        336,
+        1232
+      ],
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "linkedInOAuth2Api",
+          "name": "LinkedIn Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contenido",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "publicado",
+            "row_number": 0,
+            "fecha_programada": "={{ $now.format('yyyy-MM-dd HH:mm') }}",
+            "id_fila": "={{ $('3. Filtrar listo y fecha (FIFO)').item.json.id_fila }}"
+          },
+          "matchingColumns": [
+            "id_fila"
+          ],
+          "schema": [
+            {
+              "id": "id_fila",
+              "displayName": "id_fila",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link",
+              "displayName": "link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "texto_original",
+              "displayName": "texto_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "imagen_original",
+              "displayName": "imagen_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "watermark",
+              "displayName": "watermark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "texto_final",
+              "displayName": "texto_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "imagen_final",
+              "displayName": "imagen_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_programada",
+              "displayName": "fecha_programada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notas",
+              "displayName": "notas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Traduce todo el texto al español. Mantén la misma información, iconos y composición. Cambia el diseño a modo oscuro mismas animaciones.",
+              "displayName": "Traduce todo el texto al español. Mantén la misma información, iconos y composición. Cambia el diseño a modo oscuro mismas animaciones.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "987148a6-237c-488d-9b04-dd8c87a3a728",
+      "name": "6. Marcar como publicado",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        544,
+        1232
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contenido",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "link": "={{ $json.link }}",
+            "texto_original": "={{ $json.texto_original }}",
+            "imagen_original": "={{ $json.imagen_original }}",
+            "watermark": "={{ $json.watermark }}",
+            "texto_final": "={{ $json.texto_final }}",
+            "imagen_final": "={{ $json.imagen_final }}",
+            "status": "={{ $json.status }}",
+            "fecha": "={{ $json.fecha }}",
+            "fecha_programada": "={{ $json.fecha_programada }}",
+            "row_number": 0
+          },
+          "matchingColumns": [
+            "link"
+          ],
+          "schema": [
+            {
+              "id": "link",
+              "displayName": "link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "texto_original",
+              "displayName": "texto_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "imagen_original",
+              "displayName": "imagen_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "watermark",
+              "displayName": "watermark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "texto_final",
+              "displayName": "texto_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "imagen_final",
+              "displayName": "imagen_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_programada",
+              "displayName": "fecha_programada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false,
+          "options": {}
+        },
+        "options": {}
+      },
+      "id": "099ae2dd-dbab-4f68-b6be-e9d42dbd3f22",
+      "name": "11. Actualizar Contenido",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1424,
+        720
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const original = $('8. Guardar en Contenido').first().json;\nconst response = $input.first().json;\n\nconst traduccion = response?.candidates?.[0]?.content?.parts?.[0]?.text || '';\n\nif (!traduccion.trim()) {\n  throw new Error('Gemini no devolvió una traducción válida.');\n}\n\nreturn [\n  {\n    json: {\n      link: original.link || '',\n      texto_original: original.texto_original || '',\n      imagen_original: original.imagen_original || '',\n      watermark: original.watermark || '',\n      texto_final: traduccion.trim(),\n      status: 'traducido',\n      fecha: original.fecha || '',\n      fecha_programada: original.fecha_programada || ''\n    }\n  }\n];"
+      },
+      "id": "79ff3375-a719-4d2a-9650-e34dc33d7092",
+      "name": "10. Preparar texto_final",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1216,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contents: [{ parts: [{ text: 'Actúa como un traductor y editor profesional de contenido para LinkedIn. Traduce el siguiente texto al español. No hagas una traducción palabra por palabra: adapta expresiones, frases y estructuras para que suenen naturales, claras y profesionales para un público hispanohablante. Conserva fielmente el significado y la intención original. Conserva los saltos de línea, emojis, hashtags, menciones, llamadas a la acción y la estructura general del post. No agregues información que no esté en el original. No expliques lo que hiciste. Devuelve ÚNICAMENTE el texto final en español.\\n\\nTEXTO ORIGINAL:\\n' + ($json.texto_original || '') }] }] }) }}",
+        "options": {}
+      },
+      "id": "68e8503c-d377-4cd5-a8f0-cbf9fa046ce1",
+      "name": "9. Traducir con Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1008,
+        720
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "httpHeaderAuth",
+          "name": "Gemini API Key Header"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('1. Telegram Trigger').first().json.message.text }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "ad5c6a2c-56ee-4b17-90ab-dd557fed6add",
+      "name": "6. Obtener HTML",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        16,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('1. Telegram Trigger').first().json.message.chat.id }}",
+        "text": "⚠️ Post ya guardado, no se procesará de nuevo.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "16d13c74-b70b-48fd-a7c8-801b5904c5f3",
+      "name": "5. Avisar post duplicado",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        16,
+        480
+      ],
+      "webhookId": "00000000-0000-0000-0000-000000000003",
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram Bot Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.link || '' }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              },
+              "id": "duplicate-condition"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "2230a449-0380-409a-b4c6-1e71a4da8873",
+      "name": "4. ¿El post ya existe?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -224,
+        608
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Contenido"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "link",
+              "lookupValue": "={{ $json.message.text || '' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f36193a5-e13f-4c80-a609-5850e6dba025",
+      "name": "3. Buscar link existente",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -464,
+        608
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "c9268427-130d-48dc-a6ae-fde88f2e02df",
+      "name": "1. Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -944,
+        720
+      ],
+      "webhookId": "00000000-0000-0000-0000-000000000003",
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram Bot Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.message.text || '' }}",
+              "rightValue": "http",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              },
+              "id": "ba7fba63-dee5-4fad-a6dc-59fd551283dc"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "815b7d08-968f-416e-a16c-2d39f2f4c7d8",
+      "name": "2. ¿Es un link?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -704,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contenido",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha": "={{ $json.fecha }}",
+            "fecha_programada": "={{ $json.fecha_programada }}",
+            "id_fila": "={{ $json.id_fila }}",
+            "imagen_original": "={{ $json.imagen_original }}",
+            "link": "={{ $json.link }}",
+            "status": "={{ $json.status }}",
+            "texto_final": "={{ $json.texto_final }}",
+            "texto_original": "={{ $json.texto_original }}",
+            "watermark": "={{ $json.watermark }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "displayName": "link",
+              "id": "link",
+              "type": "string"
+            },
+            {
+              "displayName": "id_fila",
+              "id": "id_fila",
+              "type": "string"
+            },
+            {
+              "displayName": "texto_original",
+              "id": "texto_original",
+              "type": "string"
+            },
+            {
+              "displayName": "imagen_original",
+              "id": "imagen_original",
+              "type": "string"
+            },
+            {
+              "displayName": "watermark",
+              "id": "watermark",
+              "type": "string"
+            },
+            {
+              "displayName": "texto_final",
+              "id": "texto_final",
+              "type": "string"
+            },
+            {
+              "displayName": "status",
+              "id": "status",
+              "type": "string"
+            },
+            {
+              "displayName": "fecha",
+              "id": "fecha",
+              "type": "string"
+            },
+            {
+              "displayName": "fecha_programada",
+              "id": "fecha_programada",
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "72ecd37d-678b-450e-a4fa-883b9cfab837",
+      "name": "8. Guardar en Contenido",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        800,
+        720
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\n\n// 1. Obtener el link SEGÚN EL NOMBRE DE TU TRIGGER\n// Sustituí '1. Telegram Trigger' por el nombre exacto que veas en tu workflow\nconst triggerNodeName = '1. Telegram Trigger'; // <--- CAMBIAR ESTO\nconst link = $(triggerNodeName).first().json.message.text || '';\n\n// 2. Construir el string HTML\nconst html = input.data || input.body || input;\nconst htmlStr = typeof html === 'string' ? html : JSON.stringify(html);\n\n// 3. Función getMeta CON FIX DE REGEX (para que no corte en el apóstrofe)\nfunction getMeta(property) {\n  const regex = new RegExp(\n    `<meta[^>]+property=[\\\"']${property}[\\\"'][^>]+content=\"([^\\\"]*)\"`,\n    'i'\n  );\n\n  const match = htmlStr.match(regex);\n\n  if (!match) return '';\n\n  return match[1]\n    .replace(/&amp;/g, '&')\n    .replace(/&quot;/g, '\\\"')\n    .replace(/&#39;/g, \"'\")\n    .replace(/&lt;/g, '<')\n    .replace(/&gt;/g, '>');\n}\n\n// 4. Obtener og:description\nlet texto = getMeta('og:description');\nlet textoFinal = texto;\n\n// 5. Fallback si og:description está vacío (busca name=\"description\")\nif (!texto) {\n  const nameDescMatch = htmlStr.match(/<meta[^>]+name=[^>]+content=[^>]+>/i);\n  textoFinal = nameDescMatch ? nameDescMatch[0].match(/content=[^>]+>(.+)<\\/content>/i)?.[1] : '';\n}\n\n// 6. Obtener imagen\nconst imagen = getMeta('og:image');\n\n// 7. Devolver el item (con link incluido)\nreturn [\n  {\n    json: {\n      link: link || '',\n      texto_original: textoFinal || '',\n      imagen_original: imagen || '',\n      watermark: '',\n      texto_final: '',\n      status: 'extraido',\n      fecha: new Date().toISOString()\n    }\n  }\n];"
+      },
+      "id": "0ec73cde-e822-43e7-a51e-ff232799d57e",
+      "name": "7. Extraer texto e imagen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contenido",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "6b38f57b-65bc-434d-af12-4f9e25e827b1",
+      "name": "7b. Leer filas existentes",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        384,
+        640
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const datosOriginales = $('7. Extraer texto e imagen').first().json;\nconst filas = $input.all();\n\nlet maxNum = 0;\n\nfor (const fila of filas) {\n  const idFila = (fila.json.id_fila || '').toString().trim();\n  const match = idFila.match(/^post(\\d+)$/i);\n  if (match) {\n    const num = parseInt(match[1], 10);\n    if (num > maxNum) maxNum = num;\n  }\n}\n\nconst siguienteId = 'post' + (maxNum + 1);\n\nreturn [\n  {\n    json: {\n      ...datosOriginales,\n      id_fila: siguienteId\n    }\n  }\n];"
+      },
+      "id": "39358cd4-939d-48b1-89dc-663c84f006cd",
+      "name": "7c. Generar id_fila",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "={{ $json.id_fila }}.png",
+        "limit": 1,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "mode": "id",
+            "value": "1oYAjV7UZE5phonv9rGqri2V5ctRMUNgJ"
+          },
+          "whatToSearch": "files"
+        },
+        "options": {}
+      },
+      "id": "eeb65b14-1db3-4e2e-b53c-6b2e1db55036",
+      "name": "4. Buscar imagen en Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -96,
+        1232
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "googleDriveOAuth2Api",
+          "name": "Google Drive Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.id }}"
+        },
+        "options": {}
+      },
+      "id": "bce81af4-a824-4fbe-93c9-b87768230ac0",
+      "name": "4b. Descargar imagen de Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        112,
+        1232
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "googleDriveOAuth2Api",
+          "name": "Google Drive Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "TU_TELEGRAM_CHAT_ID",
+        "text": "={{\n  (() => {\n    const postInfo = $('3. Filtrar listo y fecha (FIFO)').item.json;\n    let linkedInRes = {};\n    try {\n      linkedInRes = $('5. Publicar en LinkedIn').first().json || {};\n    } catch (e) {\n      linkedInRes = {};\n    }\n    const urn = linkedInRes.id || '';\n    const postUrl = urn ? 'https://www.linkedin.com/feed/update/' + urn : 'https://www.linkedin.com/in/beto18v/recent-activity/all/';\n\n    return '🚀 <b>Post publicado en LinkedIn</b>\\n\\n' +\n      '📌 <b>ID:</b> <code>' + (postInfo.id_fila || '') + '</code> (' + (postInfo.status || '') + ')\\n' +\n      '🔗 <b>Abrir post para comentar:</b>\\n' + postUrl + '\\n\\n';\n  })()\n}}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "6fcd7181-579d-4ec9-a1c9-658d48694aa0",
+      "name": "7. Avisar post publicado",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        752,
+        1232
+      ],
+      "webhookId": "00000000-0000-0000-0000-000000000003",
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram Bot Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "found-condition",
+              "leftValue": "={{ $json.found }}",
+              "operator": {
+                "operation": "equals",
+                "type": "boolean"
+              },
+              "rightValue": true
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "id": "7f49fc4a-3bf3-49c9-a225-c2de4df93ccf",
+      "name": "3b. ¿Hay post listo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -352,
+        1232
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "TU_TELEGRAM_CHAT_ID",
+        "text": "📭 Sin post programado",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "0d301217-24d1-4a59-a220-aaea8b4b3028",
+      "name": "Avisar sin post programado",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -112,
+        1440
+      ],
+      "webhookId": "00000000-0000-0000-0000-000000000003",
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram Bot Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 12
+            }
+          ]
+        }
+      },
+      "id": "38563287-796d-49a9-87c8-88f2069149eb",
+      "name": "1. 12:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -944,
+        1232
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contenido",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "f6373a5e-0869-4b41-b5b2-c26390e3b2fc",
+      "name": "Propio - 7b. Leer filas existentes",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        384,
+        912
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Leemos todas las filas devueltas por Google Sheets (los 221 items)\nconst filas = $input.all();\n\n// Obtenemos el texto original que enviaste a Telegram\nlet msgText = '';\ntry {\n  msgText = $('1. Telegram Trigger').first().json.message?.text || '';\n} catch (e) {\n  try {\n    msgText = $('1. Telegram Trigger1').first().json.message?.text || '';\n  } catch (err) {\n    msgText = '';\n  }\n}\n\nlet maxNum = 0;\n\nfor (const fila of filas) {\n  const idVal = (fila.json?.id_fila || '').toString().trim();\n  const match = idVal.match(/post(\\d+)/i);\n  if (match) {\n    const num = parseInt(match[1], 10);\n    if (!isNaN(num) && num > maxNum) {\n      maxNum = num;\n    }\n  }\n}\n\n// Si la última era post218, el siguiente será post219\nconst siguienteNum = maxNum > 0 ? maxNum + 1 : 1;\nconst siguienteId = 'post' + siguienteNum;\n\nreturn [\n  {\n    json: {\n      id_fila: siguienteId,\n      link: \"Post escrito\",\n      texto_original: msgText,\n      imagen_original: '',\n      watermark: '',\n      texto_final: '',\n      status: 'extraido',\n      fecha: new Date().toISOString()\n    }\n  }\n];"
+      },
+      "id": "7f717be9-17e9-498c-85ea-699a6ebb71d9",
+      "name": "Propio - 7c. Generar id_fila",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        912
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contenido",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "fecha": "={{ $json.fecha }}",
+            "id_fila": "={{ $json.id_fila }}",
+            "imagen_original": "={{ $json.imagen_original }}",
+            "link": "={{ $json.link }}",
+            "status": "={{ $json.status }}",
+            "texto_final": "={{ $json.texto_final }}",
+            "texto_original": "={{ $json.texto_original }}",
+            "watermark": "={{ $json.watermark }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_fila",
+              "displayName": "id_fila",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link",
+              "displayName": "link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "texto_original",
+              "displayName": "texto_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "imagen_original",
+              "displayName": "imagen_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "watermark",
+              "displayName": "watermark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "texto_final",
+              "displayName": "texto_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "imagen_final",
+              "displayName": "imagen_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_programada",
+              "displayName": "fecha_programada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "notas",
+              "displayName": "notas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Traduce todo el texto al español. Mantén la misma información, iconos y composición. Cambia el diseño a modo oscuro mismas animaciones.",
+              "displayName": "Traduce todo el texto al español. Mantén la misma información, iconos y composición. Cambia el diseño a modo oscuro mismas animaciones.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "02e1ac52-5f8f-4b1c-b113-d156c86b02c1",
+      "name": "Propio - 8. Guardar en Contenido",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        800,
+        912
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ contents: [{ parts: [{ text: 'Actúa como ghostwriter técnico para Nicolás Valenzuela, Backend & AI Engineer y fundador de Nunca Cierro.\\n\\nConvierte la IDEA DEL USUARIO en un post de LinkedIn de alto impacto redactado en ESPAÑOL.\\n\\nREGLAS DE FORMATO Y ESTILO:\\n1. Relevancia estricta: Basa el post ÚNICAMENTE en la idea o proyecto compartido por el usuario. Si habla de React/PWA/Gemini, mantén ese stack; no agregues tecnologías ajenas.\\n2. Gancho: Primera línea contundente (máximo 12 palabras) con un emoji final pertinente.\\n3. Párrafos cortos: Máximo 2 líneas por párrafo para lectura ágil en móvil.\\n4. Viñetas estructuradas: Usa ⚠️ o ❌ para problemas/retos; 🛠️, ⚡, 📌 o 💡 para soluciones técnicas.\\n5. Cierre y llamada a la acción:\\n   - Termina con una pregunta técnica breve que invite al debate.\\n   - REGLA CLAVE: Si la idea trata sobre una app, proyecto, herramienta o código que Nicolás creó o desarrolló, añade obligatoriamente esta línea después de la pregunta:\\n   Te dejo el link en los comentarios 👇🏻\\n6. Firma obligatoria (usa exactamente este formato sin guiones markdown):\\n---\\n📌 Sigue a Nicolás Valenzuela | Backend & AI Engineer para más contenido sobre IA.\\nIncluye entre 5 y 8 hashtags pertinentes.\\n\\nOBLIGATORIO: Devuelve tu respuesta ÚNICAMENTE como un objeto JSON con dos claves entre comillas dobles, sin bloques markdown de código (sin ```json):\\n{\"post_texto\": \"aquí todo el post formateado con saltos de línea y emojis\", \"prompt_visual\": \"descripción breve del diagrama o captura de código para la imagen\"}\\n\\nIDEA DEL USUARIO:\\n' + ($json.texto_original || '') }] }] }) }}",
+        "options": {}
+      },
+      "id": "92b6cd81-0b78-4ff9-a38b-be1fa09d2695",
+      "name": "Propio - 9. Generar con Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1008,
+        912
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "httpHeaderAuth",
+          "name": "Gemini API Key Header"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const original = $('Propio - 8. Guardar en Contenido').first().json;\nconst resJson = $input.first().json;\n\nlet rawText = resJson?.candidates?.[0]?.content?.parts?.[0]?.text || '';\n\n// 1. Limpiar bloques markdown de código si vienen incluidos\nrawText = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();\n\nlet postTexto = '';\nlet promptVisual = '';\n\n// 2. Intento de parseo estándar\ntry {\n  const parsed = JSON.parse(rawText);\n  postTexto = parsed.post_texto || '';\n  promptVisual = parsed.prompt_visual || '';\n} catch (e1) {\n  // 3. Si falla por saltos de línea crudos dentro del string, intentamos normalizarlos\n  try {\n    const sanitized = rawText.replace(/[\\r\\n]+/g, '\\\\n');\n    const parsed = JSON.parse(sanitized);\n    postTexto = parsed.post_texto || '';\n    promptVisual = parsed.prompt_visual || '';\n  } catch (e2) {\n    // 4. Extracción por Regex de respaldo si el JSON viene con caracteres de control rotos\n    const postMatch = rawText.match(/\"post_texto\"\\s*:\\s*\"([\\s\\S]*?)\"\\s*,\\s*\"prompt_visual\"/i);\n    const visualMatch = rawText.match(/\"prompt_visual\"\\s*:\\s*\"([\\s\\S]*?)\"\\s*\\}/i);\n\n    if (postMatch && visualMatch) {\n      postTexto = postMatch[1];\n      promptVisual = visualMatch[1];\n    } else {\n      postTexto = rawText;\n      promptVisual = 'Diagrama arquitectónico en Excalidraw';\n    }\n  }\n}\n\n// 5. Desescapar saltos de línea para que en Google Sheets y LinkedIn se lean como texto formateado real\npostTexto = postTexto\n  .replace(/---\\?/g, '---')\n  .replace(/\\\\n/g, '\\n')\n  .replace(/\\\\\"/g, '\"')\n  .trim();\n\npromptVisual = promptVisual\n  .replace(/\\\\n/g, ' ')\n  .replace(/\\\\\"/g, '\"')\n  .trim();\n\nreturn [\n  {\n    json: {\n      link: original.link || 'Post escrito',\n      id_fila: original.id_fila || '',\n      texto_original: original.texto_original || '',\n      imagen_original: original.imagen_original || '',\n      watermark: promptVisual,\n      texto_final: postTexto,\n      status: 'generado',\n      fecha: original.fecha || '',\n      fecha_programada: original.fecha_programada || '',\n      prompt_visual: promptVisual\n    }\n  }\n];"
+      },
+      "id": "b77255a1-b484-4ae8-be39-159f1f8fcf5e",
+      "name": "Propio - 10. Preparar texto_final",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1216,
+        912
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contenido",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "link": "={{ $json.link }}",
+            "texto_original": "={{ $json.texto_original }}",
+            "imagen_original": "={{ $json.imagen_original }}",
+            "watermark": "={{ $json.watermark }}",
+            "texto_final": "={{ $json.texto_final }}",
+            "status": "={{ $json.status }}",
+            "fecha": "={{ $json.fecha }}",
+            "row_number": 0,
+            "id_fila": "={{ $json.id_fila }}"
+          },
+          "matchingColumns": [
+            "id_fila"
+          ],
+          "schema": [
+            {
+              "id": "id_fila",
+              "displayName": "id_fila",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "link",
+              "displayName": "link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "texto_original",
+              "displayName": "texto_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "imagen_original",
+              "displayName": "imagen_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "watermark",
+              "displayName": "watermark",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "texto_final",
+              "displayName": "texto_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "imagen_final",
+              "displayName": "imagen_final",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_programada",
+              "displayName": "fecha_programada",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "image prompt >",
+              "displayName": "image prompt >",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Traduce todo el texto al español. Mantén la misma información, iconos y composición. Cambia el diseño a modo oscuro mismas animaciones.",
+              "displayName": "Traduce todo el texto al español. Mantén la misma información, iconos y composición. Cambia el diseño a modo oscuro mismas animaciones.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "33a1bfd6-63cb-4ec0-b5d4-3fe4b760b2a8",
+      "name": "Propio - 11. Actualizar Contenido",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1424,
+        912
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('1. Telegram Trigger').first().json.message.chat.id }}",
+        "text": "={{ \n  $json.status === 'traducido'\n    ? '🌐 *Post Traducido Listo* (`' + ($json.link || $json.id_fila || '') + '`)\\n\\n' + ($json.texto_final || '') + '\\n\\n👉 Guardado en Google Sheets con status `traducido`. Prepara la imagen en Drive y cambia a `listo` para programar.'\n    : '💡 *Post Técnico Creado* (`' + ($json.link || $json.id_fila || '') + '`)\\n\\n' + ($json.texto_final || '') + '\\n\\n🎨 *Idea Visual / Snippet:*\\n' + ($json.watermark || 'Revisar sugerencia') + '\\n\\n👉 Guardado en Google Sheets con status `generado`. Sube la imagen a Drive como `' + ($json.link || $json.id_fila || '') + '.png` y cambia a `listo` para que se publique a las 12:00.'\n}}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "0dc300bc-2e6a-496b-baa9-05fe81f1543e",
+      "name": "12. Avisar por Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1712,
+        816
+      ],
+      "webhookId": "00000000-0000-0000-0000-000000000003",
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram Bot Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "TU_GOOGLE_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contenido",
+          "mode": "name"
+        },
+        "filtersUI": {
+          "values": []
+        },
+        "options": {}
+      },
+      "id": "4f035817-0956-46db-88a2-72e6ff94faaf",
+      "name": "2. Leer sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -736,
+        1232
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "3. Filtrar listo y fecha (FIFO)": {
+      "main": [
+        [
+          {
+            "node": "3b. ¿Hay post listo?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "5. Publicar en LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "6. Marcar como publicado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "6. Marcar como publicado": {
+      "main": [
+        [
+          {
+            "node": "7. Avisar post publicado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "11. Actualizar Contenido": {
+      "main": [
+        [
+          {
+            "node": "12. Avisar por Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "10. Preparar texto_final": {
+      "main": [
+        [
+          {
+            "node": "11. Actualizar Contenido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "9. Traducir con Gemini": {
+      "main": [
+        [
+          {
+            "node": "10. Preparar texto_final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "6. Obtener HTML": {
+      "main": [
+        [
+          {
+            "node": "7. Extraer texto e imagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4. ¿El post ya existe?": {
+      "main": [
+        [
+          {
+            "node": "5. Avisar post duplicado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "6. Obtener HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Buscar link existente": {
+      "main": [
+        [
+          {
+            "node": "4. ¿El post ya existe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1. Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "2. ¿Es un link?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. ¿Es un link?": {
+      "main": [
+        [
+          {
+            "node": "3. Buscar link existente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Propio - 7b. Leer filas existentes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "8. Guardar en Contenido": {
+      "main": [
+        [
+          {
+            "node": "9. Traducir con Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "7. Extraer texto e imagen": {
+      "main": [
+        [
+          {
+            "node": "7b. Leer filas existentes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "7b. Leer filas existentes": {
+      "main": [
+        [
+          {
+            "node": "7c. Generar id_fila",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "7c. Generar id_fila": {
+      "main": [
+        [
+          {
+            "node": "8. Guardar en Contenido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4. Buscar imagen en Drive": {
+      "main": [
+        [
+          {
+            "node": "4b. Descargar imagen de Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4b. Descargar imagen de Drive": {
+      "main": [
+        [
+          {
+            "node": "5. Publicar en LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3b. ¿Hay post listo?": {
+      "main": [
+        [
+          {
+            "node": "4. Buscar imagen en Drive",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Avisar sin post programado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1. 12:00": {
+      "main": [
+        [
+          {
+            "node": "2. Leer sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Propio - 7b. Leer filas existentes": {
+      "main": [
+        [
+          {
+            "node": "Propio - 7c. Generar id_fila",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Propio - 7c. Generar id_fila": {
+      "main": [
+        [
+          {
+            "node": "Propio - 8. Guardar en Contenido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Propio - 8. Guardar en Contenido": {
+      "main": [
+        [
+          {
+            "node": "Propio - 9. Generar con Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Propio - 9. Generar con Gemini": {
+      "main": [
+        [
+          {
+            "node": "Propio - 10. Preparar texto_final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Propio - 10. Preparar texto_final": {
+      "main": [
+        [
+          {
+            "node": "Propio - 11. Actualizar Contenido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Propio - 11. Actualizar Contenido": {
+      "main": [
+        [
+          {
+            "node": "12. Avisar por Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Leer sheet": {
+      "main": [
+        [
+          {
+            "node": "3. Filtrar listo y fecha (FIFO)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "generic-n8n-instance-id"
+  }
+}

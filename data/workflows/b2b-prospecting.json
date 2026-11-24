@@ -1,0 +1,412 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "content": "### 1. Disparo & Deduplicación\n- Cron diario 8:30 AM.\n- Lee registros previos en Google Sheets para no repetir contactos.\n\n*Reemplaza TU_GOOGLE_SHEET_ID.*",
+        "height": 170,
+        "width": 400,
+        "color": 4
+      },
+      "id": "sticky-b2b-trigger",
+      "name": "Nota - Disparo & Sheets",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        464,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 2. Rotación B2B & Calificación Heurística\n- Rota entre 12 nichos comerciales (inmobiliarias, abogados, agencias, etc.).\n- Extrae datos oficiales con Places API (New).\n- Valida móviles 3XX Colombia, reseñas (10-350) y genera mensaje personalizado.",
+        "height": 170,
+        "width": 580,
+        "color": 4
+      },
+      "id": "sticky-b2b-scoring",
+      "name": "Nota - Rotador & Scoring",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        912,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 3. Guardado & Alerta WhatsApp\n- Guarda los leads calificados en Google Sheets.\n- Envía notificación a Telegram con deep-link a WhatsApp (wa.me).\n\n*Reemplaza TU_TELEGRAM_CHAT_ID.*",
+        "height": 170,
+        "width": 440,
+        "color": 4
+      },
+      "id": "sticky-b2b-output",
+      "name": "Nota - Sheets & Telegram",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "30 8 * * *"
+            }
+          ]
+        }
+      },
+      "id": "fc663fbd-8470-41b4-9369-21e6315b945d",
+      "name": "Diario 8:30 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        464,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "TU_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads_Prospeccion",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "b57f70ca-522c-4c60-b321-be247b6ae942",
+      "name": "Leer Leads Existentes",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        688,
+        -240
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const busquedas = [\n  { query: 'inmobiliaria Chico Bogota', rubro: 'Inmobiliaria' },\n  { query: 'firma de abogados Usaquen Bogota', rubro: 'Firma de Abogados' },\n  { query: 'agencia de marketing digital Bogota', rubro: 'Agencia Marketing' },\n  { query: 'clinica odontologica Cedritos Bogota', rubro: 'Clinica Odontologica' },\n  { query: 'firma contable Chapinero Bogota', rubro: 'Firma Contable' },\n  { query: 'constructora inmobiliaria proyectos vivienda Bogota', rubro: 'Constructora' },\n  { query: 'clinica dermatologica Bogota', rubro: 'Clinica Dermatologica' },\n  { query: 'agencia de viajes Bogota', rubro: 'Agencia de Viajes' },\n  { query: 'academia de idiomas Bogota', rubro: 'Academia' },\n  { query: 'inmobiliaria Santa Barbara Bogota', rubro: 'Inmobiliaria' },\n  { query: 'clinica veterinaria Bogota', rubro: 'Clinica Veterinaria' },\n  { query: 'empresa de logistica Bogota', rubro: 'Logistica' }\n];\n\nconst staticData = $getWorkflowStaticData('global');\nconst idx = ((staticData.ultimoIndice ?? 2) + 1) % busquedas.length;\nstaticData.ultimoIndice = idx;\n\nreturn [{ json: busquedas[idx] }];"
+      },
+      "id": "91440ef5-f6c3-4253-9528-1a08d27063f2",
+      "name": "Rotador Busqueda Bogota",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        912,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://places.googleapis.com/v1/places:searchText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Goog-FieldMask",
+              "value": "places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.websiteUri,places.rating,places.userRatingCount,places.businessStatus"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"textQuery\": \"{{ $json.query }}\",\n  \"languageCode\": \"es\",\n  \"maxResultCount\": 20\n}",
+        "options": {}
+      },
+      "id": "0abb4215-ca5a-4834-9b93-08ff515fda02",
+      "name": "Google Places API (New)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1136,
+        -240
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "httpHeaderAuth",
+          "name": "Google Places API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const places = $input.first().json.places || [];\nconst rubro = $('Rotador Busqueda Bogota').first().json.rubro;\nconst existentes = $('Leer Leads Existentes').all().map(i => i.json);\n\nconst idsVistos = new Set(existentes.map(r => String(r.Place_ID || '').trim()).filter(Boolean));\nconst telsVistos = new Set(existentes.map(r => String(r.Telefono_WA || '').trim()).filter(Boolean));\nconst websVistas = new Set(existentes.map(r => String(r.Web || '').toLowerCase().trim()).filter(w => w && w !== 'sin web'));\n\nconst blacklist = [\n  'kreston', 'deloitte', 'kpmg', 'pwc', 'ernst', 'bdo', 'mazars',\n  'bancolombia', 'davivienda', 'bbva', 'scotiabank', 'occidente', 'bogota s.a',\n  'sura', 'sanitas', 'compensar', 'colsanitas', 'famisanar', 'nueva eps',\n  'movistar', 'claro', 'tigo', 'wom', 'notaria', 'notaría',\n  'gobernacion', 'alcaldia', 'ministerio', 'universidad', 'fundacion', 'fundación',\n  'sucursal', 'sede ', 'cajero', 'corresponsal',\n  'conjunto residencial', 'conjunto ', 'condominio', 'agrupacion', 'agrupación',\n'urbanizacion', 'urbanización', 'edificio', 'propiedad horizontal', 'torres de', 'parque residencial'\n];\n\nconst escapeHtml = (str) => String(str)\n  .replace(/&/g, '&amp;')\n  .replace(/</g, '&lt;')\n  .replace(/>/g, '&gt;')\n  .replace(/\"/g, '&quot;');\n\nconst hoy = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Bogota' });\nconst validos = [];\n\nfor (const p of places) {\n  if (p.businessStatus !== 'OPERATIONAL') continue;\n\n  const resenas = p.userRatingCount || 0;\n  if (resenas < 10 || resenas > 350) continue;\n\n  const nombre = (p.displayName?.text || '').trim();\n  if (!nombre) continue;\n  const nombreLower = nombre.toLowerCase();\n  if (blacklist.some(word => nombreLower.includes(word))) continue;\n\n  const rawTel = (p.nationalPhoneNumber || '').replace(/\\D/g, '');\n  if (!rawTel.startsWith('3') || rawTel.length !== 10) continue;\n  const telefonoWA = '57' + rawTel;\n\n  const placeId = String(p.id || '').trim();\n  const webRaw = (p.websiteUri || '').trim();\n  const webNorm = webRaw.toLowerCase();\n\n  if (idsVistos.has(placeId) || telsVistos.has(telefonoWA)) continue;\n  if (webNorm && websVistas.has(webNorm)) continue;\n\n  idsVistos.add(placeId);\n  telsVistos.add(telefonoWA);\n  if (webNorm) websVistas.add(webNorm);\n\n  const esSoloRed = /instagram\\.com|facebook\\.com|linktr\\.ee|wa\\.me|api\\.whatsapp\\.com|tiktok\\.com/.test(webNorm);\n  const sinWeb = !webRaw || esSoloRed;\n  const web = webRaw || 'Sin web';\n\n  let angulo = 'Automatizacion IA / WA';\n  let mensaje = '';\n\n  if (rubro === 'Agencia Marketing') {\n    angulo = 'Alianza Tecnica IA / n8n';\n    mensaje = `Hola ${nombre}, ¿cómo están? Vi su agencia en Google Maps. \\n\\nSoy Nicolás Valenzuela, ingeniero de software e IA; apoyo a agencias como aliado técnico implementando agentes de WhatsApp con IA y automatizaciones a medida para sus clientes. \\n\\n¿Con quién podría compartirles un par de demos rápidas?`;\n  } else if (sinWeb) {\n    angulo = 'Web de Captacion';\n    mensaje = `Hola ${nombre}, ¿cómo están? Vi su perfil en Google Maps y noté que aún no tienen un sitio web propio enfocado en captar clientes. \\n\\nSoy Nicolás Valenzuela, ingeniero de software e IA; ayudo a negocios de ${rubro.toLowerCase()} a lanzar páginas web rápidas de conversión y agendamiento. \\n\\n¿Podría compartirles una muestra rápida?`;\n  } else {\n    mensaje = `Hola ${nombre}, ¿cómo están? Vi su perfil y sitio web en Google Maps. \\n\\nSoy Nicolás Valenzuela, ingeniero de software e IA; ayudo a negocios de ${rubro.toLowerCase()} a automatizar la atención por WhatsApp y la calificación de consultas con IA para no perder clientes. \\n\\n¿Podría compartirles una muestra rápida?`;\n  }\n\n  const linkWA = `https://wa.me/${telefonoWA}?text=${encodeURIComponent(mensaje)}`;\n\n  validos.push({\n    json: {\n      Fecha: hoy,\n      Place_ID: placeId,\n      Negocio: nombre,\n      Negocio_HTML: escapeHtml(nombre),\n      Rubro: rubro,\n      Telefono_WA: telefonoWA,\n      Web: web,\n      Web_HTML: escapeHtml(web),\n      Resenas: resenas,\n      Rating: p.rating || 0,\n      Angulo: angulo,\n      Mensaje: mensaje,\n      Mensaje_HTML: escapeHtml(mensaje),\n      Estado: 'Pendiente',\n      Link_WA: linkWA\n    }\n  });\n}\n\nreturn validos.slice(0, 8);"
+      },
+      "id": "f1bc7a8f-9d86-431e-8f63-98fc6e3bf73a",
+      "name": "Calificar Leads y Anti-Duplicados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1344,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "TU_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads_Prospeccion",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha": "={{ $json.Fecha }}",
+            "Place_ID": "={{ $json.Place_ID }}",
+            "Negocio": "={{ $json.Negocio }}",
+            "Rubro": "={{ $json.Rubro }}",
+            "Telefono_WA": "={{ $json.Telefono_WA }}",
+            "Web": "={{ $json.Web }}",
+            "Resenas": "={{ $json.Resenas }}",
+            "Angulo": "={{ $json.Angulo }}",
+            "Mensaje": "={{ $json.Mensaje }}",
+            "Estado": "={{ $json.Estado }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Place_ID",
+              "displayName": "Place_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Negocio",
+              "displayName": "Negocio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rubro",
+              "displayName": "Rubro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Telefono_WA",
+              "displayName": "Telefono_WA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Web",
+              "displayName": "Web",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resenas",
+              "displayName": "Resenas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Angulo",
+              "displayName": "Angulo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Mensaje",
+              "displayName": "Mensaje",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "5d26386d-7143-40be-82d4-8ce59114661c",
+      "name": "Guardar Nuevos en Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1568,
+        -240
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "googleSheetsOAuth2Api",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "TU_TELEGRAM_CHAT_ID",
+        "text": "=🎯 <b>Nuevo Lead ({{ $json.Rubro }})</b>\n<b>Negocio:</b> {{ $json.Negocio }}\n<b>Reseñas:</b> {{ $json.Resenas }} | <b>Web:</b> {{ $json.Web }}\n<b>Ángulo:</b> {{ $json.Angulo }}\n\n👉 <a href=\"https://wa.me/{{ $json.Telefono_WA }}?text={{ encodeURIComponent($json.Mensaje) }}\">Enviar WhatsApp con mensaje listo</a>\n\n<b>Vista previa del mensaje:</b>\n{{ $json.Mensaje }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "7a553ae5-e490-4747-8662-32170051c285",
+      "name": "Enviar a Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1792,
+        -240
+      ],
+      "webhookId": "00000000-0000-0000-0000-000000000002",
+      "credentials": {
+        "telegramApi": {
+          "id": "telegramApi",
+          "name": "Telegram Bot Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Diario 8:30 AM": {
+      "main": [
+        [
+          {
+            "node": "Leer Leads Existentes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Leads Existentes": {
+      "main": [
+        [
+          {
+            "node": "Rotador Busqueda Bogota",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rotador Busqueda Bogota": {
+      "main": [
+        [
+          {
+            "node": "Google Places API (New)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Places API (New)": {
+      "main": [
+        [
+          {
+            "node": "Calificar Leads y Anti-Duplicados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calificar Leads y Anti-Duplicados": {
+      "main": [
+        [
+          {
+            "node": "Guardar Nuevos en Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar Nuevos en Sheets": {
+      "main": [
+        [
+          {
+            "node": "Enviar a Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "generic-n8n-instance-id"
+  }
+}
