@@ -451,7 +451,7 @@ export function N8nWorkflowsModal({
               <div className="flex flex-wrap gap-1.5">
                 {[
                   "n8n (Self-Hosted)",
-                  "Node.js",
+                  "JavaScript",
                   "Gemini API",
                   "Google Places API",
                   "Telegram Bot API",

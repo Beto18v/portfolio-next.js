@@ -773,7 +773,7 @@ export const siteConfig: SiteConfig = {
       },
       tags: [
         "n8n (Self-Hosted)",
-        "Node.js",
+        "JavaScript",
         "Gemini API",
         "Google Places API",
         "Google Sheets",

@@ -137,7 +137,7 @@ export const n8nWorkflows: Record<
           es: "Filtra reseñas (10-350), móvil 3XX Colombia, descarta gigantes y redacta mensaje por ángulo.",
           en: "Filters reviews (10-350), Colombian 3XX mobiles, excludes giants, and crafts tailored pitch.",
         },
-        nodeType: "Node.js",
+        nodeType: "JavaScript",
         iconName: "cpu",
       },
       {
