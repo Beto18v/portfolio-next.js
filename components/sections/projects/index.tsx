@@ -344,8 +344,7 @@ export function Projects() {
                     project.isProduction;
 
                   const statusLabel =
-                    project.statusBadge?.[locale] ??
-                    (isProduction ? inProductionLabel : "ACTIVO");
+                    project.statusBadge?.[locale] ?? inProductionLabel;
 
                   return (
                     <Card key={`${activeFilter}-${project.id ?? project.title.en}`}>

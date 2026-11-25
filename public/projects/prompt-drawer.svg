@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0d12" />
+      <stop offset="50%" stop-color="#12131c" />
+      <stop offset="100%" stop-color="#090a0e" />
+    </linearGradient>
+
+    <!-- Brand Indigo Gradient -->
+    <linearGradient id="indigo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+
+    <!-- Card Background -->
+    <linearGradient id="card-surface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#171924" />
+      <stop offset="100%" stop-color="#11131a" />
+    </linearGradient>
+
+    <!-- Modal Surface -->
+    <linearGradient id="modal-surface" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1f2e" />
+      <stop offset="100%" stop-color="#141622" />
+    </linearGradient>
+
+    <!-- Shadows & Glows -->
+    <filter id="soft-shadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.65" />
+    </filter>
+    <filter id="indigo-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Dot Pattern -->
+    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#2a2e40" fill-opacity="0.35" />
+    </pattern>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="800" height="500" fill="url(#bg-grad)" />
+  <rect width="800" height="500" fill="url(#dot-grid)" />
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="400" cy="120" r="180" fill="#4f46e5" fill-opacity="0.12" filter="blur(60px)" />
+  <circle cx="680" cy="380" r="140" fill="#6366f1" fill-opacity="0.08" filter="blur(50px)" />
+
+  <!-- ─── Window Shell ─── -->
+  <g transform="translate(100, 30)" filter="url(#soft-shadow)">
+    <!-- Window Border & Body -->
+    <rect width="600" height="440" rx="14" fill="#0f1118" stroke="#25293a" stroke-width="1.5" />
+
+    <!-- Window Titlebar -->
+    <rect width="600" height="42" rx="14" fill="#141722" />
+    <rect y="30" width="600" height="12" fill="#141722" />
+    <line x1="0" y1="42" x2="600" y2="42" stroke="#202434" stroke-width="1" />
+
+    <!-- Traffic Lights -->
+    <circle cx="22" cy="21" r="5" fill="#ef4444" />
+    <circle cx="38" cy="21" r="5" fill="#f59e0b" />
+    <circle cx="54" cy="21" r="5" fill="#10b981" />
+
+    <!-- Extension Name & Icon in Titlebar -->
+    <g transform="translate(80, 10)">
+      <!-- Mini Thunderbolt Logo -->
+      <rect width="22" height="22" rx="5" fill="url(#indigo-grad)" />
+      <path d="M 12 4 L 7 12 L 11 12 L 10 18 L 16 10 L 12 10 Z" fill="#ffffff" />
+      <text x="30" y="16" fill="#f3f4f6" font-size="12" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-weight="700" letter-spacing="0.3">Prompt Drawer</text>
+      <text x="126" y="15" fill="#818cf8" font-size="10" font-family="monospace" font-weight="600">v1.0 · MV3</text>
+    </g>
+
+    <!-- Header Actions (Right) -->
+    <g transform="translate(485, 11)">
+      <!-- Help Button -->
+      <rect x="0" y="0" width="20" height="20" rx="4" fill="#1e2230" stroke="#2e344a" stroke-width="1" />
+      <text x="10" y="14" fill="#9ca3af" font-size="11" font-family="monospace" font-weight="700" text-anchor="middle">?</text>
+      <!-- New Button -->
+      <rect x="26" y="0" width="20" height="20" rx="4" fill="#4f46e5" />
+      <text x="36" y="14" fill="#ffffff" font-size="13" font-family="monospace" font-weight="700" text-anchor="middle">+</text>
+      <!-- Language Pill -->
+      <rect x="52" y="0" width="28" height="20" rx="4" fill="#1e2230" stroke="#2e344a" stroke-width="1" />
+      <text x="66" y="14" fill="#c7d2fe" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle">ES</text>
+      <!-- Theme Icon -->
+      <circle cx="94" cy="10" r="8" fill="#1e2230" stroke="#2e344a" stroke-width="1" />
+      <circle cx="94" cy="10" r="3.5" fill="#f3f4f6" />
+    </g>
+
+    <!-- ─── Category Pills ─── -->
+    <g transform="translate(24, 58)">
+      <!-- Cat: All (Active) -->
+      <rect x="0" y="0" width="56" height="24" rx="6" fill="#4f46e5" fill-opacity="0.25" stroke="#6366f1" stroke-width="1.2" />
+      <text x="28" y="16" fill="#c7d2fe" font-size="11" font-family="-apple-system, sans-serif" font-weight="600" text-anchor="middle">Todos</text>
+
+      <!-- Cat: Desarrollo (Purple) -->
+      <rect x="64" y="0" width="94" height="24" rx="6" fill="#151722" stroke="#282c3e" stroke-width="1" />
+      <circle cx="76" cy="12" r="3.5" fill="#a855f7" />
+      <text x="86" y="16" fill="#d1d5db" font-size="11" font-family="-apple-system, sans-serif">Desarrollo</text>
+
+      <!-- Cat: Marketing (Amber) -->
+      <rect x="166" y="0" width="88" height="24" rx="6" fill="#151722" stroke="#282c3e" stroke-width="1" />
+      <circle cx="178" cy="12" r="3.5" fill="#f59e0b" />
+      <text x="188" y="16" fill="#d1d5db" font-size="11" font-family="-apple-system, sans-serif">Marketing</text>
+
+      <!-- Cat: Redacción (Green) -->
+      <rect x="262" y="0" width="90" height="24" rx="6" fill="#151722" stroke="#282c3e" stroke-width="1" />
+      <circle cx="274" cy="12" r="3.5" fill="#10b981" />
+      <text x="284" y="16" fill="#d1d5db" font-size="11" font-family="-apple-system, sans-serif">Redacción</text>
+    </g>
+
+    <!-- ─── Search Input Bar ─── -->
+    <g transform="translate(24, 94)">
+      <rect width="552" height="36" rx="8" fill="#131620" stroke="#2c3144" stroke-width="1.2" />
+      <!-- Search Magnifier Icon -->
+      <circle cx="18" cy="18" r="5" fill="none" stroke="#6366f1" stroke-width="1.5" />
+      <line x1="22" y1="22" x2="26" y2="26" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round" />
+      <text x="36" y="22" fill="#9ca3af" font-size="12" font-family="-apple-system, sans-serif">Buscar prompts por título, #etiquetas o variables...</text>
+      <!-- Shortcut Indicator -->
+      <rect x="476" y="8" width="64" height="20" rx="4" fill="#1a1d28" stroke="#33384c" stroke-width="1" />
+      <text x="508" y="22" fill="#818cf8" font-size="10" font-family="monospace" font-weight="600" text-anchor="middle">Alt+Shift+V</text>
+    </g>
+
+    <!-- ─── Prompt Card 1 (Pinned / Active with Variables) ─── -->
+    <g transform="translate(24, 142)">
+      <rect width="552" height="110" rx="10" fill="url(#card-surface)" stroke="#4f46e5" stroke-width="1.5" />
+      
+      <!-- Pinned Pin Icon & Category Indicator -->
+      <g transform="translate(16, 14)">
+        <!-- Pin Icon -->
+        <circle cx="6" cy="6" r="3" fill="#6366f1" />
+        <line x1="6" y1="9" x2="6" y2="13" stroke="#6366f1" stroke-width="1.5" />
+        <!-- Title -->
+        <text x="18" y="10" fill="#ffffff" font-size="13" font-family="-apple-system, sans-serif" font-weight="700">Code Review &amp; Refactor</text>
+        <!-- Category Badge -->
+        <rect x="180" y="-3" width="76" height="18" rx="4" fill="#a855f7" fill-opacity="0.18" stroke="#a855f7" stroke-opacity="0.4" stroke-width="1" />
+        <circle cx="190" cy="6" r="2.5" fill="#a855f7" />
+        <text x="198" y="9" fill="#c084fc" font-size="9" font-family="monospace" font-weight="600">Desarrollo</text>
+      </g>
+
+      <!-- Prompt Body Preview with Highlighted Variables -->
+      <g transform="translate(16, 44)">
+        <text x="0" y="10" fill="#9ca3af" font-size="11" font-family="-apple-system, sans-serif">
+          Revisa este código en <tspan fill="#818cf8" font-family="monospace" font-weight="700">{{lenguaje}}</tspan> enfocándote en <tspan fill="#818cf8" font-family="monospace" font-weight="700">{{aspecto}}</tspan> y sugiere mejoras concretas...
+        </text>
+      </g>
+
+      <!-- Tags & Action Bar -->
+      <g transform="translate(16, 76)">
+        <rect x="0" y="0" width="56" height="18" rx="4" fill="#1e2232" />
+        <text x="28" y="12" fill="#818cf8" font-size="10" font-family="monospace" text-anchor="middle">#code</text>
+
+        <rect x="62" y="0" width="80" height="18" rx="4" fill="#1e2232" />
+        <text x="102" y="12" fill="#818cf8" font-size="10" font-family="monospace" text-anchor="middle">#typescript</text>
+
+        <rect x="148" y="0" width="56" height="18" rx="4" fill="#1e2232" />
+        <text x="176" y="12" fill="#818cf8" font-size="10" font-family="monospace" text-anchor="middle">#refactor</text>
+
+        <!-- Dynamic Variables Pill -->
+        <rect x="210" y="0" width="102" height="18" rx="4" fill="#4f46e5" fill-opacity="0.15" stroke="#4f46e5" stroke-opacity="0.4" stroke-width="1" />
+        <text x="261" y="12" fill="#a5b4fc" font-size="9" font-family="monospace" font-weight="700" text-anchor="middle">&#x26A1; 2 VARIABLES</text>
+
+        <!-- Copy Action Button -->
+        <g transform="translate(440, -4)">
+          <rect width="80" height="26" rx="6" fill="#4f46e5" />
+          <path d="M 12 9 L 12 17 L 18 17 L 18 9 Z M 15 6 L 21 6 L 21 14" fill="none" stroke="#ffffff" stroke-width="1.3" />
+          <text x="44" y="17" fill="#ffffff" font-size="11" font-family="-apple-system, sans-serif" font-weight="700" text-anchor="middle">Copiar</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- ─── Prompt Card 2 (Secondary) ─── -->
+    <g transform="translate(24, 262)">
+      <rect width="552" height="74" rx="10" fill="url(#card-surface)" stroke="#222534" stroke-width="1" />
+      
+      <g transform="translate(16, 14)">
+        <text x="0" y="10" fill="#e5e7eb" font-size="12" font-family="-apple-system, sans-serif" font-weight="700">Resumen Ejecutivo de Reunión</text>
+        <rect x="180" y="-3" width="70" height="18" rx="4" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.35" stroke-width="1" />
+        <circle cx="190" cy="6" r="2.5" fill="#10b981" />
+        <text x="198" y="9" fill="#6ee7b7" font-size="9" font-family="monospace" font-weight="600">Redacción</text>
+      </g>
+
+      <g transform="translate(16, 42)">
+        <text x="0" y="8" fill="#6b7280" font-size="11" font-family="-apple-system, sans-serif">
+          Sintetiza los acuerdos alcanzados con <tspan fill="#818cf8" font-family="monospace">{{cliente}}</tspan> y genera la lista de acciones inmediatas...
+        </text>
+      </g>
+
+      <!-- Copy Action Button Mini -->
+      <g transform="translate(456, 24)">
+        <rect width="64" height="24" rx="5" fill="#1c202d" stroke="#32384e" stroke-width="1" />
+        <text x="32" y="16" fill="#9ca3af" font-size="10" font-family="-apple-system, sans-serif" font-weight="600" text-anchor="middle">Copiar</text>
+      </g>
+    </g>
+
+    <!-- ─── Variable Resolution Modal Flyout (Overlaying Bottom-Right) ─── -->
+    <g transform="translate(280, 260)" filter="url(#soft-shadow)">
+      <rect width="280" height="150" rx="10" fill="url(#modal-surface)" stroke="#6366f1" stroke-width="1.8" />
+      
+      <!-- Modal Header -->
+      <g transform="translate(16, 16)">
+        <rect width="6" height="6" rx="1" fill="#818cf8" />
+        <text x="14" y="7" fill="#ffffff" font-size="11" font-family="-apple-system, sans-serif" font-weight="700">Completar variables</text>
+        <text x="238" y="6" fill="#6b7280" font-size="12" font-family="monospace" cursor="pointer">&#x2715;</text>
+      </g>
+
+      <!-- Variable Input 1 -->
+      <g transform="translate(16, 36)">
+        <text x="0" y="8" fill="#c7d2fe" font-size="9" font-family="monospace" font-weight="600">lenguaje</text>
+        <rect y="12" width="248" height="24" rx="5" fill="#0d0f15" stroke="#6366f1" stroke-width="1.5" />
+        <text x="8" y="28" fill="#f3f4f6" font-size="10" font-family="monospace">TypeScript</text>
+        <!-- Caret -->
+        <line x1="74" y1="20" x2="74" y2="30" stroke="#818cf8" stroke-width="1.5" />
+      </g>
+
+      <!-- Variable Input 2 -->
+      <g transform="translate(16, 78)">
+        <text x="0" y="8" fill="#c7d2fe" font-size="9" font-family="monospace" font-weight="600">aspecto</text>
+        <rect y="12" width="248" height="24" rx="5" fill="#0d0f15" stroke="#25293a" stroke-width="1" />
+        <text x="8" y="28" fill="#9ca3af" font-size="10" font-family="monospace">rendimiento &amp; tipado estricto</text>
+      </g>
+
+      <!-- Modal Submit Button -->
+      <g transform="translate(16, 118)">
+        <rect width="248" height="22" rx="5" fill="url(#indigo-grad)" />
+        <text x="124" y="15" fill="#ffffff" font-size="10" font-family="-apple-system, sans-serif" font-weight="700" text-anchor="middle">Copiar al portapapeles (&lt; 5s)</text>
+      </g>
+    </g>
+
+    <!-- ─── Footer Status Bar ─── -->
+    <g transform="translate(24, 408)">
+      <circle cx="4" cy="4" r="3" fill="#10b981" />
+      <text x="12" y="7" fill="#9ca3af" font-size="10" font-family="-apple-system, sans-serif">100% Local · Sin servidores · chrome.storage.local</text>
+      <text x="430" y="7" fill="#818cf8" font-size="10" font-family="monospace" font-weight="600">22 Tests Vitest &#x2713;</text>
+    </g>
+  </g>
+</svg>

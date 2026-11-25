@@ -1019,8 +1019,8 @@ export const siteConfig: SiteConfig = {
         en: "Web & SaaS",
       },
       statusBadge: {
-        es: "ACTIVO",
-        en: "ACTIVE",
+        es: "EN PRODUCCIÓN",
+        en: "IN PRODUCTION",
       },
       title: {
         es: "Pianio",
@@ -1116,133 +1116,38 @@ export const siteConfig: SiteConfig = {
     },
 
     {
-      id: "docguard",
+      id: "prompt-drawer",
       sectionId: "extensions-tools",
       sectionBadge: {
         es: "Extensiones & Tools",
         en: "Extensions & Tools",
       },
       statusBadge: {
-        es: "ACTIVO",
-        en: "ACTIVE",
+        es: "EN PRODUCCIÓN",
+        en: "IN PRODUCTION",
       },
       title: {
-        es: "DocGuard",
-        en: "DocGuard",
+        es: "Prompt Drawer",
+        en: "Prompt Drawer",
       },
       description: {
-        es: "Detector de originalidad integrado en Google Docs. Revisa tu texto mientras redactas y te alerta sobre coincidencias o posibles plagios con millones de fuentes académicas sin salir del documento.",
-        en: "Originality and plagiarism checker integrated directly into Google Docs. Reviews your text as you type and alerts you to matches with millions of academic sources without leaving your document.",
+        es: "Biblioteca local de prompts para ChatGPT, Claude y Gemini. Busca al instante, completa variables dinámicas como {{tema}} o {{tono}} antes de pegar y copia en menos de 5 segundos con total privacidad en tu navegador.",
+        en: "Local prompt library for ChatGPT, Claude, and Gemini. Search instantly, fill dynamic variables like {{topic}} or {{tone}} before pasting, and copy in under 5 seconds with 100% browser privacy.",
       },
-      image: "/projects/docguard.jpg",
+      image: "/projects/prompt-drawer.svg",
       imageAlt: {
-        es: "Vista previa de la extensión DocGuard en Google Docs",
-        en: "Preview of DocGuard browser extension in Google Docs",
+        es: "Vista previa de la extensión Prompt Drawer",
+        en: "Preview of Prompt Drawer browser extension",
       },
       tags: [
+        "TypeScript",
         "WXT Framework",
         "Manifest V3",
-        "Chrome SidePanel API",
-        "TypeScript",
-        "Client NLP (5-gram)",
-        "OpenAlex API",
-        "Wikipedia REST",
-      ],
-      links: {
-        code: "https://github.com/Beto18v/browser-extensions",
-        demo: "https://microsoftedge.microsoft.com/addons/detail/docguard/lmlplbcejkdghmapnoglbhnjhocdgepf",
-        extraLinks: [
-          {
-            label: { es: "Web Store", en: "Web Store" },
-            href: "https://chromewebstore.google.com/search/Nicolas%20Valenzuela",
-            icon: "store",
-          },
-        ],
-      },
-      demoLabel: {
-        es: "Edge Store",
-        en: "Edge Store",
-      },
-      featured: false,
-      isProduction: true,
-      category: "production",
-      technicalDetails: {
-        commercialImpact: {
-          problem: {
-            es: "La verificación de originalidad académica suele requerir licencias costosas de software antiplagio o compartir borradores confidenciales con servidores de terceros.",
-            en: "Checking academic originality typically requires costly enterprise plagiarism licenses or sharing confidential drafts with external servers.",
-          },
-          solution: {
-            es: "Extensión integrada directamente en el panel lateral de Google Docs que analiza similitud y atribución en tiempo real contra más de 250 millones de papers científicos indexados.",
-            en: "Google Docs side panel extension verifying textual similarity and attribution in real time against 250M+ indexed scientific papers.",
-          },
-          valueProposition: {
-            es: "Protección de autoría a costo $0 en APIs y con privacidad absoluta al procesar los fragmentos de texto en el propio navegador.",
-            en: "Authorship protection at $0 in API costs and absolute confidentiality by processing text chunks entirely within the user browser.",
-          },
-        },
-        technicalArchitecture: {
-          description: {
-            es: "WXT Framework + Manifest V3 + TypeScript. Integración nativa mediante Chrome SidePanel API, procesamiento de n-gramas en cliente y consultas federadas asíncronas hacia las APIs REST públicas de OpenAlex y Wikipedia.",
-            en: "WXT Framework + Manifest V3 + TypeScript. Native integration via Chrome SidePanel API, client-side n-gram processing, and federated async queries to OpenAlex and Wikipedia public REST APIs.",
-          },
-          components: [
-            {
-              name: "Client-Side NLP (5-gram)",
-              role: {
-                es: "Extracción y tokenización de fragmentos para cálculo de coincidencia sin enviar el documento completo a la red.",
-                en: "Chunk extraction and tokenization for matching calculation without sending full documents across the network.",
-              },
-            },
-            {
-              name: "Federated Academic Query",
-              role: {
-                es: "Cotejo de citas y fuentes bibliográficas en OpenAlex y Wikipedia en tiempo real con control de tasa de peticiones.",
-                en: "Real-time citation and bibliographic cross-referencing on OpenAlex and Wikipedia with rate-limit controls.",
-              },
-            },
-          ],
-        },
-        metrics: [
-          { value: "250M+", label: { es: "Fuentes Académicas", en: "Academic Sources" } },
-          { value: "16", label: { es: "Tests Suite NLP", en: "NLP Suite Tests" } },
-          { value: "$0", label: { es: "Costo de Inferencia", en: "Inference Cost" } },
-        ],
-      },
-    },
-
-    {
-      id: "eclipse",
-      sectionId: "extensions-tools",
-      sectionBadge: {
-        es: "Extensiones & Tools",
-        en: "Extensions & Tools",
-      },
-      statusBadge: {
-        es: "ACTIVO",
-        en: "ACTIVE",
-      },
-      title: {
-        es: "Eclipse",
-        en: "Eclipse",
-      },
-      description: {
-        es: "Activa un modo oscuro cómodo y elegante en cualquier página web. Evita destellos molestos al cargar y cuida tu vista durante la noche manteniendo los colores naturales de fotos y videos.",
-        en: "Enables a comfortable, eye-friendly dark theme on any website. Eliminates annoying load flashes and protects your eyes at night while preserving natural photo and video colors.",
-      },
-      image: "/projects/eclipse.jpg",
-      imageAlt: {
-        es: "Vista previa del modo oscuro universal Eclipse",
-        en: "Preview of Eclipse universal dark mode",
-      },
-      tags: [
-        "WXT Framework",
-        "Manifest V3",
-        "TypeScript",
-        "Zero-Flashbang",
-        "document_start",
-        "Smart Media Protection",
-        "chrome.storage",
+        "Local-First",
+        "Vite",
+        "Vitest",
+        "Chrome Storage",
+        "i18n",
       ],
       links: {
         code: "https://github.com/Beto18v/browser-extensions",
@@ -1258,43 +1163,59 @@ export const siteConfig: SiteConfig = {
       technicalDetails: {
         commercialImpact: {
           problem: {
-            es: "El uso continuo de pantallas en entornos nocturnos causa fatiga visual severa debido a sitios web que carecen de modo oscuro nativo.",
-            en: "Continuous screen use in low-light environments causes severe eye strain on websites lacking native dark themes.",
+            es: "Los prompts de uso diario suelen dispersarse en notas externas o chats antiguos, obligando a buscar, editar parámetros manualmente y perder minutos antes de interactuar con la IA.",
+            en: "Daily AI prompts get scattered across external notes or past chats, forcing manual search, parameter editing, and lost minutes before interacting with AI.",
           },
           solution: {
-            es: "Extensión con inyección temprana de estilos que oscurece cualquier página preservando los colores naturales de imágenes y videos.",
-            en: "Extension with early style injection darkening any page while preserving natural photo and video colors.",
+            es: "Extensión popup ultraligera (WXT + TypeScript nativo sin frameworks de UI) con búsqueda instantánea ponderada, resolución automática de variables dinámicas {{variable}} y categorización con color.",
+            en: "Ultralight popup extension (WXT + native TypeScript with zero runtime UI frameworks) featuring weighted instant search, dynamic {{variable}} autofill, and custom colored categories.",
           },
           valueProposition: {
-            es: "Navegación nocturna cómoda y configurable por sitio sin parpadeos molestos de pantalla blanca.",
-            en: "Comfortable and per-site configurable nocturnal browsing with zero annoying white flashes.",
+            es: "Acceso y copia de cualquier instrucción en menos de 5 segundos, operación 100% local sin telemetría ni servidores (chrome.storage.local) y cero latencia de red.",
+            en: "Find and copy any prompt in under 5 seconds, 100% local operation with zero telemetry or cloud servers (chrome.storage.local), and zero network lag.",
           },
         },
         technicalArchitecture: {
           description: {
-            es: "WXT + TypeScript en Manifest V3. Inyección en fase document_start para evitar destellos (FOUC), inversión selectiva de color mediante filtros CSS dinámicos y sincronización de preferencias en chrome.storage.",
-            en: "WXT + TypeScript on Manifest V3. Injected at document_start phase to eliminate FOUC white flashes, selective CSS color inversion, and chrome.storage preference sync.",
+            es: "Desarrollada con WXT 0.21, TypeScript 5.9 y Vite 8 sobre Manifest V3. Cero dependencias de frameworks en runtime (DOM nativo manipulado con tipado estricto), persistencia local con chrome.storage.local y suite de 22 tests en Vitest.",
+            en: "Built with WXT 0.21, TypeScript 5.9, and Vite 8 on Manifest V3. Zero UI framework dependencies in runtime (strictly-typed native DOM), local storage via chrome.storage.local, and a 22-test Vitest suite.",
           },
           components: [
             {
-              name: "Zero-Flashbang document_start Engine",
+              name: "Motor de Variables Dinámicas",
               role: {
-                es: "Aplica las reglas CSS antes de la pintura inicial del DOM para eliminar el parpadeo blanco.",
-                en: "Applies CSS rules before initial DOM paint to eliminate white flashbang.",
+                es: "Detección en vivo con expresiones regulares de marcadores {{variable}}, modal de resolución con navegación por teclado y reemplazo atómico.",
+                en: "Real-time regex detection of {{variable}} tokens, keyboard-navigable resolution modal, and atomic string substitution.",
               },
             },
             {
-              name: "Smart Media Inversion Protection",
+              name: "Búsqueda Instantánea Ponderada",
               role: {
-                es: "Detecta elementos visuales (img, video, canvas, iframe) para evitar inversión indebida de color multimedia.",
-                en: "Detects media elements (img, video, canvas, iframe) preventing unwanted color inversions on multimedia.",
+                es: "Algoritmo local con prioridad por coincidencia exacta en título, subcadena, etiquetas y cuerpo sin dependencias externas.",
+                en: "Local search algorithm prioritizing exact title match, title substring, tags, and body content without external dependencies.",
+              },
+            },
+            {
+              name: "Arquitectura Zero-Framework",
+              role: {
+                es: "Interfaz construida con TypeScript y APIs nativas del DOM, garantizando un bundle ultraligero y apertura instantánea del popup.",
+                en: "Lightweight UI engineered with pure TypeScript and native DOM APIs, eliminating runtime framework overhead.",
+              },
+            },
+            {
+              name: "Almacenamiento Local & i18n",
+              role: {
+                es: "Persistencia en chrome.storage.local, soporte bilingüe (ES/EN) con detección automática y selector de tema claro/oscuro.",
+                en: "Persistence via chrome.storage.local, bilingual ES/EN support with auto-detection, and manual/system dark mode toggle.",
               },
             },
           ],
         },
         metrics: [
-          { value: "0 ms", label: { es: "Destello (FOUC)", en: "Flicker (FOUC)" } },
-          { value: "100%", label: { es: "Compatibilidad Manifest V3", en: "Manifest V3 Compliance" } },
+          { value: "< 5s", label: { es: "Tiempo Búsqueda y Copia", en: "Search & Copy Time" } },
+          { value: "22", label: { es: "Tests Unitarios (Vitest)", en: "Unit Tests (Vitest)" } },
+          { value: "0 ms", label: { es: "Latencia / Telemetría", en: "Network Lag / Telemetry" } },
+          { value: "100%", label: { es: "Privacidad Local", en: "Local Browser Privacy" } },
         ],
       },
     },

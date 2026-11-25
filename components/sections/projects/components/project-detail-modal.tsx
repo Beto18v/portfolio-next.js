@@ -112,7 +112,7 @@ export function ProjectDetailModal({
             <div className="flex items-center gap-3 shrink-0">
               <span className="hidden items-center gap-1.5 rounded-full border border-green/30 bg-green/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-green sm:inline-flex">
                 <span className="h-1.5 w-1.5 rounded-full bg-green animate-pulse" />
-                {project.statusBadge?.[locale] ?? (project.isProduction ? (isEs ? "EN PRODUCCIÓN" : "IN PRODUCTION") : (isEs ? "ACTIVO" : "ACTIVE"))}
+                {project.statusBadge?.[locale] ?? (isEs ? "EN PRODUCCIÓN" : "IN PRODUCTION")}
               </span>
 
               {/* Red Close Button */}
